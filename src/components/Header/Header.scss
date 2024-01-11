@@ -1,4 +1,7 @@
 @use '../../styles/variables' as v;
 
 .header {
+  &__avatar {
+    cursor: pointer;
+  }
 }

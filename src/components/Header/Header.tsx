@@ -1,12 +1,27 @@
-import { AppShell, Burger, Group, Image, Anchor, Tooltip } from '@mantine/core';
+import {
+  AppShell,
+  Burger,
+  Group,
+  Image,
+  Anchor,
+  Tooltip,
+  Avatar,
+  Text,
+  Menu,
+  rem,
+} from '@mantine/core';
+import { IconLogout, IconSettings, IconUserFilled } from '@tabler/icons-react';
 import './Header.scss';
 
 function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
   return (
     <AppShell.Header>
-      <Group h="100%" px="md" className="header">
+      <Group h="100%" px="md" className="header" justify="space-between">
+        {/* Responsive navbar, tranform to a burger when the breakpoint is hit */}
         <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+
         <Anchor href="/">
+          {/* Tooltip when hover on the logo */}
           <Tooltip
             label="Home"
             position="right"
@@ -19,6 +34,55 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
             <Image src="hecho-logo.png" h={30} />
           </Tooltip>
         </Anchor>
+
+        <Group>
+          <Text size="md" fw={500} visibleFrom="sm">
+            Hello Rami
+          </Text>
+
+          {/* Menu dropdown on click on avatar */}
+          <Menu shadow="md" width={200}>
+            <Menu.Target>
+              {/* Tooltip when hover on the avatar */}
+              <Tooltip
+                label="Profil"
+                position="bottom"
+                offset={5}
+                openDelay={300}
+                closeDelay={150}
+                transitionProps={{ transition: 'slide-up', duration: 200 }}
+                withArrow
+              >
+                <Avatar src={null} className="header__avatar" />
+              </Tooltip>
+            </Menu.Target>
+
+            <Menu.Dropdown>
+              <Menu.Item
+                leftSection={
+                  <IconUserFilled style={{ width: rem(14), height: rem(14) }} />
+                }
+              >
+                Profil
+              </Menu.Item>
+              <Menu.Item
+                leftSection={
+                  <IconSettings style={{ width: rem(14), height: rem(14) }} />
+                }
+              >
+                Paramètres
+              </Menu.Item>
+              <Menu.Item
+                color="red"
+                leftSection={
+                  <IconLogout style={{ width: rem(14), height: rem(14) }} />
+                }
+              >
+                Déconnexion
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
+        </Group>
       </Group>
     </AppShell.Header>
   );
