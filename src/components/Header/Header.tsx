@@ -46,11 +46,11 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
               {/* Tooltip when hover on the avatar */}
               <Tooltip
                 label="Profil"
-                position="bottom"
+                position="left"
                 offset={5}
                 openDelay={300}
                 closeDelay={150}
-                transitionProps={{ transition: 'slide-up', duration: 200 }}
+                transitionProps={{ transition: 'slide-right', duration: 200 }}
                 withArrow
               >
                 <Avatar src={null} className="header__avatar" />
