@@ -53,7 +53,11 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
                 transitionProps={{ transition: 'slide-right', duration: 200 }}
                 withArrow
               >
-                <Avatar src={null} className="header__avatar" />
+                <Avatar
+                  src={null}
+                  className="header__avatar"
+                  visibleFrom="xs"
+                />
               </Tooltip>
             </Menu.Target>
 
