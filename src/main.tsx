@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { RouterProvider } from 'react-router-dom';
 import { createTheme, MantineProvider } from '@mantine/core';
-
-import App from './components/App/App';
+import { router } from './router';
 
 // Mantine styles
 import '@mantine/core/styles.css';
@@ -13,7 +13,7 @@ import './styles/index.scss';
 const theme = createTheme({
   white: '#fff',
   black: '#000',
-  primaryColor: 'indigo',
+  primaryColor: 'orange',
   defaultRadius: 'sm',
 });
 
@@ -21,7 +21,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     {/* <Provider store={store}> */}
     <MantineProvider defaultColorScheme="dark" theme={theme}>
-      <App />
+      <RouterProvider router={router} />
     </MantineProvider>
     {/* </Provider> */}
   </React.StrictMode>
