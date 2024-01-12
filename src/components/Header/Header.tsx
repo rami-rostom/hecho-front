@@ -32,8 +32,7 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
           >
             <Text
               c="hecho.6"
-              fw={700}
-              size="2rem"
+              size="2.5rem"
               tt="uppercase"
               pl="1.3rem"
               className="header__logo"
