@@ -4,7 +4,7 @@ import Footer from '../Footer/Footer';
 
 function Main() {
   return (
-    <AppShell.Main className="page-content content-grid">
+    <AppShell.Main bg="darkBg.1">
       <Outlet />
       <Footer />
     </AppShell.Main>

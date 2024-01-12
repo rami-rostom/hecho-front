@@ -15,7 +15,7 @@ import './Header.scss';
 
 function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
   return (
-    <AppShell.Header>
+    <AppShell.Header bg="darkBg">
       <Group h="100%" px="xl" className="header" justify="space-between">
         {/* Responsive navbar, tranform to a burger when the breakpoint is hit */}
         <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
