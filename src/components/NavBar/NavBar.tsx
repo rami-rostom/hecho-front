@@ -1,11 +1,20 @@
 import './NavBar.scss';
-import { AppShell, Container, Flex, NavLink, Stack, Text } from '@mantine/core';
+import {
+  AppShell,
+  Container,
+  Flex,
+  Group,
+  NavLink,
+  Stack,
+  Text,
+} from '@mantine/core';
 import {
   IconBrandFeedly,
   IconRun,
   IconCalendar,
   IconUserFilled,
   IconSettings,
+  IconTargetArrow,
 } from '@tabler/icons-react';
 
 function NavBar() {
@@ -60,17 +69,20 @@ function NavBar() {
 
         <Container
           my="xl"
-          px="xl"
+          px="xs"
           py="md"
           bg="darkBg.1"
           className="navbar__counter"
         >
-          <Text fw={800} ta="center">
-            Cette semaine
-          </Text>
-          <Text size="sm" ta="center">
-            Activitées : 0
-          </Text>
+          <Flex align="center" gap="sm" w="100%">
+            <IconTargetArrow size="3rem" stroke={1.5} />
+            <Group gap="0.1rem" justify="left">
+              <Text size="md" fw={800}>
+                Cette semaine
+              </Text>
+              <Text size="xs">Activitées : 0</Text>
+            </Group>
+          </Flex>
         </Container>
       </Flex>
     </AppShell.Navbar>
