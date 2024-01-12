@@ -73,6 +73,7 @@ function NavBar() {
           py="md"
           bg="darkBg.1"
           className="navbar__counter"
+          visibleFrom="sm"
         >
           <Flex align="center" gap="sm" w="100%">
             <IconTargetArrow size="3rem" stroke={1.5} />
