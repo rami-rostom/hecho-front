@@ -2,7 +2,6 @@ import {
   AppShell,
   Burger,
   Group,
-  Image,
   Anchor,
   Tooltip,
   Avatar,
@@ -20,7 +19,7 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
         {/* Responsive navbar, tranform to a burger when the breakpoint is hit */}
         <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
 
-        <Anchor href="/">
+        <Anchor href="/" underline="never">
           {/* Tooltip when hover on the logo */}
           <Tooltip
             label="Home"
@@ -31,7 +30,16 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
             transitionProps={{ transition: 'slide-left', duration: 200 }}
             withArrow
           >
-            <Image src="hecho-logo.png" h={30} />
+            <Text
+              c="hecho.6"
+              fw={700}
+              size="2rem"
+              tt="uppercase"
+              pl="1.3rem"
+              className="header__logo"
+            >
+              Hecho
+            </Text>
           </Tooltip>
         </Anchor>
 

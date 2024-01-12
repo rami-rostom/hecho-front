@@ -1,6 +1,10 @@
 @use '../../styles/variables' as v;
 
 .header {
+  &__logo {
+    font-family: 'Expletus Sans', sans-serif;
+  }
+
   &__avatar {
     cursor: pointer;
   }
