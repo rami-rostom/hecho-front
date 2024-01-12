@@ -78,9 +78,9 @@ function NavBar() {
             <IconTargetArrow size="3rem" stroke={1.5} />
             <Group gap="0.1rem" justify="left">
               <Text size="md" fw={800}>
-                Cette semaine
+                Activités
               </Text>
-              <Text size="xs">Activitées : 0</Text>
+              <Text size="xs">Cette semaine : 0</Text>
             </Group>
           </Flex>
         </Container>
