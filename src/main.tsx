@@ -10,6 +10,7 @@ import { router } from './router';
 
 // Mantine styles
 import '@mantine/core/styles.css';
+import '@mantine/dates/styles.css';
 
 import './styles/index.scss';
 
