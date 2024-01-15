@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
+import { Provider } from 'react-redux';
+
 import {
   createTheme,
   MantineColorsTuple,
   MantineProvider,
 } from '@mantine/core';
+
 import { router } from './router';
 
 // Mantine styles
@@ -13,6 +16,7 @@ import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 
 import './styles/index.scss';
+import store from './store';
 
 // Define theme of the app with Mantine
 const hecho: MantineColorsTuple = [
@@ -47,10 +51,10 @@ const theme = createTheme({
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    {/* <Provider store={store}> */}
-    <MantineProvider defaultColorScheme="dark" theme={theme}>
-      <RouterProvider router={router} />
-    </MantineProvider>
-    {/* </Provider> */}
+    <Provider store={store}>
+      <MantineProvider defaultColorScheme="dark" theme={theme}>
+        <RouterProvider router={router} />
+      </MantineProvider>
+    </Provider>
   </React.StrictMode>
 );

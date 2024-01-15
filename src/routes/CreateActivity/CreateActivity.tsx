@@ -1,30 +1,32 @@
-import { Box, Button, Group, Select, TextInput, Title } from '@mantine/core';
 import { FormEvent, useState } from 'react';
-import { useForm } from '@mantine/form';
+import { useNavigate } from 'react-router-dom';
+import { Box, Button, Group, Select, TextInput, Title } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
-// import { useAppDispatch } from '../../hooks/redux';
+import { useAppDispatch } from '../../hooks/redux';
+import { createActivity } from '../../store/reducers/createActivity';
 
 function CreateActivity() {
-  const form = useForm({
-    initialValues: {
-      name: '',
-      sport_id: '1',
-      date_scheduled: '',
-      user_id: 1,
-      hecho: false,
-    },
-  });
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-  // const dispatch = useAppDispatch();
   const [nameValue, setNameValue] = useState('');
   const [typeValue, setTypeValue] = useState<string | null>('');
   const [dateValue, setDateValue] = useState<string | undefined>('');
 
   const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(nameValue);
-    console.log(typeValue);
-    console.log(dateValue);
+
+    dispatch(
+      createActivity({
+        name: nameValue,
+        sport_id: typeValue,
+        date_scheduled: dateValue,
+        user_id: 1,
+        hecho: false,
+      })
+    )
+      .unwrap()
+      .then(() => navigate('/'));
   };
 
   return (
@@ -59,7 +61,7 @@ function CreateActivity() {
             placeholder="Choisir une date de début"
             minDate={new Date()}
             onChange={(event) => {
-              const date = event?.toString();
+              const date = event?.toDateString();
               setDateValue(date);
             }}
           />
