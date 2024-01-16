@@ -21,7 +21,7 @@ const initialState: ActivityState = {
 
 export const fetchActivity = createAsyncThunk(
   'activity/fetch',
-  async (id: number) => {
+  async (id: string) => {
     const { data } = await axiosInstance.get(`/workout/${id}`);
     return data;
   }
