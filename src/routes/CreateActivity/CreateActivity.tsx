@@ -13,10 +13,11 @@ function CreateActivity() {
   const [typeValue, setTypeValue] = useState<string | null>('');
   const [dateValue, setDateValue] = useState<string | undefined>('');
 
-  const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    dispatch(
+    // Creation of the activity with useState datas
+    const createdActivity = await dispatch(
       createActivity({
         name: nameValue,
         sport_id: typeValue,
@@ -24,9 +25,11 @@ function CreateActivity() {
         user_id: 1,
         hecho: false,
       })
-    )
-      .unwrap()
-      .then(() => navigate('/'));
+    ).unwrap();
+
+    // Retrieve new activity ID to navigate to the activity's page
+    const { id } = createdActivity;
+    navigate(`/activity/${id}`);
   };
 
   return (
