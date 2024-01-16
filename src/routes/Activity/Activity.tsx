@@ -1,6 +1,17 @@
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Box, Button, Container, Group, Text, Title } from '@mantine/core';
+import { FormEvent, useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useDisclosure } from '@mantine/hooks';
+import { DatePickerInput } from '@mantine/dates';
+import {
+  Button,
+  Container,
+  Flex,
+  Group,
+  Modal,
+  Stack,
+  Text,
+  Title,
+} from '@mantine/core';
 import {
   IconBike,
   IconMountain,
@@ -8,12 +19,15 @@ import {
   IconSwimming,
   IconTrekking,
 } from '@tabler/icons-react';
+
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchActivity } from '../../store/reducers/activity';
+import { hecho } from '../../store/reducers/hecho';
 
 import './Activity.scss';
 
 function Activity() {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const { id } = useParams();
@@ -25,6 +39,26 @@ function Activity() {
     dispatch(fetchActivity(id));
   }, [dispatch, id]);
 
+  const pace = activityData.duration / activityData.distance;
+
+  const [opened, { close, open }] = useDisclosure(false);
+
+  const [dateValue, setDateValue] = useState<string | undefined>('');
+
+  const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    dispatch(
+      hecho({
+        id,
+        date_accomplished: dateValue,
+        hecho: true,
+      })
+    ).unwrap();
+
+    navigate(`/activity/${id}`);
+  };
+
   return (
     <Container p="md" className="activity">
       <Container px="-1rem" className="activity__banner">
@@ -33,6 +67,7 @@ function Activity() {
         </Text>
         <Group justify="space-between">
           <Group>
+            {/* Dynamic icon based on sport */}
             {activityData.sport.id === 1 && (
               <IconRun size="3rem" className="activity__banner-icon" />
             )}
@@ -54,10 +89,106 @@ function Activity() {
         </Group>
       </Container>
 
-      <Box maw={600} mx="auto" ta="center">
-        <Text tt="capitalize">{activityData.sport.name}</Text>
-        <Text>{activityData.date_scheduled}</Text>
-      </Box>
+      <Container>
+        <Flex justify="space-between">
+          <Stack align="stretch">
+            <Text>STEP 1</Text>
+            <Text>STEP 2</Text>
+            <Text>STEP 3</Text>
+            <Text>STEP 4</Text>
+          </Stack>
+
+          <Stack>
+            <Stack gap="0rem">
+              <Text fw={500} tt="uppercase">
+                {activityData.sport.name}
+              </Text>
+              <Text size="xs" fs="italic">
+                Type
+              </Text>
+            </Stack>
+
+            <Stack gap="0rem">
+              <Text fw={500}>{activityData.duration} min</Text>
+              <Text size="xs" fs="italic">
+                Temps total
+              </Text>
+            </Stack>
+
+            <Stack gap="0rem">
+              <Text fw={500}>{activityData.distance} km</Text>
+              <Text size="xs" fs="italic">
+                Distance
+              </Text>
+            </Stack>
+
+            <Stack gap="0rem">
+              {pace ? (
+                <Text fw={500}>{pace} km/h</Text>
+              ) : (
+                <Text fw={500}>--</Text>
+              )}
+              <Text size="xs" fs="italic">
+                Allure
+              </Text>
+            </Stack>
+
+            <Stack gap="0rem">
+              <Text fw={500}>{activityData.date_scheduled}</Text>
+              <Text size="xs" fs="italic">
+                Date prévue
+              </Text>
+            </Stack>
+
+            <Stack gap="0rem">
+              {activityData.date_accomplished ? (
+                <Text fw={500}>{activityData.date_accomplished}</Text>
+              ) : (
+                <Text fw={500}>À réaliser</Text>
+              )}
+              <Text size="xs" fs="italic">
+                Date accomplissement
+              </Text>
+            </Stack>
+
+            {activityData.hecho ? (
+              <Button color="hecho.6">HECHO</Button>
+            ) : (
+              <div>
+                <Modal
+                  opened={opened}
+                  onClose={close}
+                  size="xs"
+                  title="Date réalisation de l'activité"
+                >
+                  <Stack>
+                    <form onSubmit={handleFormSubmit}>
+                      <DatePickerInput
+                        clearable
+                        required
+                        valueFormat="DD MMMM YYYY"
+                        label="Date de réalisation"
+                        placeholder="Choisir une date"
+                        minDate={new Date()}
+                        onChange={(event) => {
+                          const date = event?.toDateString();
+                          setDateValue(date);
+                        }}
+                      />
+                      <Button color="hecho.6" type="submit">
+                        HECHO
+                      </Button>
+                    </form>
+                  </Stack>
+                </Modal>
+                <Button color="#f34141" onClick={open}>
+                  NO HECHO
+                </Button>
+              </div>
+            )}
+          </Stack>
+        </Flex>
+      </Container>
     </Container>
   );
 }

@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import createActivityReducer from './reducers/createActivity';
 import activityReducer from './reducers/activity';
+import hechoReducer from './reducers/hecho';
 
 const store = configureStore({
   reducer: {
     createActivity: createActivityReducer,
     activity: activityReducer,
+    hecho: hechoReducer,
   },
 });
 
