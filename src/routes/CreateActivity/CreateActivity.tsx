@@ -27,7 +27,7 @@ function CreateActivity() {
       })
     ).unwrap();
 
-    // Retrieve new activity ID to navigate to the activity's page
+    // Retrieve new activity ID and redirection to the activity's page
     const { id } = createdActivity;
     navigate(`/activity/${id}`);
   };

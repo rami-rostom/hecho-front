@@ -11,6 +11,12 @@ export type Activity = {
   hecho: boolean;
 };
 
+export type ActivityState = {
+  activity: Activity;
+  isLoading: boolean;
+  error: null | string;
+};
+
 // New activity states
 export type NewActivity = {
   name: string;

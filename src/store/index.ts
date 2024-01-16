@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import createActivityReducer from './reducers/createActivity';
+import activityReducer from './reducers/activity';
 
 const store = configureStore({
   reducer: {
     createActivity: createActivityReducer,
+    activity: activityReducer,
   },
 });
 
