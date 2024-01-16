@@ -4,7 +4,9 @@ function Home() {
   return (
     <>
       <div>Hecho - Homepage</div>
-      <Button color="hecho.6">Nouvelle acitivité</Button>
+      <Button color="hecho.6" component="a" href="/activity/create">
+        Nouvelle activité
+      </Button>
     </>
   );
 }

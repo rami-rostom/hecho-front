@@ -15,6 +15,7 @@ import {
   IconUserFilled,
   IconSettings,
   IconTargetArrow,
+  IconCalendarPlus,
 } from '@tabler/icons-react';
 
 function NavBar() {
@@ -50,6 +51,11 @@ function NavBar() {
               href="#"
               label="Mon calendrier"
               leftSection={<IconCalendar size="1rem" stroke={1.5} />}
+            />
+            <NavLink
+              href="/activity/create"
+              label="Nouvelle activité"
+              leftSection={<IconCalendarPlus size="1rem" stroke={1.5} />}
             />
           </NavLink>
 
