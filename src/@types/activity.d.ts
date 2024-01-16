@@ -1,3 +1,9 @@
+// Sport states
+export type Sport = {
+  id: number;
+  name?: string;
+};
+
 // Activity states
 export type Activity = {
   name: string;
@@ -9,6 +15,7 @@ export type Activity = {
   pace: number;
   user_id: number;
   hecho: boolean;
+  sport: Sport;
 };
 
 export type ActivityState = {

@@ -1,0 +1,14 @@
+.activity {
+  &__banner {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgb(71, 71, 71);
+
+    &-icon {
+      border: 1px solid grey;
+      border-radius: 3rem;
+      padding: 8px;
+
+      box-shadow: 3px 0px 10px 0px rgba(126, 124, 124, 0.5);
+    }
+  }
+}

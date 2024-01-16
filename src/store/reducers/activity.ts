@@ -14,6 +14,10 @@ const initialState: ActivityState = {
     pace: 0,
     user_id: 0,
     hecho: false || true,
+    sport: {
+      id: 0,
+      name: '',
+    },
   },
   isLoading: true,
   error: null,
