@@ -1,7 +1,9 @@
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { Box, Button, Group, Select, TextInput, Title } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
+
 import { useAppDispatch } from '../../hooks/redux';
 import { createActivity } from '../../store/reducers/createActivity';
 

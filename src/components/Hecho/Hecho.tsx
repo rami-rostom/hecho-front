@@ -1,11 +1,13 @@
-import { Button, Modal, Stack } from '@mantine/core';
-import { DatePickerInput } from '@mantine/dates';
 import { useState, FormEvent, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+
+import { Button, Modal, Stack } from '@mantine/core';
+import { DatePickerInput } from '@mantine/dates';
 import { useDisclosure } from '@mantine/hooks';
+
 import { useAppDispatch } from '../../hooks/redux';
-import { hecho } from '../../store/reducers/hecho';
 import { fetchActivity } from '../../store/reducers/activity';
+import { hecho } from '../../store/reducers/hecho';
 
 function Hecho() {
   const navigate = useNavigate();

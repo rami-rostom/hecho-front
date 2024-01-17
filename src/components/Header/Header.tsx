@@ -9,7 +9,9 @@ import {
   Menu,
   rem,
 } from '@mantine/core';
+
 import { IconLogout, IconSettings, IconUserFilled } from '@tabler/icons-react';
+
 import './Header.scss';
 
 function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {

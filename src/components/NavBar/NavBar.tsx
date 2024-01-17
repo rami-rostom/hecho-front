@@ -1,4 +1,3 @@
-import './NavBar.scss';
 import {
   AppShell,
   Container,
@@ -8,6 +7,7 @@ import {
   Stack,
   Text,
 } from '@mantine/core';
+
 import {
   IconBrandFeedly,
   IconRun,
@@ -17,6 +17,8 @@ import {
   IconTargetArrow,
   IconCalendarPlus,
 } from '@tabler/icons-react';
+
+import './NavBar.scss';
 
 function NavBar() {
   return (
