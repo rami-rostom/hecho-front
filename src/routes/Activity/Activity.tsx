@@ -11,6 +11,7 @@ import {
   Stack,
   Text,
   Title,
+  Tooltip,
 } from '@mantine/core';
 import {
   IconBike,
@@ -40,26 +41,34 @@ function Activity() {
 
   const activityData = useAppSelector((state) => state.activity.activity);
 
+  const { steps, tags } = activityData;
+
   /**
-   * Function for calculating the pace of activity
+   * Function for calculating the speed of activity
    * @param duration value in minutes
    * @param distance value in kilometers
-   * @returns Return pace in km/h
+   * @returns Return speed in km/h
    */
-  const paceCalcul = (duration: number, distance: number) => {
+  const speedCalcul = (duration: number, distance: number) => {
     const distanceInMeter = distance * 1000;
     const durationInSeconds = duration * 60;
 
-    const paceResult = (distanceInMeter / durationInSeconds) * 3.6;
+    const speedResult = (distanceInMeter / durationInSeconds) * 3.6;
 
     // Return result with two decimals
-    return paceResult.toFixed(2);
+    return speedResult.toFixed(2);
   };
 
-  // Activity pace calculation
-  const pace = paceCalcul(activityData.duration, activityData.distance);
+  // Activity speed calculation
+  const speed = speedCalcul(activityData.duration, activityData.distance);
 
-  const { steps, tags } = activityData;
+  const paceCalcul = (duration: number, distance: number) => {
+    const paceResult = duration / distance;
+
+    return paceResult;
+  };
+
+  const pace = paceCalcul(activityData.duration, activityData.distance);
 
   return (
     <Container p="md" className="activity">
@@ -71,19 +80,69 @@ function Activity() {
           <Group gap="1rem">
             {/* Dynamic icon based on sport */}
             {activityData.sport.id === 1 && (
-              <IconRun size="3rem" className="activity__banner-icon" />
+              <Tooltip
+                label="Running"
+                position="left"
+                offset={5}
+                openDelay={300}
+                closeDelay={150}
+                transitionProps={{ transition: 'slide-right', duration: 200 }}
+                withArrow
+              >
+                <IconRun size="3rem" className="activity__banner-icon" />
+              </Tooltip>
             )}
             {activityData.sport.id === 2 && (
-              <IconMountain size="3rem" className="activity__banner-icon" />
+              <Tooltip
+                label="Trail"
+                position="left"
+                offset={5}
+                openDelay={300}
+                closeDelay={150}
+                transitionProps={{ transition: 'slide-right', duration: 200 }}
+                withArrow
+              >
+                <IconMountain size="3rem" className="activity__banner-icon" />
+              </Tooltip>
             )}
             {activityData.sport.id === 3 && (
-              <IconBike size="3rem" className="activity__banner-icon" />
+              <Tooltip
+                label="Vélo"
+                position="left"
+                offset={5}
+                openDelay={300}
+                closeDelay={150}
+                transitionProps={{ transition: 'slide-right', duration: 200 }}
+                withArrow
+              >
+                <IconBike size="3rem" className="activity__banner-icon" />
+              </Tooltip>
             )}
             {activityData.sport.id === 4 && (
-              <IconSwimming size="3rem" className="activity__banner-icon" />
+              <Tooltip
+                label="Natation"
+                position="left"
+                offset={5}
+                openDelay={300}
+                closeDelay={150}
+                transitionProps={{ transition: 'slide-right', duration: 200 }}
+                withArrow
+              >
+                <IconSwimming size="3rem" className="activity__banner-icon" />
+              </Tooltip>
             )}
             {activityData.sport.id === 5 && (
-              <IconTrekking size="3rem" className="activity__banner-icon" />
+              <Tooltip
+                label="Randonnée"
+                position="left"
+                offset={5}
+                openDelay={300}
+                closeDelay={150}
+                transitionProps={{ transition: 'slide-right', duration: 200 }}
+                withArrow
+              >
+                <IconTrekking size="3rem" className="activity__banner-icon" />
+              </Tooltip>
             )}
             <Title order={1}>{activityData.name}</Title>
             {tags
@@ -118,13 +177,13 @@ function Activity() {
                     </Text>
 
                     <SimpleGrid
-                      cols={{ base: 1, lg: 3 }}
+                      cols={{ base: 2, lg: 4 }}
                       spacing={{ base: 'xs', lg: 'xs' }}
                     >
                       <Stack gap="0rem">
                         <Text fw={700}>{step.duration} min</Text>
                         <Text size="xs" fs="italic">
-                          Temps total
+                          Temps
                         </Text>
                       </Stack>
 
@@ -138,11 +197,25 @@ function Activity() {
                       <Stack gap="0rem">
                         <Text fw={700}>
                           {/* Calculation of pace step */}
-                          {paceCalcul(
+                          {speedCalcul(
                             Number(step.duration),
                             Number(step.distance)
                           )}{' '}
                           km/h
+                        </Text>
+                        <Text size="xs" fs="italic">
+                          Vitesse moyenne
+                        </Text>
+                      </Stack>
+
+                      <Stack gap="0rem">
+                        <Text fw={700}>
+                          {/* Calculation of pace step */}
+                          {paceCalcul(
+                            Number(step.duration),
+                            Number(step.distance)
+                          )}{' '}
+                          min/km
                         </Text>
                         <Text size="xs" fs="italic">
                           Allure
@@ -179,8 +252,19 @@ function Activity() {
             </Stack>
 
             <Stack gap="0rem">
+              {speed ? (
+                <Text fw={500}>{speed} km/h</Text>
+              ) : (
+                <Text fw={500}>--</Text>
+              )}
+              <Text size="xs" fs="italic">
+                Vitesse moyenne
+              </Text>
+            </Stack>
+
+            <Stack gap="0rem">
               {pace ? (
-                <Text fw={500}>{pace} km/h</Text>
+                <Text fw={500}>{pace} min/km</Text>
               ) : (
                 <Text fw={500}>--</Text>
               )}
