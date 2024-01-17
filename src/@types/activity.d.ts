@@ -1,8 +1,5 @@
-// Sport states
-export type Sport = {
-  id: number;
-  name?: string;
-};
+import { Sport } from './sport';
+import { Step } from './step';
 
 // Activity states
 export type Activity = {
@@ -16,6 +13,7 @@ export type Activity = {
   user_id: number;
   hecho: boolean;
   sport: Sport;
+  steps: Step[];
 };
 
 export type ActivityState = {
@@ -35,19 +33,6 @@ export type NewActivity = {
 
 export type NewActivityState = {
   newActivity: NewActivity;
-  isLoading: boolean;
-  error: null | string;
-};
-
-// HECHO states
-export type Hecho = {
-  id: string;
-  hecho: boolean;
-  date_accomplished?: string;
-};
-
-export type HechoState = {
-  hecho: Hecho;
   isLoading: boolean;
   error: null | string;
 };

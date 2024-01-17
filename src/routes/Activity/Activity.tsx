@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import {
+  Box,
   Button,
   Container,
   Flex,
@@ -38,8 +39,26 @@ function Activity() {
 
   const activityData = useAppSelector((state) => state.activity.activity);
 
-  // Pace calculculation
-  const pace = activityData.duration / activityData.distance;
+  /**
+   * Function for calculating the pace of activity
+   * @param duration value in minutes
+   * @param distance value in kilometers
+   * @returns Return pace in km/h
+   */
+  const paceCalcul = (duration: number, distance: number) => {
+    const distanceInMeter = distance * 1000;
+    const durationInSeconds = duration * 60;
+
+    const paceResult = (distanceInMeter / durationInSeconds) * 3.6;
+
+    // Return result with two decimals
+    return paceResult.toFixed(2);
+  };
+
+  // Activity pace calculation
+  const pace = paceCalcul(activityData.duration, activityData.distance);
+
+  const { steps } = activityData;
 
   return (
     <Container p="md" className="activity">
@@ -74,10 +93,41 @@ function Activity() {
       <Container>
         <Flex justify="space-between">
           <Stack align="stretch">
-            <Text>STEP 1</Text>
-            <Text>STEP 2</Text>
-            <Text>STEP 3</Text>
-            <Text>STEP 4</Text>
+            {steps
+              ? steps.map((step) => (
+                  <Box key={step.id}>
+                    <Text tt="capitalize">{step.name}</Text>
+
+                    <Stack gap="0rem">
+                      <Text>{step.duration} min</Text>
+                      <Text size="xs" fs="italic">
+                        Temps total
+                      </Text>
+                    </Stack>
+
+                    <Stack gap="0rem">
+                      <Text>{step.distance} km</Text>
+                      <Text size="xs" fs="italic">
+                        Distance estimée
+                      </Text>
+                    </Stack>
+
+                    <Stack gap="0rem">
+                      <Text fw={500}>
+                        {/* Calculation of pace step */}
+                        {paceCalcul(
+                          Number(step.duration),
+                          Number(step.distance)
+                        )}{' '}
+                        km/h
+                      </Text>
+                      <Text size="xs" fs="italic">
+                        Allure
+                      </Text>
+                    </Stack>
+                  </Box>
+                ))
+              : []}
           </Stack>
 
           <Stack>

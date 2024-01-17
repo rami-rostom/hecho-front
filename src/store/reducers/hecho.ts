@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Hecho, HechoState } from '../../@types/activity';
+import { Hecho, HechoState } from '../../@types/hecho';
 import { axiosInstance } from '../../utils/axios';
 
 const initialState: HechoState = {
