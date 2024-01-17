@@ -6,7 +6,9 @@ import {
   Button,
   Container,
   Flex,
+  Grid,
   Group,
+  SimpleGrid,
   Stack,
   Text,
   Title,
@@ -92,40 +94,45 @@ function Activity() {
 
       <Container>
         <Flex justify="space-between">
-          <Stack align="stretch">
+          <Stack align="stretch" gap="xl">
             {steps
               ? steps.map((step) => (
-                  <Box key={step.id}>
+                  <Flex direction="column" gap="xs" key={step.id}>
                     <Text tt="capitalize">{step.name}</Text>
 
-                    <Stack gap="0rem">
-                      <Text>{step.duration} min</Text>
-                      <Text size="xs" fs="italic">
-                        Temps total
-                      </Text>
-                    </Stack>
+                    <SimpleGrid
+                      cols={{ base: 1, lg: 3 }}
+                      spacing={{ base: 'xs', lg: '6rem' }}
+                    >
+                      <Stack gap="0rem">
+                        <Text fw={700}>{step.duration} min</Text>
+                        <Text size="xs" fs="italic">
+                          Temps total
+                        </Text>
+                      </Stack>
 
-                    <Stack gap="0rem">
-                      <Text>{step.distance} km</Text>
-                      <Text size="xs" fs="italic">
-                        Distance estimée
-                      </Text>
-                    </Stack>
+                      <Stack gap="0rem">
+                        <Text fw={700}>{step.distance} km</Text>
+                        <Text size="xs" fs="italic">
+                          Distance estimée
+                        </Text>
+                      </Stack>
 
-                    <Stack gap="0rem">
-                      <Text fw={500}>
-                        {/* Calculation of pace step */}
-                        {paceCalcul(
-                          Number(step.duration),
-                          Number(step.distance)
-                        )}{' '}
-                        km/h
-                      </Text>
-                      <Text size="xs" fs="italic">
-                        Allure
-                      </Text>
-                    </Stack>
-                  </Box>
+                      <Stack gap="0rem">
+                        <Text fw={700}>
+                          {/* Calculation of pace step */}
+                          {paceCalcul(
+                            Number(step.duration),
+                            Number(step.distance)
+                          )}{' '}
+                          km/h
+                        </Text>
+                        <Text size="xs" fs="italic">
+                          Allure
+                        </Text>
+                      </Stack>
+                    </SimpleGrid>
+                  </Flex>
                 ))
               : []}
           </Stack>
