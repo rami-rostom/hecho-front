@@ -1,5 +1,6 @@
 import { Sport } from './sport';
 import { Step } from './step';
+import { Tag } from './tag';
 
 // Activity states
 export type Activity = {
@@ -14,6 +15,7 @@ export type Activity = {
   hecho: boolean;
   sport: Sport;
   steps: Step[];
+  tags: Tag[];
 };
 
 export type ActivityState = {

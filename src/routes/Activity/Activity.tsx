@@ -2,11 +2,10 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import {
-  Box,
+  Badge,
   Button,
   Container,
   Flex,
-  Grid,
   Group,
   SimpleGrid,
   Stack,
@@ -60,7 +59,7 @@ function Activity() {
   // Activity pace calculation
   const pace = paceCalcul(activityData.duration, activityData.distance);
 
-  const { steps } = activityData;
+  const { steps, tags } = activityData;
 
   return (
     <Container p="md" className="activity">
@@ -69,7 +68,7 @@ function Activity() {
           Activité
         </Text>
         <Group justify="space-between">
-          <Group>
+          <Group gap="1rem">
             {/* Dynamic icon based on sport */}
             {activityData.sport.id === 1 && (
               <IconRun size="3rem" className="activity__banner-icon" />
@@ -87,6 +86,17 @@ function Activity() {
               <IconTrekking size="3rem" className="activity__banner-icon" />
             )}
             <Title order={1}>{activityData.name}</Title>
+            {tags
+              ? tags.map((tag) => (
+                  <Badge
+                    variant="gradient"
+                    gradient={{ from: 'yellow', to: 'orange', deg: 90 }}
+                    key={tag.id}
+                  >
+                    {tag.name}
+                  </Badge>
+                ))
+              : []}
           </Group>
           <Button color="hecho.9">Modifier l&apos;activité</Button>
         </Group>
