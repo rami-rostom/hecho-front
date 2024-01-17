@@ -94,15 +94,22 @@ function Activity() {
 
       <Container>
         <Flex justify="space-between">
-          <Stack align="stretch" gap="xl">
+          <Stack align="stretch" gap="xl" className="activity__steps">
             {steps
               ? steps.map((step) => (
-                  <Flex direction="column" gap="xs" key={step.id}>
-                    <Text tt="capitalize">{step.name}</Text>
+                  <Flex
+                    direction="column"
+                    gap="xs"
+                    key={step.id}
+                    className="activity__steps-step"
+                  >
+                    <Text tt="capitalize" size="xl" fw={700}>
+                      {step.name}
+                    </Text>
 
                     <SimpleGrid
                       cols={{ base: 1, lg: 3 }}
-                      spacing={{ base: 'xs', lg: '6rem' }}
+                      spacing={{ base: 'xs', lg: 'xs' }}
                     >
                       <Stack gap="0rem">
                         <Text fw={700}>{step.duration} min</Text>
@@ -137,7 +144,7 @@ function Activity() {
               : []}
           </Stack>
 
-          <Stack>
+          <Stack className="activity__detail">
             <Stack gap="0rem">
               <Text fw={500} tt="uppercase">
                 {activityData.sport.name}
