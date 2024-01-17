@@ -76,6 +76,7 @@ function NavBar() {
           </NavLink>
         </Stack>
 
+        {/* Tooltip when hover on the counter container */}
         <Tooltip
           label="Objectif hebdomadaire"
           position="top"
