@@ -6,6 +6,7 @@ import {
   NavLink,
   Stack,
   Text,
+  Tooltip,
 } from '@mantine/core';
 
 import {
@@ -75,24 +76,34 @@ function NavBar() {
           </NavLink>
         </Stack>
 
-        <Container
-          my="xl"
-          px="xs"
-          py="md"
-          bg="darkBg.1"
-          className="navbar__counter"
-          visibleFrom="sm"
+        <Tooltip
+          label="Objectif hebdomadaire"
+          position="top"
+          offset={8}
+          openDelay={300}
+          closeDelay={150}
+          transitionProps={{ transition: 'slide-up', duration: 200 }}
+          withArrow
         >
-          <Flex align="center" gap="sm" w="100%">
-            <IconTargetArrow size="3rem" stroke={1.5} />
-            <Group gap="0.1rem" justify="left">
-              <Text size="md" fw={800}>
-                Activités
-              </Text>
-              <Text size="xs">Cette semaine : 0</Text>
-            </Group>
-          </Flex>
-        </Container>
+          <Container
+            my="xl"
+            px="xs"
+            py="md"
+            bg="darkBg.1"
+            className="navbar__counter"
+            visibleFrom="sm"
+          >
+            <Flex align="center" gap="sm" w="100%">
+              <IconTargetArrow size="3rem" stroke={1.5} />
+              <Group gap="0.1rem" justify="left">
+                <Text size="md" fw={800}>
+                  Activités
+                </Text>
+                <Text size="xs">Cette semaine : 0</Text>
+              </Group>
+            </Flex>
+          </Container>
+        </Tooltip>
       </Flex>
     </AppShell.Navbar>
   );
