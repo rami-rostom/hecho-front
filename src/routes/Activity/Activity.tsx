@@ -54,9 +54,9 @@ function Activity() {
         date_accomplished: dateValue,
         hecho: true,
       })
-    ).unwrap();
-
-    navigate(`/activity/${id}`);
+    )
+      .unwrap()
+      .then(() => navigate(0));
   };
 
   return (
@@ -159,25 +159,28 @@ function Activity() {
                   opened={opened}
                   onClose={close}
                   size="xs"
-                  title="Date réalisation de l'activité"
+                  centered
+                  title="Modification de l'activité"
                 >
                   <Stack>
                     <form onSubmit={handleFormSubmit}>
-                      <DatePickerInput
-                        clearable
-                        required
-                        valueFormat="DD MMMM YYYY"
-                        label="Date de réalisation"
-                        placeholder="Choisir une date"
-                        minDate={new Date()}
-                        onChange={(event) => {
-                          const date = event?.toDateString();
-                          setDateValue(date);
-                        }}
-                      />
-                      <Button color="hecho.6" type="submit">
-                        HECHO
-                      </Button>
+                      <Stack gap="1rem">
+                        <DatePickerInput
+                          clearable
+                          required
+                          valueFormat="DD MMMM YYYY"
+                          label="Date accomplissement"
+                          placeholder="Choisir une date"
+                          minDate={new Date()}
+                          onChange={(event) => {
+                            const date = event?.toDateString();
+                            setDateValue(date);
+                          }}
+                        />
+                        <Button color="hecho.6" type="submit">
+                          HECHO
+                        </Button>
+                      </Stack>
                     </form>
                   </Stack>
                 </Modal>
