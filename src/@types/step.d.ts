@@ -1,6 +1,6 @@
 // Step states
 export type Step = {
-  id: string;
+  id?: string;
   name?: string;
   distance?: string | number;
   duration?: string | number;

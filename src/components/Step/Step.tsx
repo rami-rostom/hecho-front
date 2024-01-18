@@ -1,4 +1,5 @@
 import { useState, FormEvent } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import {
   Button,
@@ -9,25 +10,60 @@ import {
   TextInput,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconPlus } from '@tabler/icons-react';
 import { TimeInput } from '@mantine/dates';
+import { IconPlus } from '@tabler/icons-react';
+
+import { useAppDispatch } from '../../hooks/redux';
+import { createStep } from '../../store/reducers/createStep';
+import { updateStep } from '../../store/reducers/updateStep';
 
 function Step() {
-  const [opened, { close, open }] = useDisclosure(false);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
+  // Retrieve ID of the activity
+  const { id } = useParams();
+  if (!id) throw new Error('Invalid id');
+
+  const [opened, { close, open }] = useDisclosure(false);
   const [nameValue, setNameValue] = useState('');
   const [durationValue, setDurationValue] = useState<string | undefined>('');
   const [distanceValue, setDistanceValue] = useState<string | number>('');
 
-  const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+  // Function to transform duration in minutes
+  const convertDurationToMin = (duration?: string) => {
+    if (duration) {
+      const [heures, minutes, secondes] = duration.split(':').map(Number);
+      const durationInMin = heures * 60 + minutes + secondes / 60;
+
+      // Fixe value with two decimals
+      return durationInMin.toFixed(2);
+    }
+    return duration;
+  };
+
+  const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log(nameValue);
-    console.log(typeof nameValue);
-    console.log(durationValue);
-    console.log(typeof durationValue);
-    console.log(distanceValue);
-    console.log(typeof distanceValue);
+    // Creation of the step with useState datas
+    const createdStep = await dispatch(
+      createStep({
+        name: nameValue,
+        duration: convertDurationToMin(durationValue),
+        distance: distanceValue,
+        user_id: 1,
+      })
+    ).unwrap();
+
+    // Retrieve new step ID and redirection to the activity's page
+    const stepId = createdStep.id;
+
+    // Add the new step to the workout
+    await dispatch(
+      updateStep({
+        step_id: stepId,
+      })
+    ).then(() => navigate(0));
   };
 
   return (

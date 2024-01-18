@@ -1,6 +1,6 @@
 // Tag states
 export type Tag = {
-  id: string;
+  id?: string;
   name?: string;
   user_id: number;
 };
