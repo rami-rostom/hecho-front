@@ -72,7 +72,7 @@ function Hecho() {
           </form>
         </Stack>
       </Modal>
-      <Button color="#f34141" onClick={open}>
+      <Button color="button.1" onClick={open}>
         NO HECHO
       </Button>
     </div>

@@ -72,7 +72,7 @@ function CreateActivity() {
           />
 
           <Group justify="flex-end" mt="md">
-            <Button color="hecho.6" type="submit">
+            <Button color="palette.0" type="submit">
               Créer l&apos;activité
             </Button>
           </Group>

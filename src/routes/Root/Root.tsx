@@ -1,7 +1,9 @@
-import { AppShell } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+
+import { AppShell } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+
 import Header from '../../components/Header/Header';
 import NavBar from '../../components/NavBar/NavBar';
 import Main from '../../components/Main/Main';

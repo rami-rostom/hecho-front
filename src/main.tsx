@@ -19,34 +19,34 @@ import './styles/index.scss';
 import store from './store';
 
 // Define theme of the app with Mantine
-const hecho: MantineColorsTuple = [
-  '#fff4e2',
-  '#ffe9cc',
-  '#ffd09c',
-  '#fdb766',
-  '#fca13a',
-  '#fb931d',
-  '#fc8c0c',
-  '#e17900',
-  '#c86a00',
-  '#ae5a00',
+const palette: MantineColorsTuple = [
+  '#ff8906', // 0: main orange
+  '#f25f4c', // 1: secondary orange-ish
+  '#e53170', // 2: tertiary pink
+  '#fffffe', // 3: main white
+  '#a7a9be', // 4: paragraph light grey
+  '#0f0e17', // 5: background dark
+  '#14131c', // 6: background lighter dark
+  '#2e2f3e', // 7: stroke grey
+  'black', // 8: stroke black
+  'black', // 9: stroke black
 ];
 
-const darkBg: MantineColorsTuple = [
-  '#0e1217',
-  '#1c1f26',
-  '#0e1217',
-  '#0e1217',
-  '#0e1217',
-  '#0e1217',
-  '#0e1217',
-  '#0e1217',
-  '#0e1217',
-  '#0e1217',
+const button: MantineColorsTuple = [
+  '#ff8906', // 0: main orange button
+  '#e87a00', // 1: secondary orange button
+  '#f25f4c', // 2: main orange-ish button
+  '#ed4732', // 3: secondary orange-ish button
+  '#e53170', // 4: main pink
+  '#e01b60', // 5: secondary pink
+  '#0f0e17', // 6: background dark
+  '#14131c', // 7: background lighter dark
+  '#2e2f3e', // 8: stroke grey
+  'black', // 9: stroke black
 ];
 
 const theme = createTheme({
-  colors: { hecho, darkBg },
+  colors: { palette, button },
 });
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

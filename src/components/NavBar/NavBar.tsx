@@ -23,7 +23,7 @@ import './NavBar.scss';
 
 function NavBar() {
   return (
-    <AppShell.Navbar p="md" bg="darkBg" className="navbar">
+    <AppShell.Navbar p="md" bg="palette.5" className="navbar">
       <Flex direction="column" justify="space-between" h="100%">
         <Stack gap="0.3rem" className="navbar__menu">
           <NavLink
@@ -90,7 +90,7 @@ function NavBar() {
             my="xl"
             px="xs"
             py="md"
-            bg="darkBg.1"
+            bg="palette.6"
             className="navbar__counter"
             visibleFrom="sm"
           >

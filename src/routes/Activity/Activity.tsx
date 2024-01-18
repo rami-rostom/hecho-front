@@ -14,11 +14,11 @@ import {
 } from '@mantine/core';
 
 import Hecho from '../../components/Hecho/Hecho';
+import ActivityIcon from '../../components/ActivityIcon/ActivityIcon';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchActivity } from '../../store/reducers/activity';
 
 import './Activity.scss';
-import ActivityIcon from '../../components/ActivityIcon/ActivityIcon';
 
 function Activity() {
   const dispatch = useAppDispatch();
@@ -71,7 +71,7 @@ function Activity() {
         </Text>
         <Group justify="space-between">
           <Group gap="1rem">
-            {/* Dynamic icon based on sport */}
+            {/* Component for dynamic icon based on sport */}
             <ActivityIcon />
             <Title order={1}>{activityData.name}</Title>
             {tags
@@ -86,11 +86,10 @@ function Activity() {
                 ))
               : []}
           </Group>
-          <Button color="hecho.9">Modifier l&apos;activité</Button>
         </Group>
       </Container>
 
-      <Container>
+      <Container className="activity__main">
         <Flex justify="space-between">
           <Stack align="stretch" gap="xl" className="activity__steps">
             {steps
@@ -156,7 +155,7 @@ function Activity() {
               : []}
           </Stack>
 
-          <Stack className="activity__detail">
+          <Stack className="activity__aside">
             <Stack gap="0rem">
               <Text fw={500} tt="uppercase">
                 {activityData.sport.name}
@@ -221,13 +220,22 @@ function Activity() {
             </Stack>
 
             {activityData.hecho ? (
-              <Button color="hecho.6">HECHO</Button>
+              <Button color="button.0">HECHO</Button>
             ) : (
               // Component to update accomplished date and tag the activity as HECHO
               <Hecho />
             )}
           </Stack>
         </Flex>
+
+        <Group>
+          <Button size="xs" color="button.0">
+            Modifier l&apos;activité
+          </Button>
+          <Button size="xs" color="button.2">
+            Supprimer l&apos;activité
+          </Button>
+        </Group>
       </Container>
     </Container>
   );

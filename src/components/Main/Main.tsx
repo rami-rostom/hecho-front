@@ -4,7 +4,7 @@ import Footer from '../Footer/Footer';
 
 function Main() {
   return (
-    <AppShell.Main bg="darkBg.1">
+    <AppShell.Main bg="palette.6">
       <Outlet />
       <Footer />
     </AppShell.Main>
