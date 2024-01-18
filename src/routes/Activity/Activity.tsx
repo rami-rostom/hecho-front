@@ -86,6 +86,20 @@ function Activity() {
                 ))
               : []}
           </Group>
+          <Group gap="xs">
+            <Button
+              size="compact-xs"
+              color="button.0"
+              variant="outline"
+              component="a"
+              href={`/activity/${id}/edit`}
+            >
+              Modifier activité
+            </Button>
+            <Button size="compact-xs" color="button.2" variant="outline">
+              Supprimer activité
+            </Button>
+          </Group>
         </Group>
       </Container>
 
@@ -227,15 +241,6 @@ function Activity() {
             )}
           </Stack>
         </Flex>
-
-        <Group>
-          <Button size="xs" color="button.0">
-            Modifier l&apos;activité
-          </Button>
-          <Button size="xs" color="button.2">
-            Supprimer l&apos;activité
-          </Button>
-        </Group>
       </Container>
     </Container>
   );
