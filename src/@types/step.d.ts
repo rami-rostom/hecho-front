@@ -4,6 +4,7 @@ export type Step = {
   name?: string;
   distance?: string | number;
   duration?: string | number;
+  user_id: number;
 };
 
 export type StepState = {

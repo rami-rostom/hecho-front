@@ -18,6 +18,8 @@ const initialState: ActivityState = {
       id: 0,
       name: '',
     },
+    steps: [],
+    tags: [],
   },
   isLoading: true,
   error: null,
