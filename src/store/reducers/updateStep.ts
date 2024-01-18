@@ -17,9 +17,12 @@ const initialState: StepState = {
 
 export const updateStep = createAsyncThunk(
   'updateStep',
-  // TODO: change unknown type for stepId
-  async (stepId: unknown) => {
-    const { data } = await axiosInstance.patch(`/workout/1/step`, stepId);
+  // TODO: change any type for stepId
+  async (stepId: any) => {
+    const { data } = await axiosInstance.patch(
+      `/workout/${stepId.workoutId}/step`,
+      stepId
+    );
 
     return data;
   }

@@ -62,6 +62,7 @@ function Step() {
     await dispatch(
       updateStep({
         step_id: stepId,
+        workoutId: id,
       })
     ).then(() => navigate(0));
   };
