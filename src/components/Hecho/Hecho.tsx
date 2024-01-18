@@ -65,14 +65,14 @@ function Hecho() {
                   setDateValue(date);
                 }}
               />
-              <Button color="hecho.6" type="submit">
+              <Button color="button.1" type="submit">
                 HECHO
               </Button>
             </Stack>
           </form>
         </Stack>
       </Modal>
-      <Button color="button.1" onClick={open}>
+      <Button color="button.2" onClick={open}>
         NO HECHO
       </Button>
     </div>

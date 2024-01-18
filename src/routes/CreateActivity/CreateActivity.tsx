@@ -1,7 +1,15 @@
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Box, Button, Group, Select, TextInput, Title } from '@mantine/core';
+import {
+  Box,
+  Button,
+  Group,
+  Select,
+  Stack,
+  TextInput,
+  Title,
+} from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
 
 import { useAppDispatch } from '../../hooks/redux';
@@ -39,43 +47,45 @@ function CreateActivity() {
       <Title order={1}>Créer une nouvelle activité</Title>
       <Box maw={340} mx="auto">
         <form onSubmit={handleFormSubmit}>
-          <TextInput
-            withAsterisk
-            label="Nom"
-            placeholder="Nom de l'activité"
-            onChange={(event) => setNameValue(event.target.value)}
-          />
-          <Select
-            withAsterisk
-            label="Type"
-            placeholder="Type de l'activité"
-            data={[
-              { label: 'Course à pied', value: '1' },
-              { label: 'Trail', value: '2' },
-              { label: 'Vélo', value: '3' },
-              { label: 'Natation', value: '4' },
-              { label: 'Randonnée', value: '5' },
-            ]}
-            onChange={setTypeValue}
-          />
-          <DatePickerInput
-            clearable
-            required
-            valueFormat="DD MMMM YYYY"
-            label="Date prévue"
-            placeholder="Choisir une date de début"
-            minDate={new Date()}
-            onChange={(event) => {
-              const date = event?.toDateString();
-              setDateValue(date);
-            }}
-          />
+          <Stack gap="1rem">
+            <TextInput
+              withAsterisk
+              label="Nom"
+              placeholder="Nom de l'activité"
+              onChange={(event) => setNameValue(event.target.value)}
+            />
+            <Select
+              withAsterisk
+              label="Type"
+              placeholder="Type de l'activité"
+              data={[
+                { label: 'Course à pied', value: '1' },
+                { label: 'Trail', value: '2' },
+                { label: 'Vélo', value: '3' },
+                { label: 'Natation', value: '4' },
+                { label: 'Randonnée', value: '5' },
+              ]}
+              onChange={setTypeValue}
+            />
+            <DatePickerInput
+              clearable
+              required
+              valueFormat="DD MMMM YYYY"
+              label="Date prévue"
+              placeholder="Choisir une date de début"
+              minDate={new Date()}
+              onChange={(event) => {
+                const date = event?.toDateString();
+                setDateValue(date);
+              }}
+            />
 
-          <Group justify="flex-end" mt="md">
-            <Button color="palette.0" type="submit">
-              Créer l&apos;activité
-            </Button>
-          </Group>
+            <Group justify="flex-end" mt="md">
+              <Button color="palette.0" type="submit">
+                Créer l&apos;activité
+              </Button>
+            </Group>
+          </Stack>
         </form>
       </Box>
     </>

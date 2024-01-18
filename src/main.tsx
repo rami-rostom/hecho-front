@@ -37,8 +37,8 @@ const button: MantineColorsTuple = [
   '#e87a00', // 1: secondary orange button
   '#f25f4c', // 2: main orange-ish button
   '#ed4732', // 3: secondary orange-ish button
-  '#e53170', // 4: main pink
-  '#e01b60', // 5: secondary pink
+  '#ffba38', // 4: main yellow/orange
+  '#ffb01b', // 5: secondary yellow/orange
   '#0f0e17', // 6: background dark
   '#14131c', // 7: background lighter dark
   '#2e2f3e', // 8: stroke grey

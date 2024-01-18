@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { IconRepeat } from '@tabler/icons-react';
 import {
   Badge,
   Button,
@@ -14,6 +15,7 @@ import {
 } from '@mantine/core';
 
 import Hecho from '../../components/Hecho/Hecho';
+import Step from '../../components/Step/Step';
 import ActivityIcon from '../../components/ActivityIcon/ActivityIcon';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchActivity } from '../../store/reducers/activity';
@@ -52,9 +54,14 @@ function Activity() {
     return speedResult.toFixed(2);
   };
 
-  // Activity speed calculation
   const speed = speedCalcul(activityData.duration, activityData.distance);
 
+  /**
+   * Function for calculating the pace of activity
+   * @param duration value in minutes
+   * @param distance value in kilometers
+   * @returns Return pace in min/km
+   */
   const paceCalcul = (duration: number, distance: number) => {
     const paceResult = duration / distance;
 
@@ -106,6 +113,7 @@ function Activity() {
       <Container className="activity__main">
         <Flex justify="space-between">
           <Stack align="stretch" gap="xl" className="activity__steps">
+            {/* List of steps or none if no steps in the activity */}
             {steps
               ? steps.map((step) => (
                   <Flex
@@ -167,6 +175,16 @@ function Activity() {
                   </Flex>
                 ))
               : []}
+
+            <Group justify="flex-end" gap="xs">
+              {/* Component button and modal to create a new step */}
+              <Step />
+
+              <Button color="button.4" size="compact-xs" variant="outline">
+                <IconRepeat size="0.9rem" className="activity__steps-button" />
+                Ajouter une répétition
+              </Button>
+            </Group>
           </Stack>
 
           <Stack className="activity__aside">
