@@ -5,6 +5,7 @@ import activityReducer from './reducers/activity';
 import hechoReducer from './reducers/hecho';
 import stepReducer from './reducers/createStep';
 import addStepReducer from './reducers/addStep';
+import removeStepReducer from './reducers/removeStep';
 
 const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
     hecho: hechoReducer,
     createStep: stepReducer,
     addStep: addStepReducer,
+    removeStep: removeStepReducer,
   },
 });
 

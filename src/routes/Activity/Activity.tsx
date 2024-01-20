@@ -12,11 +12,14 @@ import {
   Stack,
   Text,
   Title,
+  UnstyledButton,
 } from '@mantine/core';
 
+import ActivityIcon from '../../components/ActivityIcon/ActivityIcon';
 import Hecho from '../../components/Hecho/Hecho';
 import Step from '../../components/Step/Step';
-import ActivityIcon from '../../components/ActivityIcon/ActivityIcon';
+import RemoveStep from '../../components/RemoveStep/RemoveStep';
+
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchActivity } from '../../store/reducers/activity';
 
@@ -123,9 +126,15 @@ function Activity() {
                     key={step.id}
                     className="activity__steps-step"
                   >
-                    <Text tt="capitalize" size="xl" fw={700}>
-                      {step.name}
-                    </Text>
+                    <Group justify="space-between">
+                      <Text tt="capitalize" size="xl" fw={700}>
+                        {step.name}
+                      </Text>
+                      <Group>
+                        <UnstyledButton>Modifier étape</UnstyledButton>
+                        <RemoveStep />
+                      </Group>
+                    </Group>
 
                     <SimpleGrid
                       cols={{ base: 2, lg: 4 }}
