@@ -1,3 +1,6 @@
+import { FormEvent } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import {
   Button,
   Group,
@@ -9,11 +12,36 @@ import {
 import { IconTrash } from '@tabler/icons-react';
 
 import { useDisclosure } from '@mantine/hooks';
+import { useAppDispatch } from '../../hooks/redux';
+import { removeStep } from '../../store/reducers/removeStep';
 
-import './RemoveStep.scss';
+type StepProps = {
+  stepId: string | undefined;
+};
 
-function RemoveStep() {
+function RemoveStep(props: StepProps) {
+  const { stepId } = props;
+
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  // Retrieve ID of the activity
+  const { id } = useParams();
+  if (!id) throw new Error('Invalid id');
+
   const [opened, { open, close }] = useDisclosure(false);
+
+  const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    // Add the new step to the workout
+    await dispatch(
+      removeStep({
+        step_id: stepId,
+        workoutId: id,
+      })
+    ).then(() => navigate(0));
+  };
 
   return (
     <>
@@ -22,13 +50,17 @@ function RemoveStep() {
         onClose={close}
         title="Supprimer l'étape de l'activité"
       >
-        <Text>Voulez-vous vraiment supprimer votre étape ?</Text>
-        <Group justify="flex-end" pt="lg" gap="xs">
-          <Button color="button.0" variant="outline">
-            Annuler
-          </Button>
-          <Button color="button.2">Supprimer</Button>
-        </Group>
+        <form onSubmit={handleFormSubmit}>
+          <Text>Voulez-vous vraiment supprimer votre étape ?</Text>
+          <Group justify="flex-end" pt="lg" gap="xs">
+            <Button color="button.0" variant="outline" onClick={close}>
+              Annuler
+            </Button>
+            <Button color="button.2" type="submit">
+              Supprimer
+            </Button>
+          </Group>
+        </form>
       </Modal>
 
       <Tooltip
@@ -40,8 +72,8 @@ function RemoveStep() {
         transitionProps={{ transition: 'slide-up', duration: 200 }}
         withArrow
       >
-        <UnstyledButton onClick={open} className="remove-step-icon">
-          <IconTrash size="1rem" />
+        <UnstyledButton onClick={open}>
+          <IconTrash size="1rem" color="var(--mantine-color-button-2)" />
         </UnstyledButton>
       </Tooltip>
     </>

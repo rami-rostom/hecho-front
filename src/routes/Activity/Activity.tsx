@@ -132,7 +132,8 @@ function Activity() {
                       </Text>
                       <Group>
                         <UnstyledButton>Modifier étape</UnstyledButton>
-                        <RemoveStep />
+                        {/* Component opening a modal to remove the step from the activity */}
+                        <RemoveStep stepId={step.id} />
                       </Group>
                     </Group>
 
