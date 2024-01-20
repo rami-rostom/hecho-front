@@ -6,6 +6,7 @@ import {
   Badge,
   Button,
   Container,
+  Divider,
   Flex,
   Group,
   SimpleGrid,
@@ -223,10 +224,10 @@ function Activity() {
             </Stack>
 
             <Stack gap="0rem">
-              {speed ? (
-                <Text fw={500}>{speed} km/h</Text>
-              ) : (
+              {speed === 'NaN' ? (
                 <Text fw={500}>--</Text>
+              ) : (
+                <Text fw={500}>{speed} km/h</Text>
               )}
               <Text size="xs" fs="italic">
                 Vitesse moyenne
@@ -234,15 +235,17 @@ function Activity() {
             </Stack>
 
             <Stack gap="0rem">
-              {pace ? (
-                <Text fw={500}>{pace} min/km</Text>
-              ) : (
+              {pace === 'NaN' ? (
                 <Text fw={500}>--</Text>
+              ) : (
+                <Text fw={500}>{pace} min/km</Text>
               )}
               <Text size="xs" fs="italic">
                 Allure
               </Text>
             </Stack>
+
+            <Divider my="0.3rem" />
 
             <Stack gap="0rem">
               <Text fw={500}>{activityData.date_scheduled}</Text>
