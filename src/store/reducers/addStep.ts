@@ -15,12 +15,12 @@ const initialState: StepState = {
   error: null,
 };
 
-export const updateStep = createAsyncThunk(
-  'updateStep',
+export const addStep = createAsyncThunk(
+  'addStep',
   // TODO: change any type for stepId
   async (stepId: any) => {
     const { data } = await axiosInstance.patch(
-      `/workout/${stepId.workoutId}/step`,
+      `/workout/${stepId.workoutId}/step/add`,
       stepId
     );
 
@@ -28,25 +28,25 @@ export const updateStep = createAsyncThunk(
   }
 );
 
-const updateStepSlice = createSlice({
-  name: 'updateStep',
+const addStepSlice = createSlice({
+  name: 'addStep',
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(updateStep.pending, (state) => {
+      .addCase(addStep.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(updateStep.rejected, (state) => {
+      .addCase(addStep.rejected, (state) => {
         state.isLoading = false;
         state.error = 'Enregistrement rejeté';
       })
-      .addCase(updateStep.fulfilled, (state) => {
+      .addCase(addStep.fulfilled, (state) => {
         state.isLoading = false;
         state.error = null;
       });
   },
 });
 
-export default updateStepSlice.reducer;
+export default addStepSlice.reducer;

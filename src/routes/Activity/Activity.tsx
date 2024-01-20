@@ -65,7 +65,8 @@ function Activity() {
   const paceCalcul = (duration: number, distance: number) => {
     const paceResult = duration / distance;
 
-    return paceResult;
+    // Return result with two decimals
+    return paceResult.toFixed(2);
   };
 
   const pace = paceCalcul(activityData.duration, activityData.distance);

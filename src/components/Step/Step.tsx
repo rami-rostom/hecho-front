@@ -15,7 +15,7 @@ import { IconPlus } from '@tabler/icons-react';
 
 import { useAppDispatch } from '../../hooks/redux';
 import { createStep } from '../../store/reducers/createStep';
-import { updateStep } from '../../store/reducers/updateStep';
+import { addStep } from '../../store/reducers/addStep';
 
 function Step() {
   const navigate = useNavigate();
@@ -60,7 +60,7 @@ function Step() {
 
     // Add the new step to the workout
     await dispatch(
-      updateStep({
+      addStep({
         step_id: stepId,
         workoutId: id,
       })
