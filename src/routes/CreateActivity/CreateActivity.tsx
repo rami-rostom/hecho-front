@@ -78,10 +78,15 @@ function CreateActivity() {
                 const date = event?.toDateString();
                 setDateValue(date);
               }}
+              styles={{
+                input: {
+                  backgroundColor: 'var(--mantine-color-palette-7)',
+                },
+              }}
             />
 
             <Group justify="flex-end" mt="md">
-              <Button color="palette.0" type="submit">
+              <Button color="button.0" type="submit">
                 Créer l&apos;activité
               </Button>
             </Group>

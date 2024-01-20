@@ -7,8 +7,13 @@ import {
   createTheme,
   MantineColorsTuple,
   MantineProvider,
+  Modal,
+  NumberInput,
+  Select,
+  TextInput,
 } from '@mantine/core';
 
+import { DatePickerInput, TimeInput } from '@mantine/dates';
 import { router } from './router';
 
 // Mantine styles
@@ -27,8 +32,8 @@ const palette: MantineColorsTuple = [
   '#a7a9be', // 4: paragraph light grey
   '#0f0e17', // 5: background dark
   '#14131c', // 6: background lighter dark
-  '#2e2f3e', // 7: stroke grey
-  'black', // 8: stroke black
+  '#1c1b29', // 7: background lighter lighter dark
+  '#2e2f3e', // 8: stroke grey
   'black', // 9: stroke black
 ];
 
@@ -47,6 +52,45 @@ const button: MantineColorsTuple = [
 
 const theme = createTheme({
   colors: { palette, button },
+  components: {
+    Modal: Modal.extend({
+      styles: {
+        header: {
+          backgroundColor: 'var(--mantine-color-palette-6)',
+          textTransform: 'uppercase',
+          color: 'darkgrey',
+          letterSpacing: '0.08rem',
+        },
+        body: { backgroundColor: 'var(--mantine-color-palette-6)' },
+      },
+    }),
+    TextInput: TextInput.extend({
+      styles: {
+        input: { backgroundColor: 'var(--mantine-color-palette-7)' },
+      },
+    }),
+    TimeInput: TimeInput.extend({
+      styles: {
+        input: { backgroundColor: 'var(--mantine-color-palette-7)' },
+      },
+    }),
+    NumberInput: NumberInput.extend({
+      styles: {
+        input: { backgroundColor: 'var(--mantine-color-palette-7)' },
+      },
+    }),
+    DatePickerInput: DatePickerInput.extend({
+      styles: {
+        input: { backgroundColor: 'var(--mantine-color-palette-7)' },
+      },
+    }),
+    Select: Select.extend({
+      styles: {
+        input: { backgroundColor: 'var(--mantine-color-palette-7)' },
+        dropdown: { backgroundColor: 'var(--mantine-color-palette-7)' },
+      },
+    }),
+  },
 });
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
