@@ -18,7 +18,7 @@ import {
 
 import ActivityIcon from '../../components/ActivityIcon/ActivityIcon';
 import Hecho from '../../components/Hecho/Hecho';
-import Step from '../../components/Step/Step';
+import AddStep from '../../components/AddStep/AddStep';
 import RemoveStep from '../../components/RemoveStep/RemoveStep';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -190,7 +190,7 @@ function Activity() {
 
             <Group justify="flex-end" gap="xs">
               {/* Component button and modal to create a new step */}
-              <Step />
+              <AddStep />
 
               <Button color="button.4" size="compact-xs" variant="outline">
                 <IconRepeat size="0.9rem" className="activity__steps-button" />

@@ -17,7 +17,7 @@ import { useAppDispatch } from '../../hooks/redux';
 import { createStep } from '../../store/reducers/createStep';
 import { addStep } from '../../store/reducers/addStep';
 
-function Step() {
+function AddStep() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -126,4 +126,4 @@ function Step() {
   );
 }
 
-export default Step;
+export default AddStep;
