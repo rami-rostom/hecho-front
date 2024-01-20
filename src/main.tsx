@@ -14,11 +14,13 @@ import {
 } from '@mantine/core';
 
 import { DatePickerInput, TimeInput } from '@mantine/dates';
+import { Notifications } from '@mantine/notifications';
 import { router } from './router';
 
 // Mantine styles
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
+import '@mantine/notifications/styles.css';
 
 import './styles/index.scss';
 import store from './store';
@@ -97,6 +99,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
       <MantineProvider defaultColorScheme="dark" theme={theme}>
+        <Notifications />
         <RouterProvider router={router} />
       </MantineProvider>
     </Provider>
