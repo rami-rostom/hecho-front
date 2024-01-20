@@ -34,7 +34,7 @@ function RemoveStep(props: StepProps) {
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Add the new step to the workout
+    // Remove step from the workout
     await dispatch(
       removeStep({
         step_id: stepId,

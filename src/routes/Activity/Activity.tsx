@@ -20,6 +20,7 @@ import ActivityIcon from '../../components/ActivityIcon/ActivityIcon';
 import Hecho from '../../components/Hecho/Hecho';
 import AddStep from '../../components/AddStep/AddStep';
 import RemoveStep from '../../components/RemoveStep/RemoveStep';
+import DeleteActivity from '../../components/DeleteActivity/DeleteActivity';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchActivity } from '../../store/reducers/activity';
@@ -108,9 +109,7 @@ function Activity() {
             >
               Modifier activité
             </Button>
-            <Button size="compact-xs" color="button.2" variant="outline">
-              Supprimer activité
-            </Button>
+            <DeleteActivity />
           </Group>
         </Group>
       </Container>

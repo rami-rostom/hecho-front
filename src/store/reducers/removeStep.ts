@@ -29,7 +29,7 @@ export const removeStep = createAsyncThunk(
 );
 
 const removeStepSlice = createSlice({
-  name: 'addStep',
+  name: 'removeStep',
   initialState,
   reducers: {},
   extraReducers(builder) {
