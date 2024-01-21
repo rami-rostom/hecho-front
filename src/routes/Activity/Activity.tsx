@@ -108,7 +108,13 @@ function Activity() {
                           stepDistance={step.distance}
                         />
                         {/* Component opening a modal to remove the step from the activity */}
-                        <RemoveStep stepId={step.id} />
+                        <RemoveStep
+                          stepId={step.id}
+                          stepDistance={step.distance}
+                          stepDuration={step.duration}
+                          activityDuration={activityData.duration}
+                          activityDistance={activityData.distance}
+                        />
                       </Group>
                     </Group>
 

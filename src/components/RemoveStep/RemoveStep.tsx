@@ -14,13 +14,24 @@ import { IconTrash } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import { useAppDispatch } from '../../hooks/redux';
 import { removeStep } from '../../store/reducers/removeStep';
+import { updateActivity } from '../../store/reducers/updateActivity';
 
 type StepProps = {
   stepId: string | undefined;
+  stepDistance: string | number | undefined;
+  stepDuration: string | number | undefined;
+  activityDuration: number;
+  activityDistance: number;
 };
 
 function RemoveStep(props: StepProps) {
-  const { stepId } = props;
+  const {
+    stepId,
+    stepDistance,
+    stepDuration,
+    activityDuration,
+    activityDistance,
+  } = props;
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -39,6 +50,25 @@ function RemoveStep(props: StepProps) {
       removeStep({
         step_id: stepId,
         workoutId: id,
+      })
+    );
+
+    await dispatch(
+      updateActivity({
+        id,
+        duration: parseInt(activityDuration) - parseInt(stepDuration),
+        distance: parseInt(activityDistance) - parseInt(stepDistance),
+        name: '',
+        sport_id: null,
+        pace: 0,
+        user_id: 0,
+        hecho: false,
+        sport: {
+          id: 0,
+          name: undefined,
+        },
+        steps: [],
+        tags: [],
       })
     ).then(() => navigate(0));
   };
