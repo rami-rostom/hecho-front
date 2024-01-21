@@ -14,6 +14,7 @@ import { TimeInput } from '@mantine/dates';
 import { IconPlus } from '@tabler/icons-react';
 
 import { useAppDispatch } from '../../hooks/redux';
+import { convertDurationToMin } from '../../utils/calculation';
 import { createStep } from '../../store/reducers/createStep';
 import { addStep } from '../../store/reducers/addStep';
 
@@ -29,18 +30,6 @@ function AddStep() {
   const [nameValue, setNameValue] = useState('');
   const [durationValue, setDurationValue] = useState<string | undefined>('');
   const [distanceValue, setDistanceValue] = useState<string | number>('');
-
-  // Function to transform duration in minutes
-  const convertDurationToMin = (duration?: string) => {
-    if (duration) {
-      const [heures, minutes, secondes] = duration.split(':').map(Number);
-      const durationInMin = heures * 60 + minutes + secondes / 60;
-
-      // Fixe value with two decimals
-      return durationInMin.toFixed(2);
-    }
-    return duration;
-  };
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

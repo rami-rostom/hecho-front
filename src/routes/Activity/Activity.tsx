@@ -23,6 +23,7 @@ import DeleteActivity from '../../components/DeleteActivity/DeleteActivity';
 import UpdateStep from '../../components/UpdateStep/UpdateStep';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { paceCalcul, speedCalcul } from '../../utils/calculation';
 import { fetchActivity } from '../../store/reducers/getActivity';
 
 import './Activity.scss';
@@ -40,40 +41,9 @@ function Activity() {
   }, [dispatch, id]);
 
   const activityData = useAppSelector((state) => state.getActivity.activity);
-
   const { steps, tags } = activityData;
 
-  /**
-   * Function for calculating the speed of activity
-   * @param duration value in minutes
-   * @param distance value in kilometers
-   * @returns Return speed in km/h
-   */
-  const speedCalcul = (duration: number, distance: number) => {
-    const distanceInMeter = distance * 1000;
-    const durationInSeconds = duration * 60;
-
-    const speedResult = (distanceInMeter / durationInSeconds) * 3.6;
-
-    // Return result with two decimals
-    return speedResult.toFixed(2);
-  };
-
   const speed = speedCalcul(activityData.duration, activityData.distance);
-
-  /**
-   * Function for calculating the pace of activity
-   * @param duration value in minutes
-   * @param distance value in kilometers
-   * @returns Return pace in min/km
-   */
-  const paceCalcul = (duration: number, distance: number) => {
-    const paceResult = duration / distance;
-
-    // Return result with two decimals
-    return paceResult.toFixed(2);
-  };
-
   const pace = paceCalcul(activityData.duration, activityData.distance);
 
   return (
