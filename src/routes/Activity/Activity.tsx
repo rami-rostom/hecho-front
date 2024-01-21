@@ -102,7 +102,7 @@ function Activity() {
           <Group gap="xs">
             <Button
               size="compact-xs"
-              color="button.0"
+              color="button.4"
               variant="outline"
               component="a"
               href={`/activity/${id}/edit`}
@@ -132,7 +132,11 @@ function Activity() {
                       </Text>
                       <Group>
                         {/* Component opening a modal to update the step */}
-                        <UpdateStep stepId={step.id} />
+                        <UpdateStep
+                          stepId={step.id}
+                          stepName={step.name}
+                          stepDistance={step.distance}
+                        />
                         {/* Component opening a modal to remove the step from the activity */}
                         <RemoveStep stepId={step.id} />
                       </Group>
