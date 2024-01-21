@@ -58,17 +58,6 @@ function RemoveStep(props: StepProps) {
         id,
         duration: parseInt(activityDuration) - parseInt(stepDuration),
         distance: parseInt(activityDistance) - parseInt(stepDistance),
-        name: '',
-        sport_id: null,
-        pace: 0,
-        user_id: 0,
-        hecho: false,
-        sport: {
-          id: 0,
-          name: undefined,
-        },
-        steps: [],
-        tags: [],
       })
     ).then(() => navigate(0));
   };
