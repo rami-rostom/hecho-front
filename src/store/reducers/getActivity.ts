@@ -33,8 +33,8 @@ export const fetchActivity = createAsyncThunk(
   }
 );
 
-const activitySlice = createSlice({
-  name: 'activity',
+const getActivitySlice = createSlice({
+  name: 'getActivity',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -56,4 +56,4 @@ const activitySlice = createSlice({
   },
 });
 
-export default activitySlice.reducer;
+export default getActivitySlice.reducer;

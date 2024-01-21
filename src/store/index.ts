@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import createActivityReducer from './reducers/createActivity';
-import activityReducer from './reducers/activity';
+import getActivityReducer from './reducers/getActivity';
 import hechoReducer from './reducers/hecho';
 import stepReducer from './reducers/createStep';
 import addStepReducer from './reducers/addStep';
@@ -11,7 +11,7 @@ import deleteActivityReducer from './reducers/deleteActivity';
 const store = configureStore({
   reducer: {
     createActivity: createActivityReducer,
-    activity: activityReducer,
+    getActivity: getActivityReducer,
     hecho: hechoReducer,
     createStep: stepReducer,
     addStep: addStepReducer,

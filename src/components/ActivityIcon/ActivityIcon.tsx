@@ -12,7 +12,7 @@ import {
 } from '@tabler/icons-react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchActivity } from '../../store/reducers/activity';
+import { fetchActivity } from '../../store/reducers/getActivity';
 
 function ActivityIcon() {
   const dispatch = useAppDispatch();
@@ -26,7 +26,7 @@ function ActivityIcon() {
     dispatch(fetchActivity(id));
   }, [dispatch, id]);
 
-  const activityData = useAppSelector((state) => state.activity.activity);
+  const activityData = useAppSelector((state) => state.getActivity.activity);
 
   return (
     <>

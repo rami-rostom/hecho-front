@@ -7,7 +7,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { notifications } from '@mantine/notifications';
 
 import { useAppDispatch } from '../../hooks/redux';
-import { fetchActivity } from '../../store/reducers/activity';
+import { fetchActivity } from '../../store/reducers/getActivity';
 import { hecho } from '../../store/reducers/hecho';
 
 function Hecho() {

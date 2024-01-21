@@ -13,7 +13,6 @@ import {
   Stack,
   Text,
   Title,
-  UnstyledButton,
 } from '@mantine/core';
 
 import ActivityIcon from '../../components/ActivityIcon/ActivityIcon';
@@ -21,9 +20,10 @@ import Hecho from '../../components/Hecho/Hecho';
 import AddStep from '../../components/AddStep/AddStep';
 import RemoveStep from '../../components/RemoveStep/RemoveStep';
 import DeleteActivity from '../../components/DeleteActivity/DeleteActivity';
+import UpdateStep from '../../components/UpdateStep/UpdateStep';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchActivity } from '../../store/reducers/activity';
+import { fetchActivity } from '../../store/reducers/getActivity';
 
 import './Activity.scss';
 
@@ -39,7 +39,7 @@ function Activity() {
     dispatch(fetchActivity(id));
   }, [dispatch, id]);
 
-  const activityData = useAppSelector((state) => state.activity.activity);
+  const activityData = useAppSelector((state) => state.getActivity.activity);
 
   const { steps, tags } = activityData;
 
@@ -131,7 +131,13 @@ function Activity() {
                         {step.name}
                       </Text>
                       <Group>
-                        <UnstyledButton>Modifier étape</UnstyledButton>
+                        {/* Component opening a modal to update the step */}
+                        <UpdateStep
+                          stepId={step.id}
+                          stepName={step.name}
+                          stepDuration={step.duration}
+                          stepDistance={step.distance}
+                        />
                         {/* Component opening a modal to remove the step from the activity */}
                         <RemoveStep stepId={step.id} />
                       </Group>
