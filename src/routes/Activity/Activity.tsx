@@ -132,12 +132,7 @@ function Activity() {
                       </Text>
                       <Group>
                         {/* Component opening a modal to update the step */}
-                        <UpdateStep
-                          stepId={step.id}
-                          stepName={step.name}
-                          stepDuration={step.duration}
-                          stepDistance={step.distance}
-                        />
+                        <UpdateStep stepId={step.id} />
                         {/* Component opening a modal to remove the step from the activity */}
                         <RemoveStep stepId={step.id} />
                       </Group>

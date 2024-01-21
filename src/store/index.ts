@@ -7,6 +7,7 @@ import stepReducer from './reducers/createStep';
 import addStepReducer from './reducers/addStep';
 import removeStepReducer from './reducers/removeStep';
 import deleteActivityReducer from './reducers/deleteActivity';
+import getStepReducer from './reducers/getStep';
 
 const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
     addStep: addStepReducer,
     removeStep: removeStepReducer,
     deleteActivity: deleteActivityReducer,
+    getStep: getStepReducer,
   },
 });
 

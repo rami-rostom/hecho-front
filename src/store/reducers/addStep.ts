@@ -4,7 +4,7 @@ import { StepState } from '../../@types/step';
 import { axiosInstance } from '../../utils/axios';
 
 const initialState: StepState = {
-  steps: {
+  step: {
     id: '',
     name: '',
     distance: '',

@@ -1,11 +1,10 @@
 /* eslint-disable import/prefer-default-export */
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Step, StepState } from '../../@types/step';
+import { NewStepState, NewStep } from '../../@types/step';
 import { axiosInstance } from '../../utils/axios';
 
-const initialState: StepState = {
-  steps: {
-    id: '',
+const initialState: NewStepState = {
+  step: {
     name: '',
     distance: '',
     duration: '',
@@ -17,7 +16,7 @@ const initialState: StepState = {
 
 export const createStep = createAsyncThunk(
   'createStep',
-  async (newStep: Step) => {
+  async (newStep: NewStep) => {
     const { data } = await axiosInstance.post('/step', newStep);
     return data;
   }
@@ -30,13 +29,13 @@ const createStepSlice = createSlice({
     changeInputStepValue(
       state,
       action: PayloadAction<{
-        fieldName: keyof StepState['steps'];
+        fieldName: keyof NewStepState['step'];
         value: string;
       }>
     ) {
       const { fieldName, value } = action.payload;
 
-      state.steps[fieldName] = value as never;
+      state.step[fieldName] = value as never;
     },
   },
   extraReducers(builder) {
