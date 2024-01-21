@@ -20,7 +20,6 @@ import Hecho from '../../components/Hecho/Hecho';
 import AddStep from '../../components/AddStep/AddStep';
 import RemoveStep from '../../components/RemoveStep/RemoveStep';
 import DeleteActivity from '../../components/DeleteActivity/DeleteActivity';
-import UpdateStep from '../../components/UpdateStep/UpdateStep';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { paceCalcul, speedCalcul } from '../../utils/calculation';
@@ -101,12 +100,6 @@ function Activity() {
                         {step.name}
                       </Text>
                       <Group>
-                        {/* Component opening a modal to update the step */}
-                        <UpdateStep
-                          stepId={step.id}
-                          stepName={step.name}
-                          stepDistance={step.distance}
-                        />
                         {/* Component opening a modal to remove the step from the activity */}
                         <RemoveStep
                           stepId={step.id}

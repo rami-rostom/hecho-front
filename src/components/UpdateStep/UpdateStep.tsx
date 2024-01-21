@@ -8,16 +8,16 @@ import {
   NumberInput,
   Stack,
   TextInput,
+  Tooltip,
   UnstyledButton,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { TimeInput } from '@mantine/dates';
+import { IconPencil } from '@tabler/icons-react';
 
 import { useAppDispatch } from '../../hooks/redux';
 import { convertDurationToMin } from '../../utils/calculation';
 import { updateStep } from '../../store/reducers/updateStep';
-
-import './UpdateStep.scss';
 
 type StepProps = {
   stepId: string;
@@ -100,9 +100,19 @@ function UpdateStep(props: StepProps) {
         </form>
       </Modal>
 
-      <UnstyledButton className="update-btn" onClick={open}>
-        Modifier étape
-      </UnstyledButton>
+      <Tooltip
+        label="Modifier l'étape"
+        position="top"
+        offset={8}
+        openDelay={300}
+        closeDelay={150}
+        transitionProps={{ transition: 'slide-up', duration: 200 }}
+        withArrow
+      >
+        <UnstyledButton onClick={open}>
+          <IconPencil size="1.2rem" />
+        </UnstyledButton>
+      </Tooltip>
     </>
   );
 }

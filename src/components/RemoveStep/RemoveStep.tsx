@@ -92,7 +92,7 @@ function RemoveStep(props: StepProps) {
         withArrow
       >
         <UnstyledButton onClick={open}>
-          <IconTrash size="1rem" color="var(--mantine-color-button-2)" />
+          <IconTrash size="1.2rem" color="var(--mantine-color-button-2)" />
         </UnstyledButton>
       </Tooltip>
     </>
