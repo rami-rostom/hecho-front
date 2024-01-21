@@ -164,7 +164,10 @@ function Activity() {
 
             <Group justify="flex-end" gap="xs">
               {/* Component button and modal to create a new step */}
-              <AddStep />
+              <AddStep
+                activityDuration={activityData.duration}
+                activityDistance={activityData.distance}
+              />
 
               <Button color="button.4" size="compact-xs" variant="outline">
                 <IconRepeat size="0.9rem" className="activity__steps-button" />

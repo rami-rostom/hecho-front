@@ -4,6 +4,7 @@ import { Tag } from './tag';
 
 // Activity states
 export type Activity = {
+  id: string;
   name: string;
   sport_id: string | null;
   date_scheduled?: string;

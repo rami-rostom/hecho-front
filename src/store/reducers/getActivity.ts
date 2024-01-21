@@ -5,6 +5,7 @@ import { axiosInstance } from '../../utils/axios';
 
 const initialState: ActivityState = {
   activity: {
+    id: '',
     name: '',
     sport_id: '',
     date_scheduled: '',

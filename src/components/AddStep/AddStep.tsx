@@ -17,8 +17,16 @@ import { useAppDispatch } from '../../hooks/redux';
 import { convertDurationToMin } from '../../utils/calculation';
 import { createStep } from '../../store/reducers/createStep';
 import { addStep } from '../../store/reducers/addStep';
+import { updateActivity } from '../../store/reducers/updateActivity';
 
-function AddStep() {
+type ActivityProps = {
+  activityDuration: number;
+  activityDistance: number;
+};
+
+function AddStep(props: ActivityProps) {
+  const { activityDuration, activityDistance } = props;
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -38,8 +46,8 @@ function AddStep() {
     const createdStep = await dispatch(
       createStep({
         name: nameValue,
-        duration: convertDurationToMin(durationValue),
         distance: distanceValue,
+        duration: convertDurationToMin(durationValue),
         user_id: 1,
       })
     ).unwrap();
@@ -52,6 +60,16 @@ function AddStep() {
       addStep({
         step_id: stepId,
         workoutId: id,
+      })
+    );
+
+    await dispatch(
+      updateActivity({
+        id,
+        duration:
+          parseInt(activityDuration) +
+          parseInt(convertDurationToMin(durationValue)),
+        distance: parseInt(activityDistance) + parseInt(distanceValue),
       })
     ).then(() => navigate(0));
   };
