@@ -1,7 +1,7 @@
 import { FormEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { Button, Group, Modal, Notification, Text } from '@mantine/core';
+import { Button, Group, Modal, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { notifications } from '@mantine/notifications';
 
@@ -21,14 +21,16 @@ function DeleteActivity() {
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Delete the activity then redirect to homepage with confirmation toaster
+    // Delete the activity then redirect to homepage with confirmation notification
     await dispatch(deleteActivity(id)).then(() => {
       navigate('/');
 
       notifications.show({
-        color: 'red',
+        color: 'button.2',
         title: 'Confirmation de la suppression',
         message: 'Votre activité a bien été supprimé.',
+        autoClose: 3000,
+        style: { backgroundColor: 'var(--mantine-color-palette-7)' },
       });
     });
   };

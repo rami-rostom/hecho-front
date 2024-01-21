@@ -11,6 +11,7 @@ import {
   Title,
 } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
+import { notifications } from '@mantine/notifications';
 
 import { useAppDispatch } from '../../hooks/redux';
 import { createActivity } from '../../store/reducers/createActivity';
@@ -40,6 +41,14 @@ function CreateActivity() {
     // Retrieve new activity ID and redirection to the activity's page
     const { id } = createdActivity;
     navigate(`/activity/${id}`);
+
+    notifications.show({
+      color: 'lime',
+      title: 'Confirmation création',
+      message: 'Ajoute à présent des étapes à ton activité.',
+      autoClose: 3000,
+      style: { backgroundColor: 'var(--mantine-color-palette-7)' },
+    });
   };
 
   return (

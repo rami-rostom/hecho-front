@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Modal, Stack } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
 import { useDisclosure } from '@mantine/hooks';
+import { notifications } from '@mantine/notifications';
 
 import { useAppDispatch } from '../../hooks/redux';
 import { fetchActivity } from '../../store/reducers/activity';
@@ -29,16 +30,23 @@ function Hecho() {
   const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // Activity to HECHO then refresh the current page and show success notification
     dispatch(
       hecho({
         id,
         date_accomplished: dateValue,
         hecho: true,
       })
-    )
-      .unwrap()
-      // Refresh the current page
-      .then(() => navigate(0));
+    ).then(() => {
+      notifications.show({
+        onClose: () => navigate(0),
+        color: 'green',
+        title: 'Activité HECHO !',
+        message: "Bien joué ! Ne t'arrête pas en si bon chemin.",
+        autoClose: 3000,
+        style: { backgroundColor: 'var(--mantine-color-palette-7)' },
+      });
+    });
   };
 
   return (
@@ -65,13 +73,14 @@ function Hecho() {
                   setDateValue(date);
                 }}
               />
-              <Button color="button.1" type="submit">
+              <Button color="button.0" type="submit" onClick={close}>
                 HECHO
               </Button>
             </Stack>
           </form>
         </Stack>
       </Modal>
+
       <Button color="button.2" onClick={open}>
         NO HECHO
       </Button>
