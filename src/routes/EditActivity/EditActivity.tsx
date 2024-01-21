@@ -13,7 +13,10 @@ import {
   Stack,
   Text,
   Title,
+  Tooltip,
+  UnstyledButton,
 } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 
 import ActivityIcon from '../../components/ActivityIcon/ActivityIcon';
 import Hecho from '../../components/Hecho/Hecho';
@@ -30,6 +33,8 @@ import './EditActivity.scss';
 
 function EditActivity() {
   const dispatch = useAppDispatch();
+
+  const [opened, { close, open }] = useDisclosure(false);
 
   // Retrieve ID of the activity
   const { id } = useParams();
@@ -57,7 +62,22 @@ function EditActivity() {
             {/* Component for dynamic icon based on sport */}
             <ActivityIcon />
             <Title order={1}>{activityData.name}</Title>
-            <IconPencil size="1.2rem" />
+            <UnstyledButton onClick={open}>
+              <Tooltip
+                label="Modifier le nom"
+                position="right"
+                offset={5}
+                openDelay={300}
+                closeDelay={150}
+                transitionProps={{
+                  transition: 'slide-left',
+                  duration: 200,
+                }}
+                withArrow
+              >
+                <IconPencil size="1.2rem" />
+              </Tooltip>
+            </UnstyledButton>
             {tags
               ? tags.map((tag) => (
                   <Badge
@@ -76,9 +96,9 @@ function EditActivity() {
               color="button.4"
               variant="outline"
               component="a"
-              href={`/activity/${id}/edit`}
+              href={`/activity/${id}`}
             >
-              Modifier activité
+              Annuler
             </Button>
             <DeleteActivity />
           </Group>
@@ -185,12 +205,9 @@ function EditActivity() {
 
           <Stack className="activity__aside">
             <Stack gap="0rem">
-              <Group gap="xs">
-                <Text fw={500} tt="uppercase">
-                  {activityData.sport.name}
-                </Text>
-                <IconPencil size="1rem" />
-              </Group>
+              <Text fw={500} tt="uppercase">
+                {activityData.sport.name}
+              </Text>
               <Text size="xs" fs="italic">
                 Type
               </Text>
@@ -237,7 +254,22 @@ function EditActivity() {
             <Stack gap="0rem">
               <Group gap="xs">
                 <Text fw={500}>{activityData.date_scheduled}</Text>
-                <IconPencil size="1rem" />
+                <UnstyledButton onClick={open}>
+                  <Tooltip
+                    label="Modifier"
+                    position="right"
+                    offset={5}
+                    openDelay={300}
+                    closeDelay={150}
+                    transitionProps={{
+                      transition: 'slide-down',
+                      duration: 200,
+                    }}
+                    withArrow
+                  >
+                    <IconPencil size="1rem" />
+                  </Tooltip>
+                </UnstyledButton>
               </Group>
               <Text size="xs" fs="italic">
                 Date prévue
@@ -248,7 +280,22 @@ function EditActivity() {
               {activityData.date_accomplished ? (
                 <Group gap="xs">
                   <Text fw={500}>{activityData.date_accomplished}</Text>
-                  <IconPencil size="1rem" />
+                  <UnstyledButton onClick={open}>
+                    <Tooltip
+                      label="Modifier"
+                      position="right"
+                      offset={5}
+                      openDelay={300}
+                      closeDelay={150}
+                      transitionProps={{
+                        transition: 'slide-up',
+                        duration: 200,
+                      }}
+                      withArrow
+                    >
+                      <IconPencil size="1rem" />
+                    </Tooltip>
+                  </UnstyledButton>
                 </Group>
               ) : (
                 <Text fw={500}>À réaliser</Text>
