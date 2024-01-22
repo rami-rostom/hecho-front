@@ -69,13 +69,13 @@ function UpdateStep(props: StepProps) {
       updateActivity({
         id,
         duration:
-          parseInt(activityDuration) -
-          parseInt(stepDuration.toString()) +
-          parseInt(convertDurationToMin(durationValue)),
+          Number(activityDuration) -
+          Number(stepDuration) +
+          Number(convertDurationToMin(durationValue)),
         distance:
-          parseInt(activityDistance) -
-          parseInt(stepDistance.toString()) +
-          parseInt(distanceValue.toString()),
+          Number(activityDistance) -
+          Number(stepDistance) +
+          Number(distanceValue),
         name: '',
         sport_id: null,
         pace: 0,
@@ -125,7 +125,6 @@ function UpdateStep(props: StepProps) {
               suffix=" km"
               placeholder="Distance de l'étape"
               min={0}
-              defaultValue={stepDistance}
               onChange={setDistanceValue}
             />
 

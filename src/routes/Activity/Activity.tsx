@@ -237,13 +237,17 @@ function Activity() {
             <Divider my="0.3rem" />
 
             <Stack gap="0rem">
-              <Text fw={500}>
-                {/* Function to transform date into DAY-MONTH-YEAR format */}
-                {convertDateFormat(activityData.date_scheduled)}
-              </Text>
-              <Text size="xs" fs="italic">
-                Date prévue
-              </Text>
+              {activityData.date_scheduled && (
+                <>
+                  <Text fw={500}>
+                    {/* Function to transform date into DAY-MONTH-YEAR format */}
+                    {convertDateFormat(activityData.date_scheduled)}
+                  </Text>
+                  <Text size="xs" fs="italic">
+                    Date prévue
+                  </Text>
+                </>
+              )}
             </Stack>
 
             <Stack gap="0rem">

@@ -68,10 +68,9 @@ function AddStep(props: ActivityProps) {
       updateActivity({
         id,
         duration:
-          parseInt(activityDuration) +
-          parseInt(convertDurationToMin(durationValue)),
-        distance:
-          parseInt(activityDistance) + parseInt(distanceValue.toString()),
+          Number(activityDuration) +
+          Number(convertDurationToMin(durationValue)),
+        distance: Number(activityDistance) + Number(distanceValue),
         name: '',
         sport_id: null,
         pace: 0,

@@ -56,8 +56,8 @@ function RemoveStep(props: StepProps) {
     await dispatch(
       updateActivity({
         id,
-        duration: parseInt(activityDuration) - parseInt(stepDuration),
-        distance: parseInt(activityDistance) - parseInt(stepDistance),
+        duration: Number(activityDuration) - Number(stepDuration),
+        distance: Number(activityDistance) - Number(stepDistance),
         name: '',
         sport_id: null,
         pace: 0,
