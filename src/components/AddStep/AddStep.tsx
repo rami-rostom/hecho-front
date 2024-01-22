@@ -63,6 +63,7 @@ function AddStep(props: ActivityProps) {
       })
     );
 
+    // Update activity details with new distance and duration
     await dispatch(
       updateActivity({
         id,

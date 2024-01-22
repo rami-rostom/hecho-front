@@ -20,6 +20,7 @@ import Hecho from '../../components/Hecho/Hecho';
 import AddStep from '../../components/AddStep/AddStep';
 import RemoveStep from '../../components/RemoveStep/RemoveStep';
 import DeleteActivity from '../../components/DeleteActivity/DeleteActivity';
+import DuplicateStep from '../../components/DuplicateStep/DuplicateStep';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { paceCalcul, speedCalcul } from '../../utils/calculation';
@@ -100,6 +101,14 @@ function Activity() {
                         {step.name}
                       </Text>
                       <Group>
+                        {/* Component to duplicate the step */}
+                        <DuplicateStep
+                          stepName={step.name}
+                          stepDuration={step.duration}
+                          stepDistance={step.distance}
+                          activityDuration={activityData.duration}
+                          activityDistance={activityData.distance}
+                        />
                         {/* Component opening a modal to remove the step from the activity */}
                         <RemoveStep
                           stepId={step.id}

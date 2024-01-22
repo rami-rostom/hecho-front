@@ -68,6 +68,7 @@ function RemoveStep(props: StepProps) {
         opened={opened}
         onClose={close}
         title="Supprimer l'étape de l'activité"
+        centered
       >
         <form onSubmit={handleFormSubmit}>
           <Text>Voulez-vous vraiment supprimer votre étape ?</Text>
