@@ -194,10 +194,10 @@ function EditActivity() {
                 activityDistance={activityData.distance}
               />
 
-              <Button color="button.4" size="compact-xs" variant="outline">
+              {/* <Button color="button.4" size="compact-xs" variant="outline">
                 <IconRepeat size="0.9rem" className="activity__steps-button" />
                 Ajouter une répétition
-              </Button>
+              </Button> */}
             </Group>
           </Stack>
 
