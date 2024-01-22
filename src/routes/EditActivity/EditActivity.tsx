@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { IconPencil, IconRepeat } from '@tabler/icons-react';
 import {
   Badge,
   Button,
@@ -12,11 +11,11 @@ import {
   SimpleGrid,
   Stack,
   Text,
-  Title,
   Tooltip,
   UnstyledButton,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { IconPencil, IconRepeat } from '@tabler/icons-react';
 
 import ActivityIcon from '../../components/ActivityIcon/ActivityIcon';
 import Hecho from '../../components/Hecho/Hecho';
@@ -24,6 +23,7 @@ import AddStep from '../../components/AddStep/AddStep';
 import RemoveStep from '../../components/RemoveStep/RemoveStep';
 import DeleteActivity from '../../components/DeleteActivity/DeleteActivity';
 import UpdateStep from '../../components/UpdateStep/UpdateStep';
+import UpdateActivityName from '../../components/UpdateActivityName/UpdateActivityName';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { paceCalcul, speedCalcul } from '../../utils/calculation';
@@ -35,6 +35,7 @@ function EditActivity() {
   const dispatch = useAppDispatch();
 
   const [opened, { close, open }] = useDisclosure(false);
+  const [openNameHandler, nameHandler] = useDisclosure(false);
 
   // Retrieve ID of the activity
   const { id } = useParams();
@@ -51,6 +52,13 @@ function EditActivity() {
   const speed = speedCalcul(activityData.duration, activityData.distance);
   const pace = paceCalcul(activityData.duration, activityData.distance);
 
+  const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    console.log('test');
+    nameHandler.close();
+  };
+
   return (
     <Container p="md" className="activity">
       <Container px="-1rem" className="activity__banner">
@@ -61,23 +69,13 @@ function EditActivity() {
           <Group gap="1rem">
             {/* Component for dynamic icon based on sport */}
             <ActivityIcon />
-            <Title order={1}>{activityData.name}</Title>
-            <UnstyledButton onClick={open}>
-              <Tooltip
-                label="Modifier le nom"
-                position="right"
-                offset={5}
-                openDelay={300}
-                closeDelay={150}
-                transitionProps={{
-                  transition: 'slide-left',
-                  duration: 200,
-                }}
-                withArrow
-              >
-                <IconPencil size="1.2rem" />
-              </Tooltip>
-            </UnstyledButton>
+
+            {/* Component to render activity name and to update it */}
+            <UpdateActivityName
+              activityId={activityData.id}
+              activityName={activityData.name}
+            />
+
             {tags
               ? tags.map((tag) => (
                   <Badge
