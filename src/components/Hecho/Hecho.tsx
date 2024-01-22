@@ -43,14 +43,14 @@ function Hecho() {
         color: 'green',
         title: 'Activité HECHO !',
         message: "Bien joué ! Ne t'arrête pas en si bon chemin.",
-        autoClose: 3000,
+        autoClose: 2000,
         style: { backgroundColor: 'var(--mantine-color-palette-7)' },
       });
     });
   };
 
   return (
-    <div>
+    <>
       <Modal
         opened={opened}
         onClose={close}
@@ -58,33 +58,31 @@ function Hecho() {
         centered
         title="Modification de l'activité"
       >
-        <Stack>
-          <form onSubmit={handleFormSubmit}>
-            <Stack gap="1rem">
-              <DatePickerInput
-                clearable
-                required
-                valueFormat="DD MMMM YYYY"
-                label="Date accomplissement"
-                placeholder="Choisir une date"
-                minDate={new Date()}
-                onChange={(event) => {
-                  const date = event?.toDateString();
-                  setDateValue(date);
-                }}
-              />
-              <Button color="button.0" type="submit" onClick={close}>
-                HECHO
-              </Button>
-            </Stack>
-          </form>
-        </Stack>
+        <form onSubmit={handleFormSubmit}>
+          <Stack gap="1rem">
+            <DatePickerInput
+              clearable
+              required
+              valueFormat="DD MMMM YYYY"
+              label="Date accomplissement"
+              placeholder="Choisir une date"
+              minDate={new Date()}
+              onChange={(event) => {
+                const date = event?.toDateString();
+                setDateValue(date);
+              }}
+            />
+            <Button color="button.0" type="submit" onClick={close}>
+              HECHO
+            </Button>
+          </Stack>
+        </form>
       </Modal>
 
       <Button color="button.2" onClick={open}>
         NO HECHO
       </Button>
-    </div>
+    </>
   );
 }
 

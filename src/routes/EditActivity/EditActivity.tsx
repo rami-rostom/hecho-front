@@ -1,4 +1,4 @@
-import { useEffect, FormEvent } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import {
@@ -11,11 +11,8 @@ import {
   SimpleGrid,
   Stack,
   Text,
-  Tooltip,
-  UnstyledButton,
 } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { IconPencil, IconRepeat } from '@tabler/icons-react';
+import { IconRepeat } from '@tabler/icons-react';
 
 import ActivityIcon from '../../components/ActivityIcon/ActivityIcon';
 import Hecho from '../../components/Hecho/Hecho';
@@ -24,6 +21,7 @@ import RemoveStep from '../../components/RemoveStep/RemoveStep';
 import DeleteActivity from '../../components/DeleteActivity/DeleteActivity';
 import UpdateStep from '../../components/UpdateStep/UpdateStep';
 import UpdateActivityName from '../../components/UpdateActivityName/UpdateActivityName';
+import UpdateActivityDate from '../../components/UpdateActivityDate/UpdateActivityDate';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { paceCalcul, speedCalcul } from '../../utils/calculation';
@@ -33,9 +31,6 @@ import './EditActivity.scss';
 
 function EditActivity() {
   const dispatch = useAppDispatch();
-
-  const [opened, { close, open }] = useDisclosure(false);
-  const [openNameHandler, nameHandler] = useDisclosure(false);
 
   // Retrieve ID of the activity
   const { id } = useParams();
@@ -51,13 +46,6 @@ function EditActivity() {
 
   const speed = speedCalcul(activityData.duration, activityData.distance);
   const pace = paceCalcul(activityData.duration, activityData.distance);
-
-  const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    console.log('test');
-    nameHandler.close();
-  };
 
   return (
     <Container p="md" className="activity">
@@ -252,22 +240,10 @@ function EditActivity() {
             <Stack gap="0rem">
               <Group gap="xs">
                 <Text fw={500}>{activityData.date_scheduled}</Text>
-                <UnstyledButton onClick={open}>
-                  <Tooltip
-                    label="Modifier"
-                    position="right"
-                    offset={5}
-                    openDelay={300}
-                    closeDelay={150}
-                    transitionProps={{
-                      transition: 'slide-down',
-                      duration: 200,
-                    }}
-                    withArrow
-                  >
-                    <IconPencil size="1rem" />
-                  </Tooltip>
-                </UnstyledButton>
+                <UpdateActivityDate
+                  activityId={activityData.id}
+                  scheduledDate={true}
+                />
               </Group>
               <Text size="xs" fs="italic">
                 Date prévue
@@ -278,22 +254,10 @@ function EditActivity() {
               {activityData.date_accomplished ? (
                 <Group gap="xs">
                   <Text fw={500}>{activityData.date_accomplished}</Text>
-                  <UnstyledButton onClick={open}>
-                    <Tooltip
-                      label="Modifier"
-                      position="right"
-                      offset={5}
-                      openDelay={300}
-                      closeDelay={150}
-                      transitionProps={{
-                        transition: 'slide-up',
-                        duration: 200,
-                      }}
-                      withArrow
-                    >
-                      <IconPencil size="1rem" />
-                    </Tooltip>
-                  </UnstyledButton>
+                  <UpdateActivityDate
+                    activityId={activityData.id}
+                    scheduledDate={false}
+                  />
                 </Group>
               ) : (
                 <Text fw={500}>À réaliser</Text>

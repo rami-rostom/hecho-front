@@ -28,10 +28,10 @@ function UpdateActivityName(props: ActivityProps) {
   const [openNameHandler, nameHandler] = useDisclosure(false);
   const [nameValue, setNameValue] = useState('');
 
-  const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    await dispatch(
+    dispatch(
       updateActivity({
         id: activityId,
         name: nameValue,
