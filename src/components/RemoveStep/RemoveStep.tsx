@@ -18,10 +18,10 @@ import { updateActivity } from '../../store/reducers/updateActivity';
 
 type StepProps = {
   stepId: string | undefined;
-  stepDistance: string | number | undefined;
-  stepDuration: string | number | undefined;
-  activityDuration: number;
-  activityDistance: number;
+  stepDistance: string;
+  stepDuration: string;
+  activityDuration: string;
+  activityDistance: string;
 };
 
 function RemoveStep(props: StepProps) {
@@ -58,6 +58,17 @@ function RemoveStep(props: StepProps) {
         id,
         duration: parseInt(activityDuration) - parseInt(stepDuration),
         distance: parseInt(activityDistance) - parseInt(stepDistance),
+        name: '',
+        sport_id: null,
+        pace: 0,
+        user_id: 0,
+        hecho: false,
+        sport: {
+          id: 0,
+          name: undefined,
+        },
+        steps: [],
+        tags: [],
       })
     ).then(() => navigate(0));
   };

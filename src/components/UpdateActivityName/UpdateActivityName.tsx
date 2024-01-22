@@ -35,6 +35,18 @@ function UpdateActivityName(props: ActivityProps) {
       updateActivity({
         id: activityId,
         name: nameValue,
+        sport_id: null,
+        distance: 0,
+        duration: 0,
+        pace: 0,
+        user_id: 0,
+        hecho: false,
+        sport: {
+          id: 0,
+          name: undefined,
+        },
+        steps: [],
+        tags: [],
       })
     ).then(() => navigate(0));
   };

@@ -33,7 +33,7 @@ function UpdateStep(props: StepProps) {
 
   const [opened, { close, open }] = useDisclosure(false);
   const [nameValue, setNameValue] = useState('');
-  const [durationValue, setDurationValue] = useState<string | undefined>('');
+  const [durationValue, setDurationValue] = useState<string>('');
   const [distanceValue, setDistanceValue] = useState<string | number>('');
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {

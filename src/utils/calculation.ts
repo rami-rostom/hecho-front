@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
 // Function to transform duration in minutes
-export const convertDurationToMin = (duration?: string) => {
+export const convertDurationToMin = (duration: string) => {
   if (duration) {
     const [heures, minutes, secondes] = duration.split(':').map(Number);
     const durationInMin = heures * 60 + minutes + secondes / 60;

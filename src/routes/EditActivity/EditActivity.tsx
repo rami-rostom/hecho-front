@@ -117,10 +117,10 @@ function EditActivity() {
                         {/* Component opening a modal to remove the step from the activity */}
                         <RemoveStep
                           stepId={step.id}
-                          stepDistance={step.distance}
-                          stepDuration={step.duration}
-                          activityDuration={activityData.duration}
-                          activityDistance={activityData.distance}
+                          stepDistance={step.distance.toString()}
+                          stepDuration={step.duration.toString()}
+                          activityDuration={activityData.duration.toString()}
+                          activityDistance={activityData.distance.toString()}
                         />
                       </Group>
                     </Group>
@@ -178,8 +178,8 @@ function EditActivity() {
             <Group justify="flex-end" gap="xs">
               {/* Component button and modal to create a new step */}
               <AddStep
-                activityDuration={activityData.duration}
-                activityDistance={activityData.distance}
+                activityDuration={activityData.duration.toString()}
+                activityDistance={activityData.distance.toString()}
               />
 
               {/* <Button color="button.4" size="compact-xs" variant="outline">

@@ -2,8 +2,8 @@
 export type Step = {
   id: string;
   name?: string;
-  distance?: string | number;
-  duration?: string | number;
+  distance: string | number;
+  duration: string | number;
   user_id: number;
 };
 

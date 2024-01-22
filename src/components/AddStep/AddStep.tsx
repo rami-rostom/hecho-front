@@ -20,8 +20,8 @@ import { addStep } from '../../store/reducers/addStep';
 import { updateActivity } from '../../store/reducers/updateActivity';
 
 type ActivityProps = {
-  activityDuration: number;
-  activityDistance: number;
+  activityDuration: string;
+  activityDistance: string;
 };
 
 function AddStep(props: ActivityProps) {
@@ -36,7 +36,7 @@ function AddStep(props: ActivityProps) {
 
   const [opened, { close, open }] = useDisclosure(false);
   const [nameValue, setNameValue] = useState('');
-  const [durationValue, setDurationValue] = useState<string | undefined>('');
+  const [durationValue, setDurationValue] = useState<string>('');
   const [distanceValue, setDistanceValue] = useState<string | number>('');
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -70,7 +70,19 @@ function AddStep(props: ActivityProps) {
         duration:
           parseInt(activityDuration) +
           parseInt(convertDurationToMin(durationValue)),
-        distance: parseInt(activityDistance) + parseInt(distanceValue),
+        distance:
+          parseInt(activityDistance) + parseInt(distanceValue.toString()),
+        name: '',
+        sport_id: null,
+        pace: 0,
+        user_id: 0,
+        hecho: false,
+        sport: {
+          id: 0,
+          name: undefined,
+        },
+        steps: [],
+        tags: [],
       })
     ).then(() => navigate(0));
   };
