@@ -10,6 +10,7 @@ import {
   Modal,
   NumberInput,
   Select,
+  TagsInput,
   TextInput,
 } from '@mantine/core';
 
@@ -79,6 +80,12 @@ const theme = createTheme({
     NumberInput: NumberInput.extend({
       styles: {
         input: { backgroundColor: 'var(--mantine-color-palette-7)' },
+      },
+    }),
+    TagsInput: TagsInput.extend({
+      styles: {
+        input: { backgroundColor: 'var(--mantine-color-palette-7)' },
+        dropdown: { backgroundColor: 'var(--mantine-color-palette-7)' },
       },
     }),
     DatePickerInput: DatePickerInput.extend({

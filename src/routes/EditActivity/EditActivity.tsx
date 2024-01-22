@@ -12,7 +12,6 @@ import {
   Stack,
   Text,
 } from '@mantine/core';
-import { IconRepeat } from '@tabler/icons-react';
 
 import ActivityIcon from '../../components/ActivityIcon/ActivityIcon';
 import Hecho from '../../components/Hecho/Hecho';
@@ -22,6 +21,7 @@ import DeleteActivity from '../../components/DeleteActivity/DeleteActivity';
 import UpdateStep from '../../components/UpdateStep/UpdateStep';
 import UpdateActivityName from '../../components/UpdateActivityName/UpdateActivityName';
 import UpdateActivityDate from '../../components/UpdateActivityDate/UpdateActivityDate';
+import AddTag from '../../components/AddTag/AddTag';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
@@ -182,17 +182,8 @@ function EditActivity() {
                 ))
               : []}
 
-            <Group justify="flex-end" gap="xs">
-              {/* Component button and modal to create a new step */}
-              <AddStep
-                activityDuration={activityData.duration.toString()}
-                activityDistance={activityData.distance.toString()}
-              />
-
-              {/* <Button color="button.4" size="compact-xs" variant="outline">
-                <IconRepeat size="0.9rem" className="activity__steps-button" />
-                Ajouter une répétition
-              </Button> */}
+            <Group justify="flex-end">
+              <AddTag />
             </Group>
           </Stack>
 
@@ -246,10 +237,12 @@ function EditActivity() {
 
             <Stack gap="0rem">
               <Group gap="xs">
-                <Text fw={500}>
-                  {/* Function to transform date into DAY-MONTH-YEAR format */}
-                  {convertDateFormat(activityData.date_scheduled)}
-                </Text>
+                {activityData.date_scheduled && (
+                  <Text fw={500}>
+                    {/* Function to transform date into DAY-MONTH-YEAR format */}
+                    {convertDateFormat(activityData.date_scheduled)}
+                  </Text>
+                )}
                 <UpdateActivityDate
                   activityId={activityData.id}
                   scheduledDate={true}
