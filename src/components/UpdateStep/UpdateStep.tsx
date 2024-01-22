@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import {
   Button,
@@ -18,18 +18,33 @@ import { IconPencil } from '@tabler/icons-react';
 import { useAppDispatch } from '../../hooks/redux';
 import { convertDurationToMin } from '../../utils/calculation';
 import { updateStep } from '../../store/reducers/updateStep';
+import { updateActivity } from '../../store/reducers/updateActivity';
 
 type StepProps = {
   stepId: string;
   stepName: string | undefined;
-  stepDistance: string | number | undefined;
+  stepDistance: string | number;
+  stepDuration: string | number;
+  activityDuration: string;
+  activityDistance: string;
 };
 
 function UpdateStep(props: StepProps) {
-  const { stepId, stepName, stepDistance } = props;
+  const {
+    stepId,
+    stepName,
+    stepDistance,
+    stepDuration,
+    activityDuration,
+    activityDistance,
+  } = props;
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  // Retrieve ID of the activity
+  const { id } = useParams();
+  if (!id) throw new Error('Invalid id');
 
   const [opened, { close, open }] = useDisclosure(false);
   const [nameValue, setNameValue] = useState('');
@@ -40,7 +55,7 @@ function UpdateStep(props: StepProps) {
     event.preventDefault();
 
     // Creation of the step with useState datas
-    dispatch(
+    await dispatch(
       updateStep({
         id: stepId,
         name: nameValue,
@@ -48,9 +63,32 @@ function UpdateStep(props: StepProps) {
         distance: distanceValue,
         user_id: 1,
       })
-    )
-      .unwrap()
-      .then(() => navigate(0));
+    );
+
+    await dispatch(
+      updateActivity({
+        id,
+        duration:
+          parseInt(activityDuration) -
+          parseInt(stepDuration.toString()) +
+          parseInt(convertDurationToMin(durationValue)),
+        distance:
+          parseInt(activityDistance) -
+          parseInt(stepDistance.toString()) +
+          parseInt(distanceValue.toString()),
+        name: '',
+        sport_id: null,
+        pace: 0,
+        user_id: 0,
+        hecho: false,
+        sport: {
+          id: 0,
+          name: undefined,
+        },
+        steps: [],
+        tags: [],
+      })
+    ).then(() => navigate(0));
   };
 
   return (

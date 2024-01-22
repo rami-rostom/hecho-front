@@ -23,8 +23,12 @@ import DeleteActivity from '../../components/DeleteActivity/DeleteActivity';
 import DuplicateStep from '../../components/DuplicateStep/DuplicateStep';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { paceCalcul, speedCalcul } from '../../utils/calculation';
 import { fetchActivity } from '../../store/reducers/getActivity';
+import {
+  paceCalcul,
+  speedCalcul,
+  convertDateFormat,
+} from '../../utils/calculation';
 
 import './Activity.scss';
 
@@ -233,7 +237,10 @@ function Activity() {
             <Divider my="0.3rem" />
 
             <Stack gap="0rem">
-              <Text fw={500}>{activityData.date_scheduled}</Text>
+              <Text fw={500}>
+                {/* Function to transform date into DAY-MONTH-YEAR format */}
+                {convertDateFormat(activityData.date_scheduled)}
+              </Text>
               <Text size="xs" fs="italic">
                 Date prévue
               </Text>
@@ -241,7 +248,10 @@ function Activity() {
 
             <Stack gap="0rem">
               {activityData.date_accomplished ? (
-                <Text fw={500}>{activityData.date_accomplished}</Text>
+                <Text fw={500}>
+                  {/* Function to transform date into DAY-MONTH-YEAR format */}
+                  {convertDateFormat(activityData.date_accomplished)}
+                </Text>
               ) : (
                 <Text fw={500}>À réaliser</Text>
               )}

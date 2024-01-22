@@ -24,7 +24,11 @@ import UpdateActivityName from '../../components/UpdateActivityName/UpdateActivi
 import UpdateActivityDate from '../../components/UpdateActivityDate/UpdateActivityDate';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { paceCalcul, speedCalcul } from '../../utils/calculation';
+import {
+  convertDateFormat,
+  paceCalcul,
+  speedCalcul,
+} from '../../utils/calculation';
 import { fetchActivity } from '../../store/reducers/getActivity';
 
 import './EditActivity.scss';
@@ -84,7 +88,7 @@ function EditActivity() {
               component="a"
               href={`/activity/${id}`}
             >
-              Annuler
+              Retour
             </Button>
             <DeleteActivity />
           </Group>
@@ -113,6 +117,9 @@ function EditActivity() {
                           stepId={step.id}
                           stepName={step.name}
                           stepDistance={step.distance}
+                          stepDuration={step.duration}
+                          activityDuration={activityData.duration.toString()}
+                          activityDistance={activityData.distance.toString()}
                         />
                         {/* Component opening a modal to remove the step from the activity */}
                         <RemoveStep
@@ -239,7 +246,10 @@ function EditActivity() {
 
             <Stack gap="0rem">
               <Group gap="xs">
-                <Text fw={500}>{activityData.date_scheduled}</Text>
+                <Text fw={500}>
+                  {/* Function to transform date into DAY-MONTH-YEAR format */}
+                  {convertDateFormat(activityData.date_scheduled)}
+                </Text>
                 <UpdateActivityDate
                   activityId={activityData.id}
                   scheduledDate={true}
@@ -253,7 +263,10 @@ function EditActivity() {
             <Stack gap="0rem">
               {activityData.date_accomplished ? (
                 <Group gap="xs">
-                  <Text fw={500}>{activityData.date_accomplished}</Text>
+                  <Text fw={500}>
+                    {/* Function to transform date into DAY-MONTH-YEAR format */}
+                    {convertDateFormat(activityData.date_accomplished)}
+                  </Text>
                   <UpdateActivityDate
                     activityId={activityData.id}
                     scheduledDate={false}
