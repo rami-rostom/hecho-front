@@ -63,6 +63,7 @@ function CreateActivity() {
               placeholder="Nom de l'activité"
               onChange={(event) => setNameValue(event.target.value)}
             />
+
             <Select
               withAsterisk
               label="Type"
@@ -76,23 +77,26 @@ function CreateActivity() {
               ]}
               onChange={setTypeValue}
             />
-            <DatePickerInput
-              clearable
-              required
-              valueFormat="DD MMMM YYYY"
-              label="Date prévue"
-              placeholder="Choisir une date de début"
-              minDate={new Date()}
-              onChange={(event) => {
-                const date = event?.toDateString();
-                setDateValue(date);
-              }}
-              styles={{
-                input: {
-                  backgroundColor: 'var(--mantine-color-palette-7)',
-                },
-              }}
-            />
+
+            {typeValue && (
+              <DatePickerInput
+                clearable
+                required
+                valueFormat="DD MMMM YYYY"
+                label="Date prévue"
+                placeholder="Choisir une date de début"
+                minDate={new Date()}
+                onChange={(event) => {
+                  const date = event?.toDateString();
+                  setDateValue(date);
+                }}
+                styles={{
+                  input: {
+                    backgroundColor: 'var(--mantine-color-palette-7)',
+                  },
+                }}
+              />
+            )}
 
             <Group justify="flex-end" mt="md">
               <Button color="button.0" type="submit">

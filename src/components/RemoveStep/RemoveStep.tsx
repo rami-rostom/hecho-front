@@ -52,25 +52,72 @@ function RemoveStep(props: StepProps) {
         workoutId: id,
       })
     );
+    
+    if (stepDistance != '' && stepDuration != '') {
+      // Update render of activity details
+      await dispatch(
+        updateActivity({
+          id,
+          duration: Number(activityDuration) - Number(stepDuration),
+          distance: Number(activityDistance) - Number(stepDistance),
+          name: '',
+          sport_id: null,
+          pace: 0,
+          user_id: 0,
+          hecho: false,
+          sport: {
+            id: 0,
+            name: undefined,
+          },
+          steps: [],
+          tags: [],
+        })
+      ).then(() => navigate(0));
+    }
 
-    await dispatch(
-      updateActivity({
-        id,
-        duration: Number(activityDuration) - Number(stepDuration),
-        distance: Number(activityDistance) - Number(stepDistance),
-        name: '',
-        sport_id: null,
-        pace: 0,
-        user_id: 0,
-        hecho: false,
-        sport: {
-          id: 0,
-          name: undefined,
-        },
-        steps: [],
-        tags: [],
-      })
-    ).then(() => navigate(0));
+    if (stepDistance != '' && stepDuration == '') {
+      // Update render of activity details
+      await dispatch(
+        updateActivity({
+          id,
+          duration: Number(activityDuration),
+          distance: Number(activityDistance) - Number(stepDistance),
+          name: '',
+          sport_id: null,
+          pace: 0,
+          user_id: 0,
+          hecho: false,
+          sport: {
+            id: 0,
+            name: undefined,
+          },
+          steps: [],
+          tags: [],
+        })
+      ).then(() => navigate(0));
+    }
+
+    if (stepDuration != '' && stepDistance == '') {
+      // Update render of activity details
+      await dispatch(
+        updateActivity({
+          id,
+          duration: Number(activityDuration) - Number(stepDuration),
+          distance: Number(activityDistance),
+          name: '',
+          sport_id: null,
+          pace: 0,
+          user_id: 0,
+          hecho: false,
+          sport: {
+            id: 0,
+            name: undefined,
+          },
+          steps: [],
+          tags: [],
+        })
+      ).then(() => navigate(0));
+    }
   };
 
   return (

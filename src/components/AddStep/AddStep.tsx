@@ -6,6 +6,7 @@ import {
   Group,
   Modal,
   NumberInput,
+  Select,
   Stack,
   TextInput,
 } from '@mantine/core';
@@ -14,7 +15,7 @@ import { TimeInput } from '@mantine/dates';
 import { IconPlus } from '@tabler/icons-react';
 
 import { useAppDispatch } from '../../hooks/redux';
-import { convertDurationToMin } from '../../utils/calculation';
+import { sumDurations } from '../../utils/calculation';
 import { createStep } from '../../store/reducers/createStep';
 import { addStep } from '../../store/reducers/addStep';
 import { updateActivity } from '../../store/reducers/updateActivity';
@@ -38,16 +39,21 @@ function AddStep(props: ActivityProps) {
   const [nameValue, setNameValue] = useState('');
   const [durationValue, setDurationValue] = useState<string>('');
   const [distanceValue, setDistanceValue] = useState<string | number>('');
+  const [typeValue, setTypeValue] = useState<string | null>('');
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Creation of the step with useState datas
+    setTypeValue('');
+
+    // User select distance as type
+    if (durationValue === '') {
+      // Creation of the step with useState datas
     const createdStep = await dispatch(
       createStep({
         name: nameValue,
         distance: distanceValue,
-        duration: convertDurationToMin(durationValue),
+        duration: '',
         user_id: 1,
       })
     ).unwrap();
@@ -67,9 +73,7 @@ function AddStep(props: ActivityProps) {
     await dispatch(
       updateActivity({
         id,
-        duration:
-          Number(activityDuration) +
-          Number(convertDurationToMin(durationValue)),
+        duration: activityDuration,
         distance: Number(activityDistance) + Number(distanceValue),
         name: '',
         sport_id: null,
@@ -84,6 +88,87 @@ function AddStep(props: ActivityProps) {
         tags: [],
       })
     ).then(() => navigate(0));
+    }
+
+    // User select duration as type
+    if (distanceValue === '') {
+    const createdStep = await dispatch(
+      createStep({
+        name: nameValue,
+        distance: 0,
+        duration: durationValue,
+        user_id: 1,
+      })
+    ).unwrap();
+
+    const stepId = createdStep.id;
+
+    await dispatch(
+      addStep({
+        step_id: stepId,
+        workoutId: id,
+      })
+    );
+
+    await dispatch(
+      updateActivity({
+        id,
+        duration: sumDurations(activityDuration, durationValue),
+        distance: Number(activityDistance),
+        name: '',
+        sport_id: null,
+        pace: 0,
+        user_id: 0,
+        hecho: false,
+        sport: {
+          id: 0,
+          name: undefined,
+        },
+        steps: [],
+        tags: [],
+      })
+    ).then(() => navigate(0));
+    }
+
+    // User select distance and duration as type
+    if (distanceValue && durationValue) {
+      const createdStep = await dispatch(
+        createStep({
+          name: nameValue,
+          distance: distanceValue,
+          duration: durationValue,
+          user_id: 1,
+        })
+      ).unwrap();
+
+      const stepId = createdStep.id;
+
+      await dispatch(
+        addStep({
+          step_id: stepId,
+          workoutId: id,
+        })
+      );
+
+      await dispatch(
+        updateActivity({
+          id,
+          duration: sumDurations(activityDuration, durationValue),
+          distance: Number(activityDistance) + Number(distanceValue),
+          name: '',
+          sport_id: null,
+          pace: 0,
+          user_id: 0,
+          hecho: false,
+          sport: {
+            id: 0,
+            name: undefined,
+          },
+          steps: [],
+          tags: [],
+        })
+      ).then(() => navigate(0));
+    }
   };
 
   return (
@@ -104,24 +189,63 @@ function AddStep(props: ActivityProps) {
               onChange={(event) => setNameValue(event.target.value)}
             />
 
-            <TimeInput
-              withSeconds
+            <Select
               withAsterisk
-              label="Durée"
-              description="hh-mm-ss"
-              onChange={(event) => setDurationValue(event.target.value)}
+              label="Type"
+              placeholder="Type de durée"
+              data={[
+                { label: 'Durée', value: '1' },
+                { label: 'Distance', value: '2' },
+                { label: 'Durée & distance', value: '3' },
+              ]}
+              onChange={setTypeValue}
             />
 
-            <NumberInput
-              withAsterisk
-              label="Distance"
-              description="Décimale possible"
-              suffix=" km"
-              placeholder="Distance de l'étape"
-              min={0}
-              value={distanceValue}
-              onChange={setDistanceValue}
-            />
+            {typeValue == '1' && (
+              <TimeInput
+                withSeconds
+                withAsterisk
+                label="Durée"
+                description="hh-mm-ss"
+                onChange={(event) => setDurationValue(event.target.value)}
+              />
+            )}
+
+            {typeValue == '2' && (
+              <NumberInput
+                withAsterisk
+                label="Distance"
+                description="Décimale possible"
+                suffix=" km"
+                placeholder="Distance de l'étape"
+                min={0}
+                value={distanceValue}
+                onChange={setDistanceValue}
+              />
+            )}
+
+            {typeValue == '3' && (
+              <>
+              <TimeInput
+                withSeconds
+                withAsterisk
+                label="Durée"
+                description="hh-mm-ss"
+                onChange={(event) => setDurationValue(event.target.value)}
+              />
+
+              <NumberInput
+                withAsterisk
+                label="Distance"
+                description="Décimale possible"
+                suffix=" km"
+                placeholder="Distance de l'étape"
+                min={0}
+                value={distanceValue}
+                onChange={setDistanceValue}
+              />
+              </>
+            )}
 
             <Group justify="flex-end" mt="md">
               <Button color="button.0" type="submit">

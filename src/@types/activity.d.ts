@@ -10,7 +10,7 @@ export type Activity = {
   date_scheduled?: string;
   date_accomplished?: string;
   distance: number;
-  duration: number;
+  duration: string;
   pace: number;
   user_id: number;
   hecho: boolean;

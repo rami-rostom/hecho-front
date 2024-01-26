@@ -6,7 +6,7 @@ function Main() {
   return (
     <AppShell.Main bg="palette.6">
       <Outlet />
-      <Footer />
+      {/* <Footer /> */}
     </AppShell.Main>
   );
 }

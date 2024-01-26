@@ -51,3 +51,29 @@ export const convertDateFormat = (oldFormatDate: string) => {
   const newFormatDate = `${day}-${month}-${year}`;
   return newFormatDate;
 };
+
+export const sumDurations = (duration1: string, duration2: string) => {
+  // Fonction pour convertir une durée HH:mm:ss en secondes
+  const convertToSeconds = (duration: string) => {
+    const [hours, minutes, seconds] = duration.split(':');
+    return parseInt(hours, 10) * 3600 + parseInt(minutes, 10) * 60 + parseInt(seconds, 10);
+  }
+
+  // Fonction pour convertir des secondes en durée HH:mm:ss
+  const convertToDuration = (seconds: number) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = seconds % 60;
+
+    const format = (num: number) => (num < 10 ? `0${num}` : num);
+
+    return `${format(hours)}:${format(minutes)}:${format(remainingSeconds)}`;
+  }
+
+  const seconds1 = convertToSeconds(duration1);
+  const seconds2 = convertToSeconds(duration2);
+
+  const totalSeconds = seconds1 + seconds2;
+
+  return convertToDuration(totalSeconds);
+}
