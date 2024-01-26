@@ -16,7 +16,7 @@ import { TimeInput } from '@mantine/dates';
 import { IconPencil } from '@tabler/icons-react';
 
 import { useAppDispatch } from '../../hooks/redux';
-import { convertDurationToMin } from '../../utils/calculation';
+import { subDurations, sumDurations } from '../../utils/calculation';
 import { updateStep } from '../../store/reducers/updateStep';
 import { updateActivity } from '../../store/reducers/updateActivity';
 
@@ -59,7 +59,7 @@ function UpdateStep(props: StepProps) {
       updateStep({
         id: stepId,
         name: nameValue,
-        duration: convertDurationToMin(durationValue),
+        duration: durationValue,
         distance: distanceValue,
         user_id: 1,
       })
@@ -69,9 +69,7 @@ function UpdateStep(props: StepProps) {
       updateActivity({
         id,
         duration:
-          Number(activityDuration) -
-          Number(stepDuration) +
-          Number(convertDurationToMin(durationValue)),
+          sumDurations(subDurations(activityDuration, stepDuration.toString()), durationValue),
         distance:
           Number(activityDistance) -
           Number(stepDistance) +

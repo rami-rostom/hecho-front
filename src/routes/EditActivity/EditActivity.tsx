@@ -15,7 +15,6 @@ import {
 
 import ActivityIcon from '../../components/ActivityIcon/ActivityIcon';
 import Hecho from '../../components/Hecho/Hecho';
-import AddStep from '../../components/AddStep/AddStep';
 import RemoveStep from '../../components/RemoveStep/RemoveStep';
 import DeleteActivity from '../../components/DeleteActivity/DeleteActivity';
 import UpdateStep from '../../components/UpdateStep/UpdateStep';
@@ -26,6 +25,7 @@ import AddTag from '../../components/AddTag/AddTag';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   convertDateFormat,
+  convertDurationToMin,
   paceCalcul,
   speedCalcul,
 } from '../../utils/calculation';
@@ -48,8 +48,8 @@ function EditActivity() {
   const activityData = useAppSelector((state) => state.getActivity.activity);
   const { steps, tags } = activityData;
 
-  const speed = speedCalcul(activityData.duration, activityData.distance);
-  const pace = paceCalcul(activityData.duration, activityData.distance);
+  const speed = speedCalcul(convertDurationToMin(activityData.duration), activityData.distance);
+  const pace = paceCalcul(convertDurationToMin(activityData.duration), activityData.distance);
 
   return (
     <Container p="md" className="activity">
@@ -136,47 +136,119 @@ function EditActivity() {
                       cols={{ base: 2, lg: 4 }}
                       spacing={{ base: 'xs', lg: 'xs' }}
                     >
-                      <Stack gap="0rem">
-                        <Text fw={700}>{step.duration} min</Text>
-                        <Text size="xs" fs="italic">
-                          Temps
-                        </Text>
-                      </Stack>
+                      {/* Render step when user select only distance type */}
+                      {step.distance && !step.duration && (
+                        <>
+                        <Stack gap="0rem">
+                          <Text fw={700}>--</Text>
+                          <Text size="xs" fs="italic">
+                            Durée
+                          </Text>
+                        </Stack>
 
-                      <Stack gap="0rem">
-                        <Text fw={700}>{step.distance} km</Text>
-                        <Text size="xs" fs="italic">
-                          Distance estimée
-                        </Text>
-                      </Stack>
+                        <Stack gap="0rem">
+                          <Text fw={700}>{step.distance} km</Text>
+                          <Text size="xs" fs="italic">
+                            Distance estimée
+                          </Text>
+                        </Stack>
 
-                      <Stack gap="0rem">
-                        <Text fw={700}>
-                          {/* Calculation of pace step */}
-                          {speedCalcul(
-                            Number(step.duration),
-                            Number(step.distance)
-                          )}{' '}
-                          km/h
-                        </Text>
-                        <Text size="xs" fs="italic">
-                          Vitesse moyenne
-                        </Text>
-                      </Stack>
+                        <Stack gap="0rem">
+                          <Text fw={700}>--</Text>
+                          <Text size="xs" fs="italic">
+                            Vitesse moyenne
+                          </Text>
+                        </Stack>
 
-                      <Stack gap="0rem">
-                        <Text fw={700}>
-                          {/* Calculation of pace step */}
-                          {paceCalcul(
-                            Number(step.duration),
-                            Number(step.distance)
-                          )}{' '}
-                          min/km
-                        </Text>
-                        <Text size="xs" fs="italic">
-                          Allure
-                        </Text>
-                      </Stack>
+                        <Stack gap="0rem">
+                          <Text fw={700}>--</Text>
+                          <Text size="xs" fs="italic">
+                            Allure
+                          </Text>
+                        </Stack>
+                        </>
+                      )}
+
+                      {/* Render step when user select only duration type */}
+                      {step.duration && step.distance == 0 && (
+                        <>
+                        <Stack gap="0rem">
+                          <Text fw={700}>{step.duration}</Text>
+                          <Text size="xs" fs="italic">
+                            Durée
+                          </Text>
+                        </Stack>
+
+                        <Stack gap="0rem">
+                          <Text fw={700}>--</Text>
+                          <Text size="xs" fs="italic">
+                            Distance estimée
+                          </Text>
+                        </Stack>
+
+                        <Stack gap="0rem">
+                          <Text fw={700}>--</Text>
+                          <Text size="xs" fs="italic">
+                            Vitesse moyenne
+                          </Text>
+                        </Stack>
+
+                        <Stack gap="0rem">
+                          <Text fw={700}>--</Text>
+                          <Text size="xs" fs="italic">
+                            Allure
+                          </Text>
+                        </Stack>
+                        </>
+                      )}
+
+                      {/* Render step when user select duration and distance type */}
+                      {step.duration && step.distance != 0 && (
+                        <>
+                        <Stack gap="0rem">
+                          <Text fw={700}>{step.duration}</Text>
+                          <Text size="xs" fs="italic">
+                            Durée
+                          </Text>
+                        </Stack>
+
+                        <Stack gap="0rem">
+                          <Text fw={700}>{step.distance} km</Text>
+                          <Text size="xs" fs="italic">
+                            Distance estimée
+                          </Text>
+                        </Stack>
+
+                        <Stack gap="0rem">
+                          <Text fw={700}>
+                            {/* Calculation of pace step */}
+                            {speedCalcul(
+                              convertDurationToMin(step.duration),
+                              Number(step.distance)
+                            )}{' '}
+                            km/h
+                          </Text>
+                          <Text size="xs" fs="italic">
+                            Vitesse moyenne
+                          </Text>
+                        </Stack>
+
+                        <Stack gap="0rem">
+                          <Text fw={700}>
+                            {/* Calculation of pace step */}
+                            {paceCalcul(
+                              convertDurationToMin(step.duration),
+                              Number(step.distance)
+                            )}{' '}
+                            min/km
+                          </Text>
+                          <Text size="xs" fs="italic">
+                            Allure
+                          </Text>
+                        </Stack>
+                        </>
+                      )}
+
                     </SimpleGrid>
                   </Flex>
                 ))
@@ -197,41 +269,65 @@ function EditActivity() {
               </Text>
             </Stack>
 
-            <Stack gap="0rem">
-              <Text fw={500}>{activityData.duration} min</Text>
-              <Text size="xs" fs="italic">
-                Temps total
-              </Text>
-            </Stack>
-
-            <Stack gap="0rem">
-              <Text fw={500}>{activityData.distance} km</Text>
-              <Text size="xs" fs="italic">
-                Distance
-              </Text>
-            </Stack>
-
-            <Stack gap="0rem">
-              {speed === 'NaN' ? (
+            {activityData.duration == '0' ? (
+              <Stack gap="0rem">
                 <Text fw={500}>--</Text>
+                <Text size="xs" fs="italic">
+                  Temps total
+                </Text>
+              </Stack>
               ) : (
-                <Text fw={500}>{speed} km/h</Text>
-              )}
-              <Text size="xs" fs="italic">
-                Vitesse moyenne
-              </Text>
-            </Stack>
+              <Stack gap="0rem">
+                <Text fw={500}>{activityData.duration}</Text>
+                <Text size="xs" fs="italic">
+                  Temps total
+                </Text>
+              </Stack>
+            )}
 
-            <Stack gap="0rem">
-              {pace === 'NaN' ? (
+            {activityData.distance ? (
+              <Stack gap="0rem">
+                <Text fw={500}>{activityData.distance} km</Text>
+                <Text size="xs" fs="italic">
+                  Distance
+                </Text>
+              </Stack>
+            ) : (
+              <Stack gap="0rem">
                 <Text fw={500}>--</Text>
-              ) : (
-                <Text fw={500}>{pace} min/km</Text>
-              )}
-              <Text size="xs" fs="italic">
-                Allure
-              </Text>
+                <Text size="xs" fs="italic">
+                  Distance
+                </Text>
             </Stack>
+            )}
+
+            {activityData.duration && activityData.distance ? (
+              <>
+              <Stack gap="0rem">
+                {speed === 'NaN' ? (
+                  <Text fw={500}>--</Text>
+                ) : (
+                  <Text fw={500}>{speed} km/h</Text>
+                )}
+                <Text size="xs" fs="italic">
+                  Vitesse moyenne
+                </Text>
+              </Stack>
+
+              <Stack gap="0rem">
+                {pace === 'NaN' ? (
+                  <Text fw={500}>--</Text>
+                ) : (
+                  <Text fw={500}>{pace} min/km</Text>
+                )}
+                <Text size="xs" fs="italic">
+                  Allure
+                </Text>
+              </Stack>
+              </>
+            ) : (
+              []
+            )}
 
             <Divider my="0.3rem" />
 

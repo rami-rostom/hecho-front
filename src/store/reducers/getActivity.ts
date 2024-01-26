@@ -11,7 +11,7 @@ const initialState: ActivityState = {
     date_scheduled: '',
     date_accomplished: '',
     distance: 0,
-    duration: 0,
+    duration: '',
     pace: 0,
     user_id: 0,
     hecho: false || true,

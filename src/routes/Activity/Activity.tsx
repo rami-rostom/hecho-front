@@ -28,7 +28,7 @@ import {
   paceCalcul,
   speedCalcul,
   convertDateFormat,
-  sumDurations,
+  convertDurationToMin,
 } from '../../utils/calculation';
 
 import './Activity.scss';
@@ -48,8 +48,8 @@ function Activity() {
   const activityData = useAppSelector((state) => state.getActivity.activity);
   const { steps, tags } = activityData;
 
-  const speed = speedCalcul(activityData.duration, activityData.distance);
-  const pace = paceCalcul(activityData.duration, activityData.distance);
+  const speed = speedCalcul(convertDurationToMin(activityData.duration), activityData.distance);
+  const pace = paceCalcul(convertDurationToMin(activityData.duration), activityData.distance);
 
   return (
     <Container p="md" className="activity">
@@ -129,7 +129,6 @@ function Activity() {
                       cols={{ base: 2, lg: 4 }}
                       spacing={{ base: 'xs', lg: 'xs' }}
                     >
-
                       {/* Render step when user select only distance type */}
                       {step.distance && !step.duration && (
                         <>
@@ -217,7 +216,7 @@ function Activity() {
                           <Text fw={700}>
                             {/* Calculation of pace step */}
                             {speedCalcul(
-                              Number(step.duration),
+                              convertDurationToMin(step.duration),
                               Number(step.distance)
                             )}{' '}
                             km/h
@@ -231,7 +230,7 @@ function Activity() {
                           <Text fw={700}>
                             {/* Calculation of pace step */}
                             {paceCalcul(
-                              Number(step.duration),
+                              convertDurationToMin(step.duration),
                               Number(step.distance)
                             )}{' '}
                             min/km
