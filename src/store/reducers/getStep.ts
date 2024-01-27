@@ -7,7 +7,7 @@ const initialState: StepState = {
   step: {
     id: '',
     name: '',
-    distance: '',
+    distance: 0,
     duration: '',
     user_id: 0,
   },

@@ -15,13 +15,14 @@ import { useDisclosure } from '@mantine/hooks';
 import { useAppDispatch } from '../../hooks/redux';
 import { removeStep } from '../../store/reducers/removeStep';
 import { updateActivity } from '../../store/reducers/updateActivity';
+import { subDurations } from '../../utils/calculation';
 
 type StepProps = {
   stepId: string | undefined;
-  stepDistance: string;
+  stepDistance: number;
   stepDuration: string;
   activityDuration: string;
-  activityDistance: string;
+  activityDistance: number;
 };
 
 function RemoveStep(props: StepProps) {
@@ -53,12 +54,12 @@ function RemoveStep(props: StepProps) {
       })
     );
     
-    if (stepDistance != '' && stepDuration != '') {
+    if (stepDistance != 0 && stepDuration != '') {
       // Update render of activity details
       await dispatch(
         updateActivity({
           id,
-          duration: Number(activityDuration) - Number(stepDuration),
+          duration: subDurations(activityDuration, stepDuration),
           distance: Number(activityDistance) - Number(stepDistance),
           name: '',
           sport_id: null,
@@ -75,12 +76,12 @@ function RemoveStep(props: StepProps) {
       ).then(() => navigate(0));
     }
 
-    if (stepDistance != '' && stepDuration == '') {
+    if (stepDistance != 0 && stepDuration == '') {
       // Update render of activity details
       await dispatch(
         updateActivity({
           id,
-          duration: Number(activityDuration),
+          duration: activityDuration,
           distance: Number(activityDistance) - Number(stepDistance),
           name: '',
           sport_id: null,
@@ -97,12 +98,12 @@ function RemoveStep(props: StepProps) {
       ).then(() => navigate(0));
     }
 
-    if (stepDuration != '' && stepDistance == '') {
+    if (stepDuration != '' && stepDistance == 0) {
       // Update render of activity details
       await dispatch(
         updateActivity({
           id,
-          duration: Number(activityDuration) - Number(stepDuration),
+          duration: subDurations(activityDuration, stepDuration),
           distance: Number(activityDistance),
           name: '',
           sport_id: null,

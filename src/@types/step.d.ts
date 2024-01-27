@@ -2,7 +2,7 @@
 export type Step = {
   id: string;
   name?: string;
-  distance: string | number;
+  distance: number;
   duration: string | number;
   user_id: number;
 };
@@ -16,7 +16,7 @@ export type StepState = {
 // New step states
 export type NewStep = {
   name?: string;
-  distance?: string | number;
+  distance?: number;
   duration?: string | number;
   user_id: number;
 };

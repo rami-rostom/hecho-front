@@ -48,45 +48,98 @@ function UpdateStep(props: StepProps) {
 
   const [opened, { close, open }] = useDisclosure(false);
   const [nameValue, setNameValue] = useState('');
-  const [durationValue, setDurationValue] = useState<string>('');
-  const [distanceValue, setDistanceValue] = useState<string | number>('');
+  const [newDurationValue, setNewDurationValue] = useState<string>('');
+  const [newDistanceValue, setNewDistanceValue] = useState<string | number>('');
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Creation of the step with useState datas
+    const resetDuration = subDurations(activityDuration, stepDuration);
+
+    // Update the step with useState datas
     await dispatch(
       updateStep({
         id: stepId,
         name: nameValue,
-        duration: durationValue,
-        distance: distanceValue,
+        duration: newDurationValue,
+        distance: newDistanceValue,
         user_id: 1,
       })
     );
 
-    await dispatch(
-      updateActivity({
-        id,
-        duration:
-          sumDurations(subDurations(activityDuration, stepDuration.toString()), durationValue),
-        distance:
-          Number(activityDistance) -
-          Number(stepDistance) +
-          Number(distanceValue),
-        name: '',
-        sport_id: null,
-        pace: 0,
-        user_id: 0,
-        hecho: false,
-        sport: {
-          id: 0,
-          name: undefined,
-        },
-        steps: [],
-        tags: [],
-      })
-    ).then(() => navigate(0));
+    if (newDurationValue === '') {
+      await dispatch(
+        updateActivity({
+          id,
+          duration: activityDuration,
+          distance:
+            Number(activityDistance) -
+            Number(stepDistance) +
+            Number(newDistanceValue),
+          name: '',
+          sport_id: null,
+          pace: 0,
+          user_id: 0,
+          hecho: false,
+          sport: {
+            id: 0,
+            name: undefined,
+          },
+          steps: [],
+          tags: [],
+        })
+      ).then(() => navigate(0));
+    }
+
+    if (newDistanceValue === '') {
+      await dispatch(
+        updateActivity({
+          id,
+          duration:
+            sumDurations(resetDuration, newDurationValue),
+          distance:
+            Number(activityDistance) -
+            Number(stepDistance) +
+            Number(newDistanceValue),
+          name: '',
+          sport_id: null,
+          pace: 0,
+          user_id: 0,
+          hecho: false,
+          sport: {
+            id: 0,
+            name: undefined,
+          },
+          steps: [],
+          tags: [],
+        })
+      ).then(() => navigate(0));
+    }
+
+    if (newDurationValue != '' && newDistanceValue != '') {
+      await dispatch(
+        updateActivity({
+          id,
+          duration:
+            sumDurations(resetDuration, newDurationValue),
+          distance:
+            Number(activityDistance) -
+            Number(stepDistance) +
+            Number(newDistanceValue),
+          name: '',
+          sport_id: null,
+          pace: 0,
+          user_id: 0,
+          hecho: false,
+          sport: {
+            id: 0,
+            name: undefined,
+          },
+          steps: [],
+          tags: [],
+        })
+      ).then(() => navigate(0));
+    }
   };
 
   return (
@@ -113,7 +166,7 @@ function UpdateStep(props: StepProps) {
               withAsterisk
               label="Durée"
               description="hh-mm-ss"
-              onChange={(event) => setDurationValue(event.target.value)}
+              onChange={(event) => setNewDurationValue(event.target.value)}
             />
 
             <NumberInput
@@ -123,7 +176,7 @@ function UpdateStep(props: StepProps) {
               suffix=" km"
               placeholder="Distance de l'étape"
               min={0}
-              onChange={setDistanceValue}
+              onChange={setNewDistanceValue}
             />
 
             <Group justify="flex-end" mt="md">

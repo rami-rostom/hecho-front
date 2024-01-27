@@ -22,7 +22,7 @@ import { updateActivity } from '../../store/reducers/updateActivity';
 
 type ActivityProps = {
   activityDuration: string;
-  activityDistance: string;
+  activityDistance: number;
 };
 
 function AddStep(props: ActivityProps) {
@@ -38,13 +38,15 @@ function AddStep(props: ActivityProps) {
   const [opened, { close, open }] = useDisclosure(false);
   const [nameValue, setNameValue] = useState('');
   const [durationValue, setDurationValue] = useState<string>('');
-  const [distanceValue, setDistanceValue] = useState<string | number>('');
+  const [distanceValue, setDistanceValue] = useState<number>();
   const [typeValue, setTypeValue] = useState<string | null>('');
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     setTypeValue('');
+
+    const newDuration = sumDurations(activityDuration, durationValue);
 
     // User select distance as type
     if (durationValue === '') {
@@ -91,7 +93,7 @@ function AddStep(props: ActivityProps) {
     }
 
     // User select duration as type
-    if (distanceValue === '') {
+    if (distanceValue === 0) {
     const createdStep = await dispatch(
       createStep({
         name: nameValue,
@@ -113,8 +115,8 @@ function AddStep(props: ActivityProps) {
     await dispatch(
       updateActivity({
         id,
-        duration: sumDurations(activityDuration, durationValue),
-        distance: Number(activityDistance),
+        duration: newDuration,
+        distance: activityDistance,
         name: '',
         sport_id: null,
         pace: 0,
@@ -153,7 +155,7 @@ function AddStep(props: ActivityProps) {
       await dispatch(
         updateActivity({
           id,
-          duration: sumDurations(activityDuration, durationValue),
+          duration: newDuration,
           distance: Number(activityDistance) + Number(distanceValue),
           name: '',
           sport_id: null,
@@ -182,13 +184,6 @@ function AddStep(props: ActivityProps) {
       >
         <form onSubmit={handleFormSubmit}>
           <Stack gap="xs">
-            <TextInput
-              withAsterisk
-              label="Nom"
-              placeholder="Nom de l'étape"
-              onChange={(event) => setNameValue(event.target.value)}
-            />
-
             <Select
               withAsterisk
               label="Type"
@@ -199,6 +194,13 @@ function AddStep(props: ActivityProps) {
                 { label: 'Durée & distance', value: '3' },
               ]}
               onChange={setTypeValue}
+            />
+
+            <TextInput
+              withAsterisk
+              label="Nom"
+              placeholder="Nom de l'étape"
+              onChange={(event) => setNameValue(event.target.value)}
             />
 
             {typeValue == '1' && (

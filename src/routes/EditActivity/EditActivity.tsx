@@ -124,10 +124,10 @@ function EditActivity() {
                         {/* Component opening a modal to remove the step from the activity */}
                         <RemoveStep
                           stepId={step.id}
-                          stepDistance={step.distance.toString()}
+                          stepDistance={step.distance}
                           stepDuration={step.duration.toString()}
                           activityDuration={activityData.duration.toString()}
-                          activityDistance={activityData.distance.toString()}
+                          activityDistance={activityData.distance}
                         />
                       </Group>
                     </Group>
@@ -269,7 +269,7 @@ function EditActivity() {
               </Text>
             </Stack>
 
-            {activityData.duration == '0' ? (
+            {activityData.duration == '' || activityData.duration == '00:00:00' ? (
               <Stack gap="0rem">
                 <Text fw={500}>--</Text>
                 <Text size="xs" fs="italic">
@@ -301,7 +301,7 @@ function EditActivity() {
             </Stack>
             )}
 
-            {activityData.duration && activityData.distance ? (
+            {activityData.duration !== '00:00:00' && activityData.distance ? (
               <>
               <Stack gap="0rem">
                 {speed === 'NaN' ? (

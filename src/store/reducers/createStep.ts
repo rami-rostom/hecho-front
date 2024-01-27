@@ -6,7 +6,7 @@ import { axiosInstance } from '../../utils/axios';
 const initialState: NewStepState = {
   step: {
     name: '',
-    distance: '',
+    distance: 0,
     duration: '',
     user_id: 1,
   },
