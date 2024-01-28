@@ -6,6 +6,7 @@ import {
   Group,
   Modal,
   NumberInput,
+  Select,
   Stack,
   TextInput,
   Tooltip,
@@ -23,10 +24,10 @@ import { updateActivity } from '../../store/reducers/updateActivity';
 type StepProps = {
   stepId: string;
   stepName: string | undefined;
-  stepDistance: string | number;
-  stepDuration: string | number;
+  stepDistance: number;
+  stepDuration: string;
   activityDuration: string;
-  activityDistance: string;
+  activityDistance: number;
 };
 
 function UpdateStep(props: StepProps) {
@@ -50,9 +51,12 @@ function UpdateStep(props: StepProps) {
   const [nameValue, setNameValue] = useState('');
   const [newDurationValue, setNewDurationValue] = useState<string>('');
   const [newDistanceValue, setNewDistanceValue] = useState<string | number>('');
+  const [typeValue, setTypeValue] = useState<string | null>('');
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    setTypeValue('');
 
     const resetDuration = subDurations(activityDuration, stepDuration);
 
@@ -62,7 +66,7 @@ function UpdateStep(props: StepProps) {
         id: stepId,
         name: nameValue,
         duration: newDurationValue,
-        distance: newDistanceValue,
+        distance: Number(newDistanceValue),
         user_id: 1,
       })
     );
@@ -153,6 +157,18 @@ function UpdateStep(props: StepProps) {
       >
         <form onSubmit={handleFormSubmit}>
           <Stack gap="xs">
+          <Select
+              withAsterisk
+              label="Type"
+              placeholder="Type de durée"
+              data={[
+                { label: 'Durée', value: '1' },
+                { label: 'Distance', value: '2' },
+                { label: 'Durée & distance', value: '3' },
+              ]}
+              onChange={setTypeValue}
+            />
+
             <TextInput
               withAsterisk
               label="Nom"
@@ -161,23 +177,49 @@ function UpdateStep(props: StepProps) {
               onChange={(event) => setNameValue(event.target.value)}
             />
 
-            <TimeInput
-              withSeconds
-              withAsterisk
-              label="Durée"
-              description="hh-mm-ss"
-              onChange={(event) => setNewDurationValue(event.target.value)}
-            />
+            {typeValue == '1' && (
+              <TimeInput
+                withSeconds
+                withAsterisk
+                label="Durée"
+                description="hh-mm-ss"
+                onChange={(event) => setNewDurationValue(event.target.value)}
+              />
+            )}
 
-            <NumberInput
-              withAsterisk
-              label="Distance"
-              description="Décimale possible"
-              suffix=" km"
-              placeholder="Distance de l'étape"
-              min={0}
-              onChange={setNewDistanceValue}
-            />
+            {typeValue == '2' && (
+              <NumberInput
+                withAsterisk
+                label="Distance"
+                description="Décimale possible"
+                suffix=" km"
+                placeholder="Distance de l'étape"
+                min={0}
+                onChange={setNewDistanceValue}
+              />
+            )}
+
+            {typeValue == '3' && (
+              <>
+              <TimeInput
+                withSeconds
+                withAsterisk
+                label="Durée"
+                description="hh-mm-ss"
+                onChange={(event) => setNewDurationValue(event.target.value)}
+              />
+
+              <NumberInput
+                withAsterisk
+                label="Distance"
+                description="Décimale possible"
+                suffix=" km"
+                placeholder="Distance de l'étape"
+                min={0}
+                onChange={setNewDistanceValue}
+              />
+              </>
+            )}
 
             <Group justify="flex-end" mt="md">
               <Button color="button.0" type="submit">
