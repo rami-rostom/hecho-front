@@ -10,3 +10,15 @@ export type TagState = {
   isLoading: boolean;
   error: null | string;
 };
+
+
+export type NewTag = {
+  name: string;
+  user_id: number;
+};
+
+export type NewTagState = {
+  tags: NewTag;
+  isLoading: boolean;
+  error: null | string;
+};

@@ -11,6 +11,7 @@ import getStepReducer from './reducers/getStep';
 import updateStepReducer from './reducers/updateStep';
 import updateActivityReducer from './reducers/updateActivity';
 import getTagReducer from './reducers/getTag';
+import addTagReducer from './reducers/addTag';
 
 const store = configureStore({
   reducer: {
@@ -25,6 +26,7 @@ const store = configureStore({
     removeStep: removeStepReducer,
     hecho: hechoReducer,
     getTag: getTagReducer,
+    addTag: addTagReducer,
   },
 });
 

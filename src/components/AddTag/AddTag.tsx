@@ -6,6 +6,7 @@ import { IconTag } from '@tabler/icons-react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchTag } from '../../store/reducers/getTag';
+import { createTag } from '../../store/reducers/createTag';
 
 function AddTag() {
   const dispatch = useAppDispatch();
@@ -20,9 +21,24 @@ function AddTag() {
 
   const tagsData = useAppSelector((state) => state.getTag.tags);
 
+  const tagsArray = [];
+
+  tagsData.map((tag) => {
+    tagsArray.push(
+    { value: tag.name })
+   });
+
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('test');
+
+    const createdTag = await dispatch(
+      createTag({
+        name: nameValue[0],
+        user_id: 1,
+      })
+    ).unwrap();
+
+    console.log(createdTag.name);
   };
 
   return (
@@ -32,14 +48,14 @@ function AddTag() {
         onClose={close}
         size="sm"
         centered
-        title="Ajouter un tag"
+        title="Ajouter un tag (2 max)"
       >
         <form onSubmit={handleFormSubmit}>
           <TagsInput
             description="Appuyez sur entrée pour créer un tag"
-            placeholder="Sélectionner ou créer un tag"
-            maxTags={1}
-            data={tagsData.map((tag) => tag.name)}
+            placeholder="Créer un tag"
+            maxTags={2}
+            onChange={setNameValue}
           />
           <Group justify="flex-end" mt="md">
             <Button color="button.0" type="submit">
