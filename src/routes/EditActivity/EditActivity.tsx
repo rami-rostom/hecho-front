@@ -170,7 +170,7 @@ function EditActivity() {
                       )}
 
                       {/* Render step when user select only duration type */}
-                      {step.duration && step.distance == 0 && (
+                      {step.duration && step.distance == null && (
                         <>
                         <Stack gap="0rem">
                           <Text fw={700}>{step.duration}</Text>
@@ -203,7 +203,7 @@ function EditActivity() {
                       )}
 
                       {/* Render step when user select duration and distance type */}
-                      {step.duration && step.distance != 0 && (
+                      {step.duration && step.distance != null && (
                         <>
                         <Stack gap="0rem">
                           <Text fw={700}>{step.duration}</Text>

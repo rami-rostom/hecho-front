@@ -93,11 +93,11 @@ function AddStep(props: ActivityProps) {
     }
 
     // User select duration as type
-    if (distanceValue === 0) {
+    if (distanceValue === undefined) {
     const createdStep = await dispatch(
       createStep({
         name: nameValue,
-        distance: 0,
+        distance: null,
         duration: durationValue,
         user_id: 1,
       })

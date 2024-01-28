@@ -110,9 +110,9 @@ function Activity() {
                         <DuplicateStep
                           stepName={step.name}
                           stepDuration={step.duration.toString()}
-                          stepDistance={step.distance.toString()}
+                          stepDistance={step.distance}
                           activityDuration={activityData.duration.toString()}
-                          activityDistance={activityData.distance.toString()}
+                          activityDistance={activityData.distance}
                         />
                         {/* Component opening a modal to remove the step from the activity */}
                         <RemoveStep
@@ -163,7 +163,7 @@ function Activity() {
                       )}
 
                       {/* Render step when user select only duration type */}
-                      {step.duration && step.distance == 0 && (
+                      {step.duration && step.distance == null && (
                         <>
                         <Stack gap="0rem">
                           <Text fw={700}>{step.duration}</Text>
@@ -196,7 +196,7 @@ function Activity() {
                       )}
 
                       {/* Render step when user select duration and distance type */}
-                      {step.duration && step.distance != 0 && (
+                      {step.duration && step.distance != null && (
                         <>
                         <Stack gap="0rem">
                           <Text fw={700}>{step.duration}</Text>
