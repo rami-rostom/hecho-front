@@ -6,11 +6,10 @@ export type Tag = {
 };
 
 export type TagState = {
-  tags: Tag[];
+  tags: Tag;
   isLoading: boolean;
   error: null | string;
 };
-
 
 export type NewTag = {
   name: string;

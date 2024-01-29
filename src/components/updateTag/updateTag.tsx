@@ -1,15 +1,27 @@
 import { FormEvent, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { Button, Group, Modal, TagsInput } from '@mantine/core';
+import {
+  Badge,
+  Button,
+  Group,
+  Modal,
+  TagsInput,
+  UnstyledButton,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconTag } from '@tabler/icons-react';
 
 import { useAppDispatch } from '../../hooks/redux';
-import { createTag } from '../../store/reducers/createTag';
-import { addTag } from '../../store/reducers/addTag';
+import { updateTag as editTag } from '../../store/reducers/updateTag';
 
-function AddTag() {
+type TagProps = {
+  tagId: string;
+  tagName: string;
+};
+
+function updateTag(props: TagProps) {
+  const { tagId, tagName } = props;
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -27,21 +39,11 @@ function AddTag() {
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // First step is to create the tag
-    const createdTag = await dispatch(
-      createTag({
+    await dispatch(
+      editTag({
+        id: tagId,
         name: nameValue[0],
         user_id: 1,
-      })
-    ).unwrap();
-
-    const tagId = createdTag.id;
-
-    // Second step is to add the created tag to the workout
-    await dispatch(
-      addTag({
-        tag_id: tagId,
-        workoutId: id,
       })
     ).then(() => navigate(0));
   };
@@ -53,16 +55,20 @@ function AddTag() {
         onClose={close}
         size="sm"
         centered
-        title="Ajouter un tag"
+        title="Modifier un tag"
       >
         <form onSubmit={handleFormSubmit}>
           <TagsInput
-            description="Appuyez sur entrée pour créer le tag"
-            placeholder="Créer un tag"
+            description="Appuyez sur entrée pour modifier le tag"
+            placeholder="Modifier le tag"
             maxTags={1}
+            defaultValue={[tagName]}
             onChange={handleTagInput}
           />
           <Group justify="flex-end" mt="md">
+            <Button color="button.0" variant="outline" onClick={close}>
+              Annuler
+            </Button>
             <Button color="button.0" type="submit">
               Ajouter
             </Button>
@@ -70,17 +76,16 @@ function AddTag() {
         </form>
       </Modal>
 
-      <Button
-        color="button.4"
-        size="compact-xs"
-        variant="outline"
-        onClick={open}
-      >
-        <IconTag size="0.9rem" className="activity__steps-button" />
-        Ajouter un tag
-      </Button>
+      <UnstyledButton onClick={open}>
+        <Badge
+          variant="gradient"
+          gradient={{ from: 'yellow', to: 'orange', deg: 90 }}
+        >
+          {tagName}
+        </Badge>
+      </UnstyledButton>
     </>
   );
 }
 
-export default AddTag;
+export default updateTag;

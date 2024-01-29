@@ -3,7 +3,10 @@
 // Function to transform duration in minutes
 export const convertDurationToMin = (duration: string) => {
   if (duration) {
-    const [heures, minutes, secondes] = duration.split(':').map(Number);
+    const [heures, minutes, secondes] = duration
+      .toString()
+      .split(':')
+      .map(Number);
     const durationInMin = heures * 60 + minutes + secondes / 60;
 
     // Fixe value with two decimals
@@ -11,7 +14,6 @@ export const convertDurationToMin = (duration: string) => {
   }
   return duration;
 };
-
 
 /**
  * Function for calculating the speed of activity
@@ -29,7 +31,6 @@ export const speedCalcul = (duration: number, distance: number) => {
   return speedResult.toFixed(2);
 };
 
-
 /**
  * Function for calculating the pace of activity
  * @param duration value in minutes
@@ -43,7 +44,6 @@ export const paceCalcul = (duration: number, distance: number) => {
   return paceResult.toFixed(2);
 };
 
-
 /**
  * Function to transform date into DAY-MONTH-YEAR format
  * @param oldFormatDate date in format YEAR-MONTH-DAY
@@ -55,19 +55,22 @@ export const convertDateFormat = (oldFormatDate: string) => {
   return newFormatDate;
 };
 
-
 /**
  * Function to sum two durations in format HH:mm:ss
  * @param duration1 first duration in format HH:mm:ss
  * @param duration2 second duration in format HH:mm:ss
- * @returns 
+ * @returns
  */
 export const sumDurations = (duration1: string, duration2: string) => {
   // Function to convert a duration HH:mm:ss in seconds
   const convertToSeconds = (duration: string) => {
     const [hours, minutes, seconds] = duration.split(':');
-    return parseInt(hours, 10) * 3600 + parseInt(minutes, 10) * 60 + parseInt(seconds, 10);
-  }
+    return (
+      parseInt(hours, 10) * 3600 +
+      parseInt(minutes, 10) * 60 +
+      parseInt(seconds, 10)
+    );
+  };
 
   // Function to convert seconds in duration HH:mm:ss
   const convertToDuration = (seconds: number) => {
@@ -78,7 +81,7 @@ export const sumDurations = (duration1: string, duration2: string) => {
     const format = (num: number) => (num < 10 ? `0${num}` : num);
 
     return `${format(hours)}:${format(minutes)}:${format(remainingSeconds)}`;
-  }
+  };
 
   const seconds1 = convertToSeconds(duration1);
   const seconds2 = convertToSeconds(duration2);
@@ -86,21 +89,24 @@ export const sumDurations = (duration1: string, duration2: string) => {
   const totalSeconds = seconds1 + seconds2;
 
   return convertToDuration(totalSeconds);
-}
-
+};
 
 /**
  * Function to sub two durations in format HH:mm:ss
  * @param duration1 first duration in format HH:mm:ss
  * @param duration2 second duration in format HH:mm:ss
- * @returns 
+ * @returns
  */
 export const subDurations = (duration1: string, duration2: string) => {
   // Function to convert a duration HH:mm:ss in seconds
   const convertToSeconds = (duration: string) => {
     const [hours, minutes, seconds] = duration.split(':');
-    return parseInt(hours, 10) * 3600 + parseInt(minutes, 10) * 60 + parseInt(seconds, 10);
-  }
+    return (
+      parseInt(hours, 10) * 3600 +
+      parseInt(minutes, 10) * 60 +
+      parseInt(seconds, 10)
+    );
+  };
 
   // Function to convert seconds in duration HH:mm:ss
   const convertToDuration = (seconds: number) => {
@@ -111,7 +117,7 @@ export const subDurations = (duration1: string, duration2: string) => {
     const format = (num: number) => (num < 10 ? `0${num}` : num);
 
     return `${format(hours)}:${format(minutes)}:${format(remainingSeconds)}`;
-  }
+  };
 
   const seconds1 = convertToSeconds(duration1);
   const seconds2 = convertToSeconds(duration2);
@@ -119,4 +125,4 @@ export const subDurations = (duration1: string, duration2: string) => {
   const totalSeconds = seconds1 - seconds2;
 
   return convertToDuration(totalSeconds);
-}
+};
