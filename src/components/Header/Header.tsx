@@ -9,20 +9,30 @@ import {
   Menu,
   rem,
   Button,
+  Transition,
 } from '@mantine/core';
 import { IconLogout, IconSettings, IconUserFilled } from '@tabler/icons-react';
 
 import { useAppSelector } from '../../hooks/redux';
 
 import './Header.scss';
+import { useWindowScroll } from '@mantine/hooks';
 
 function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
   const isLogged = useAppSelector((state) => state.login.logged);
 
+  const [scroll] = useWindowScroll();
+
+  console.log(scroll.y);
+
   return (
     <>
-      {!isLogged ? (
-        <AppShell.Header bg="palette.5" withBorder={false}>
+      {!isLogged && (
+        <AppShell.Header
+          bg="palette.5"
+          withBorder={false}
+          className="header-unlogged"
+        >
           <Group h="100%" px="xl" className="header" justify="space-between">
             <Anchor href="/" underline="never">
               {/* Tooltip when hover on the logo */}
@@ -32,7 +42,10 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
                 offset={8}
                 openDelay={300}
                 closeDelay={150}
-                transitionProps={{ transition: 'slide-left', duration: 200 }}
+                transitionProps={{
+                  transition: 'slide-left',
+                  duration: 200,
+                }}
                 withArrow
               >
                 <Text
@@ -53,7 +66,9 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
             </Group>
           </Group>
         </AppShell.Header>
-      ) : (
+      )}
+
+      {isLogged && (
         <AppShell.Header bg="palette.5">
           <Group h="100%" px="xl" className="header" justify="space-between">
             {/* Responsive navbar, tranform to a burger when the breakpoint is hit */}

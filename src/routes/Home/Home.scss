@@ -1,0 +1,51 @@
+// Title animation
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.home-title {
+  color: var(--mantine-color-palette-0);
+  animation: fadeIn 5s;
+}
+
+// Subtitle animation
+@keyframes fadeInTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home-subtitle {
+  opacity: 0;
+  animation: fadeInTop 1s ease 1s forwards;
+}
+
+// Login button animation
+@keyframes fadeInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home-btn {
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeInBottom 1.5s 2s forwards;
+}
