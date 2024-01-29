@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
+import loginReducer from './reducers/login';
 import createActivityReducer from './reducers/createActivity';
 import getActivityReducer from './reducers/getActivity';
 import hechoReducer from './reducers/hecho';
@@ -16,6 +17,7 @@ import updateTagReducer from './reducers/updateTag';
 
 const store = configureStore({
   reducer: {
+    login: loginReducer,
     getActivity: getActivityReducer,
     createActivity: createActivityReducer,
     updateActivity: updateActivityReducer,
