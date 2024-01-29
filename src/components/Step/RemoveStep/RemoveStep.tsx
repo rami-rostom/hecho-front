@@ -12,10 +12,10 @@ import {
 import { IconTrash } from '@tabler/icons-react';
 
 import { useDisclosure } from '@mantine/hooks';
-import { useAppDispatch } from '../../hooks/redux';
-import { removeStep } from '../../store/reducers/removeStep';
-import { updateActivity } from '../../store/reducers/updateActivity';
-import { subDurations } from '../../utils/calculation';
+import { useAppDispatch } from '../../../hooks/redux';
+import { removeStep } from '../../../store/reducers/removeStep';
+import { updateActivity } from '../../../store/reducers/updateActivity';
+import { subDurations } from '../../../utils/calculation';
 
 type StepProps = {
   stepId: string | undefined;
@@ -53,7 +53,7 @@ function RemoveStep(props: StepProps) {
         workoutId: id,
       })
     );
-    
+
     if (stepDistance != 0 && stepDuration != '') {
       // Update render of activity details
       await dispatch(

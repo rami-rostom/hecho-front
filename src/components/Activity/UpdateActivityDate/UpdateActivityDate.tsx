@@ -1,5 +1,4 @@
 import { FormEvent, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { Button, Modal, Stack, Tooltip, UnstyledButton } from '@mantine/core';
@@ -7,8 +6,8 @@ import { DatePickerInput } from '@mantine/dates';
 import { useDisclosure } from '@mantine/hooks';
 import { IconPencil } from '@tabler/icons-react';
 
-import { updateActivity } from '../../store/reducers/updateActivity';
-import { useAppDispatch } from '../../hooks/redux';
+import { updateActivity } from '../../../store/reducers/updateActivity';
+import { useAppDispatch } from '../../../hooks/redux';
 
 type ActivityProps = {
   activityId: string;
@@ -40,7 +39,7 @@ function UpdateActivityDate(props: ActivityProps) {
         name: '',
         sport_id: null,
         distance: 0,
-        duration: 0,
+        duration: '',
         pace: 0,
         user_id: 0,
         hecho: false,

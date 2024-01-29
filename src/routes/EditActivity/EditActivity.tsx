@@ -12,15 +12,15 @@ import {
   Text,
 } from '@mantine/core';
 
-import ActivityIcon from '../../components/ActivityIcon/ActivityIcon';
+import ActivityIcon from '../../components/Activity/ActivityIcon/ActivityIcon';
 import Hecho from '../../components/Hecho/Hecho';
-import RemoveStep from '../../components/RemoveStep/RemoveStep';
-import DeleteActivity from '../../components/DeleteActivity/DeleteActivity';
-import UpdateStep from '../../components/UpdateStep/UpdateStep';
-import UpdateActivityName from '../../components/UpdateActivityName/UpdateActivityName';
-import UpdateActivityDate from '../../components/UpdateActivityDate/UpdateActivityDate';
-import AddTag from '../../components/AddTag/AddTag';
-import UpdateTag from '../../components/updateTag/updateTag';
+import RemoveStep from '../../components/Step/RemoveStep/RemoveStep';
+import DeleteActivity from '../../components/Activity/DeleteActivity/DeleteActivity';
+import UpdateStep from '../../components/Step/UpdateStep/UpdateStep';
+import UpdateActivityName from '../../components/Activity/UpdateActivityName/UpdateActivityName';
+import UpdateActivityDate from '../../components/Activity/UpdateActivityDate/UpdateActivityDate';
+import AddTag from '../../components/Tag/AddTag/AddTag';
+import UpdateTag from '../../components/Tag/UpdateTag/UpdateTag';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {

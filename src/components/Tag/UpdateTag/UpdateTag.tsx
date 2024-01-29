@@ -11,15 +11,15 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
-import { useAppDispatch } from '../../hooks/redux';
-import { updateTag as editTag } from '../../store/reducers/updateTag';
+import { useAppDispatch } from '../../../hooks/redux';
+import { updateTag as editTag } from '../../../store/reducers/updateTag';
 
 type TagProps = {
   tagId: string;
   tagName: string;
 };
 
-function updateTag(props: TagProps) {
+function UpdateTag(props: TagProps) {
   const { tagId, tagName } = props;
 
   const dispatch = useAppDispatch();
@@ -88,4 +88,4 @@ function updateTag(props: TagProps) {
   );
 }
 
-export default updateTag;
+export default UpdateTag;

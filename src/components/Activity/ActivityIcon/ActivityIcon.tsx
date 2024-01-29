@@ -11,8 +11,8 @@ import {
   IconTrekking,
 } from '@tabler/icons-react';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchActivity } from '../../store/reducers/getActivity';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { fetchActivity } from '../../../store/reducers/getActivity';
 
 function ActivityIcon() {
   const dispatch = useAppDispatch();

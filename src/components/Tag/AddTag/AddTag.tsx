@@ -5,9 +5,9 @@ import { Button, Group, Modal, TagsInput } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconTag } from '@tabler/icons-react';
 
-import { useAppDispatch } from '../../hooks/redux';
-import { createTag } from '../../store/reducers/createTag';
-import { addTag } from '../../store/reducers/addTag';
+import { useAppDispatch } from '../../../hooks/redux';
+import { createTag } from '../../../store/reducers/createTag';
+import { addTag } from '../../../store/reducers/addTag';
 
 function AddTag() {
   const dispatch = useAppDispatch();

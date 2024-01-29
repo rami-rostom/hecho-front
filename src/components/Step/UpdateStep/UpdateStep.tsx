@@ -9,24 +9,36 @@ import {
   Select,
   Stack,
   TextInput,
+  Tooltip,
+  UnstyledButton,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { TimeInput } from '@mantine/dates';
-import { IconPlus } from '@tabler/icons-react';
+import { IconPencil } from '@tabler/icons-react';
 
-import { useAppDispatch } from '../../hooks/redux';
-import { sumDurations } from '../../utils/calculation';
-import { createStep } from '../../store/reducers/createStep';
-import { addStep } from '../../store/reducers/addStep';
-import { updateActivity } from '../../store/reducers/updateActivity';
+import { useAppDispatch } from '../../../hooks/redux';
+import { subDurations, sumDurations } from '../../../utils/calculation';
+import { updateStep } from '../../../store/reducers/updateStep';
+import { updateActivity } from '../../../store/reducers/updateActivity';
 
-type ActivityProps = {
+type StepProps = {
+  stepId: string;
+  stepName: string | undefined;
+  stepDistance: number;
+  stepDuration: string;
   activityDuration: string;
   activityDistance: number;
 };
 
-function AddStep(props: ActivityProps) {
-  const { activityDuration, activityDistance } = props;
+function UpdateStep(props: StepProps) {
+  const {
+    stepId,
+    stepName,
+    stepDistance,
+    stepDuration,
+    activityDuration,
+    activityDistance,
+  } = props;
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -37,8 +49,8 @@ function AddStep(props: ActivityProps) {
 
   const [opened, { close, open }] = useDisclosure(false);
   const [nameValue, setNameValue] = useState('');
-  const [durationValue, setDurationValue] = useState<string>('');
-  const [distanceValue, setDistanceValue] = useState<number>();
+  const [newDurationValue, setNewDurationValue] = useState<string>('');
+  const [newDistanceValue, setNewDistanceValue] = useState<string | number>('');
   const [typeValue, setTypeValue] = useState<string | null>('');
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -46,37 +58,28 @@ function AddStep(props: ActivityProps) {
 
     setTypeValue('');
 
-    const newDuration = sumDurations(activityDuration, durationValue);
+    const resetDuration = subDurations(activityDuration, stepDuration);
 
-    // User select distance as type
-    if (durationValue === '') {
-      // Creation of the step with useState datas
-      const createdStep = await dispatch(
-        createStep({
-          name: nameValue,
-          distance: distanceValue,
-          duration: '',
-          user_id: 1,
-        })
-      ).unwrap();
+    // Update the step with useState datas
+    await dispatch(
+      updateStep({
+        id: stepId,
+        name: nameValue,
+        duration: newDurationValue,
+        distance: Number(newDistanceValue),
+        user_id: 1,
+      })
+    );
 
-      // Retrieve new step ID and redirection to the activity's page
-      const stepId = createdStep.id;
-
-      // Add the new step to the workout
-      await dispatch(
-        addStep({
-          step_id: stepId,
-          workoutId: id,
-        })
-      );
-
-      // Update activity details with new distance and duration
+    if (newDurationValue === '') {
       await dispatch(
         updateActivity({
           id,
           duration: activityDuration,
-          distance: Number(activityDistance) + Number(distanceValue),
+          distance:
+            Number(activityDistance) -
+            Number(stepDistance) +
+            Number(newDistanceValue),
           name: '',
           sport_id: null,
           pace: 0,
@@ -92,31 +95,15 @@ function AddStep(props: ActivityProps) {
       ).then(() => navigate(0));
     }
 
-    // User select duration as type
-    if (distanceValue === undefined) {
-      const createdStep = await dispatch(
-        createStep({
-          name: nameValue,
-          distance: null,
-          duration: durationValue,
-          user_id: 1,
-        })
-      ).unwrap();
-
-      const stepId = createdStep.id;
-
-      await dispatch(
-        addStep({
-          step_id: stepId,
-          workoutId: id,
-        })
-      );
-
+    if (newDistanceValue === '') {
       await dispatch(
         updateActivity({
           id,
-          duration: newDuration,
-          distance: activityDistance,
+          duration: sumDurations(resetDuration, newDurationValue),
+          distance:
+            Number(activityDistance) -
+            Number(stepDistance) +
+            Number(newDistanceValue),
           name: '',
           sport_id: null,
           pace: 0,
@@ -132,31 +119,15 @@ function AddStep(props: ActivityProps) {
       ).then(() => navigate(0));
     }
 
-    // User select distance and duration as type
-    if (distanceValue && durationValue) {
-      const createdStep = await dispatch(
-        createStep({
-          name: nameValue,
-          distance: distanceValue,
-          duration: durationValue,
-          user_id: 1,
-        })
-      ).unwrap();
-
-      const stepId = createdStep.id;
-
-      await dispatch(
-        addStep({
-          step_id: stepId,
-          workoutId: id,
-        })
-      );
-
+    if (newDurationValue != '' && newDistanceValue != '') {
       await dispatch(
         updateActivity({
           id,
-          duration: newDuration,
-          distance: Number(activityDistance) + Number(distanceValue),
+          duration: sumDurations(resetDuration, newDurationValue),
+          distance:
+            Number(activityDistance) -
+            Number(stepDistance) +
+            Number(newDistanceValue),
           name: '',
           sport_id: null,
           pace: 0,
@@ -180,7 +151,7 @@ function AddStep(props: ActivityProps) {
         onClose={close}
         size="xs"
         centered
-        title="Ajouter une étape"
+        title="Modifier une étape"
       >
         <form onSubmit={handleFormSubmit}>
           <Stack gap="xs">
@@ -200,6 +171,7 @@ function AddStep(props: ActivityProps) {
               withAsterisk
               label="Nom"
               placeholder="Nom de l'étape"
+              defaultValue={stepName}
               onChange={(event) => setNameValue(event.target.value)}
             />
 
@@ -209,7 +181,7 @@ function AddStep(props: ActivityProps) {
                 withAsterisk
                 label="Durée"
                 description="hh-mm-ss"
-                onChange={(event) => setDurationValue(event.target.value)}
+                onChange={(event) => setNewDurationValue(event.target.value)}
               />
             )}
 
@@ -221,8 +193,7 @@ function AddStep(props: ActivityProps) {
                 suffix=" km"
                 placeholder="Distance de l'étape"
                 min={0}
-                value={distanceValue}
-                onChange={setDistanceValue}
+                onChange={setNewDistanceValue}
               />
             )}
 
@@ -233,7 +204,7 @@ function AddStep(props: ActivityProps) {
                   withAsterisk
                   label="Durée"
                   description="hh-mm-ss"
-                  onChange={(event) => setDurationValue(event.target.value)}
+                  onChange={(event) => setNewDurationValue(event.target.value)}
                 />
 
                 <NumberInput
@@ -243,32 +214,35 @@ function AddStep(props: ActivityProps) {
                   suffix=" km"
                   placeholder="Distance de l'étape"
                   min={0}
-                  value={distanceValue}
-                  onChange={setDistanceValue}
+                  onChange={setNewDistanceValue}
                 />
               </>
             )}
 
             <Group justify="flex-end" mt="md">
               <Button color="button.0" type="submit">
-                Ajouter
+                Modifier
               </Button>
             </Group>
           </Stack>
         </form>
       </Modal>
 
-      <Button
-        color="button.4"
-        size="compact-xs"
-        variant="outline"
-        onClick={open}
+      <Tooltip
+        label="Modifier l'étape"
+        position="top"
+        offset={8}
+        openDelay={300}
+        closeDelay={150}
+        transitionProps={{ transition: 'slide-up', duration: 200 }}
+        withArrow
       >
-        <IconPlus size="1rem" className="activity__steps-button" />
-        Ajouter une étape
-      </Button>
+        <UnstyledButton onClick={open}>
+          <IconPencil size="1.2rem" />
+        </UnstyledButton>
+      </Tooltip>
     </>
   );
 }
 
-export default AddStep;
+export default UpdateStep;

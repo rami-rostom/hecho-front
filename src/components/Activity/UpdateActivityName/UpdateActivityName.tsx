@@ -11,8 +11,8 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import { IconCircleCheck, IconCircleX, IconPencil } from '@tabler/icons-react';
 
-import { useAppDispatch } from '../../hooks/redux';
-import { updateActivity } from '../../store/reducers/updateActivity';
+import { useAppDispatch } from '../../../hooks/redux';
+import { updateActivity } from '../../../store/reducers/updateActivity';
 
 type ActivityProps = {
   activityId: string;
@@ -37,7 +37,7 @@ function UpdateActivityName(props: ActivityProps) {
         name: nameValue,
         sport_id: null,
         distance: 0,
-        duration: 0,
+        duration: '',
         pace: 0,
         user_id: 0,
         hecho: false,

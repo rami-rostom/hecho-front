@@ -5,8 +5,8 @@ import { Button, Group, Modal, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { notifications } from '@mantine/notifications';
 
-import { useAppDispatch } from '../../hooks/redux';
-import { deleteActivity } from '../../store/reducers/deleteActivity';
+import { useAppDispatch } from '../../../hooks/redux';
+import { deleteActivity } from '../../../store/reducers/deleteActivity';
 
 function DeleteActivity() {
   const navigate = useNavigate();

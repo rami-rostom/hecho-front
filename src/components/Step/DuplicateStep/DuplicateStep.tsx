@@ -4,11 +4,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Tooltip, UnstyledButton } from '@mantine/core';
 import { IconCopy } from '@tabler/icons-react';
 
-import { useAppDispatch } from '../../hooks/redux';
-import { createStep } from '../../store/reducers/createStep';
-import { addStep } from '../../store/reducers/addStep';
-import { updateActivity } from '../../store/reducers/updateActivity';
-import { sumDurations } from '../../utils/calculation';
+import { useAppDispatch } from '../../../hooks/redux';
+import { createStep } from '../../../store/reducers/createStep';
+import { addStep } from '../../../store/reducers/addStep';
+import { updateActivity } from '../../../store/reducers/updateActivity';
+import { sumDurations } from '../../../utils/calculation';
 
 type StepProps = {
   stepName: string | undefined;
@@ -60,24 +60,24 @@ function DuplicateStep(props: StepProps) {
 
     if (stepDistance === null) {
       // Update activity details with duration
-    await dispatch(
-      updateActivity({
-        id,
-        duration: sumDurations(activityDuration, stepDuration),
-        distance: activityDistance,
-        name: '',
-        sport_id: null,
-        pace: 0,
-        user_id: 0,
-        hecho: false,
-        sport: {
-          id: 0,
-          name: undefined,
-        },
-        steps: [],
-        tags: [],
-      })
-    ).then(() => navigate(0));
+      await dispatch(
+        updateActivity({
+          id,
+          duration: sumDurations(activityDuration, stepDuration),
+          distance: activityDistance,
+          name: '',
+          sport_id: null,
+          pace: 0,
+          user_id: 0,
+          hecho: false,
+          sport: {
+            id: 0,
+            name: undefined,
+          },
+          steps: [],
+          tags: [],
+        })
+      ).then(() => navigate(0));
     }
 
     if (stepDuration === '') {
