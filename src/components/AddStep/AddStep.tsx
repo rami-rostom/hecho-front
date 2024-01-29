@@ -51,85 +51,85 @@ function AddStep(props: ActivityProps) {
     // User select distance as type
     if (durationValue === '') {
       // Creation of the step with useState datas
-    const createdStep = await dispatch(
-      createStep({
-        name: nameValue,
-        distance: distanceValue,
-        duration: '',
-        user_id: 1,
-      })
-    ).unwrap();
+      const createdStep = await dispatch(
+        createStep({
+          name: nameValue,
+          distance: distanceValue,
+          duration: '',
+          user_id: 1,
+        })
+      ).unwrap();
 
-    // Retrieve new step ID and redirection to the activity's page
-    const stepId = createdStep.id;
+      // Retrieve new step ID and redirection to the activity's page
+      const stepId = createdStep.id;
 
-    // Add the new step to the workout
-    await dispatch(
-      addStep({
-        step_id: stepId,
-        workoutId: id,
-      })
-    );
+      // Add the new step to the workout
+      await dispatch(
+        addStep({
+          step_id: stepId,
+          workoutId: id,
+        })
+      );
 
-    // Update activity details with new distance and duration
-    await dispatch(
-      updateActivity({
-        id,
-        duration: activityDuration,
-        distance: Number(activityDistance) + Number(distanceValue),
-        name: '',
-        sport_id: null,
-        pace: 0,
-        user_id: 0,
-        hecho: false,
-        sport: {
-          id: 0,
-          name: undefined,
-        },
-        steps: [],
-        tags: [],
-      })
-    ).then(() => navigate(0));
+      // Update activity details with new distance and duration
+      await dispatch(
+        updateActivity({
+          id,
+          duration: activityDuration,
+          distance: Number(activityDistance) + Number(distanceValue),
+          name: '',
+          sport_id: null,
+          pace: 0,
+          user_id: 0,
+          hecho: false,
+          sport: {
+            id: 0,
+            name: undefined,
+          },
+          steps: [],
+          tags: [],
+        })
+      ).then(() => navigate(0));
     }
 
     // User select duration as type
     if (distanceValue === undefined) {
-    const createdStep = await dispatch(
-      createStep({
-        name: nameValue,
-        distance: null,
-        duration: durationValue,
-        user_id: 1,
-      })
-    ).unwrap();
+      const createdStep = await dispatch(
+        createStep({
+          name: nameValue,
+          distance: null,
+          duration: durationValue,
+          user_id: 1,
+        })
+      ).unwrap();
 
-    const stepId = createdStep.id;
+      const stepId = createdStep.id;
 
-    await dispatch(
-      addStep({
-        step_id: stepId,
-        workoutId: id,
-      })
-    );
+      await dispatch(
+        addStep({
+          step_id: stepId,
+          workoutId: id,
+        })
+      );
 
-    await dispatch(
-      updateActivity({
-        id,
-        duration: newDuration,
-        distance: activityDistance,
-        name: '',
-        sport_id: null,
-        pace: 0,
-        user_id: 0,
-        hecho: false,
-        sport: {
-          id: 0,
-          name: undefined,
-        },
-        steps: [],
-        tags: [],
-      })
-    ).then(() => navigate(0));
+      await dispatch(
+        updateActivity({
+          id,
+          duration: newDuration,
+          distance: activityDistance,
+          name: '',
+          sport_id: null,
+          pace: 0,
+          user_id: 0,
+          hecho: false,
+          sport: {
+            id: 0,
+            name: undefined,
+          },
+          steps: [],
+          tags: [],
+        })
+      ).then(() => navigate(0));
     }
 
     // User select distance and duration as type
@@ -228,24 +228,24 @@ function AddStep(props: ActivityProps) {
 
             {typeValue == '3' && (
               <>
-              <TimeInput
-                withSeconds
-                withAsterisk
-                label="Durée"
-                description="hh-mm-ss"
-                onChange={(event) => setDurationValue(event.target.value)}
-              />
+                <TimeInput
+                  withSeconds
+                  withAsterisk
+                  label="Durée"
+                  description="hh-mm-ss"
+                  onChange={(event) => setDurationValue(event.target.value)}
+                />
 
-              <NumberInput
-                withAsterisk
-                label="Distance"
-                description="Décimale possible"
-                suffix=" km"
-                placeholder="Distance de l'étape"
-                min={0}
-                value={distanceValue}
-                onChange={setDistanceValue}
-              />
+                <NumberInput
+                  withAsterisk
+                  label="Distance"
+                  description="Décimale possible"
+                  suffix=" km"
+                  placeholder="Distance de l'étape"
+                  min={0}
+                  value={distanceValue}
+                  onChange={setDistanceValue}
+                />
               </>
             )}
 
