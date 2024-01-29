@@ -23,6 +23,7 @@ function Home() {
               size={'12rem'}
               ff={'Gemunu Libre'}
               className="home-title"
+              visibleFrom="sm"
             >
               HECHO.
             </Title>
@@ -32,6 +33,29 @@ function Home() {
               ta={'center'}
               ff={'Gemunu Libre'}
               className="home-subtitle"
+              visibleFrom="sm"
+            >
+              PLANIFIE. TRANSPIRE. PROFITE.
+            </Title>
+
+            <Title
+              order={1}
+              ta={'center'}
+              size={'6rem'}
+              ff={'Gemunu Libre'}
+              className="home-title"
+              hiddenFrom="sm"
+            >
+              HECHO.
+            </Title>
+
+            <Title
+              order={2}
+              ta={'center'}
+              size={'1.2rem'}
+              ff={'Gemunu Libre'}
+              className="home-subtitle"
+              hiddenFrom="sm"
             >
               PLANIFIE. TRANSPIRE. PROFITE.
             </Title>

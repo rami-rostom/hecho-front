@@ -33,7 +33,13 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
           withBorder={false}
           className="header-unlogged"
         >
-          <Group h="100%" px="xl" className="header" justify="space-between">
+          <Group
+            h="100%"
+            px="xl"
+            py="lg"
+            className="header"
+            justify="space-between"
+          >
             <Anchor href="/" underline="never">
               {/* Tooltip when hover on the logo */}
               <Tooltip
@@ -52,6 +58,7 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
                   c="palette.0"
                   size="2.5rem"
                   tt="uppercase"
+                  pl="1rem"
                   className="header__logo"
                 >
                   Hecho
@@ -60,7 +67,13 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
             </Anchor>
 
             <Group>
-              <Button color="button.0" variant="outline" size="xs" radius="xl">
+              <Button
+                color="button.0"
+                variant="outline"
+                size="xs"
+                radius="xl"
+                pr="1rem"
+              >
                 Se connecter
               </Button>
             </Group>
@@ -94,7 +107,7 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
                   c="palette.0"
                   size="2.5rem"
                   tt="uppercase"
-                  // pl="1.3rem"
+                  pl="1.3rem"
                   className="header__logo"
                 >
                   Hecho
