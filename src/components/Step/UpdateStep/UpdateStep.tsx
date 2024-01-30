@@ -16,7 +16,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { TimeInput } from '@mantine/dates';
 import { IconPencil } from '@tabler/icons-react';
 
-import { useAppDispatch } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { subDurations, sumDurations } from '../../../utils/calculation';
 import { updateStep } from '../../../store/reducers/updateStep';
 import { updateActivity } from '../../../store/reducers/updateActivity';
@@ -43,6 +43,8 @@ function UpdateStep(props: StepProps) {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  const userId = useAppSelector((state) => state.login.data.userId);
+
   // Retrieve ID of the activity
   const { id } = useParams();
   if (!id) throw new Error('Invalid id');
@@ -58,6 +60,7 @@ function UpdateStep(props: StepProps) {
 
     setTypeValue('');
 
+    // Original duration of the activity before adding this step
     const resetDuration = subDurations(activityDuration, stepDuration);
 
     // Update the step with useState datas
@@ -67,7 +70,7 @@ function UpdateStep(props: StepProps) {
         name: nameValue,
         duration: newDurationValue,
         distance: Number(newDistanceValue),
-        user_id: 1,
+        user_id: userId,
       })
     );
 

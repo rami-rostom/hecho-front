@@ -13,12 +13,14 @@ import {
 import { DatePickerInput } from '@mantine/dates';
 import { notifications } from '@mantine/notifications';
 
-import { useAppDispatch } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { createActivity } from '../../store/reducers/createActivity';
 
 function CreateActivity() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const userId = useAppSelector((state) => state.login.data.userId);
 
   const [nameValue, setNameValue] = useState('');
   const [typeValue, setTypeValue] = useState<string | null>('');
@@ -33,7 +35,7 @@ function CreateActivity() {
         name: nameValue,
         sport_id: typeValue,
         date_scheduled: dateValue,
-        user_id: 1,
+        user_id: userId,
         hecho: false,
       })
     ).unwrap();

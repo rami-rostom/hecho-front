@@ -5,13 +5,15 @@ import { Button, Group, Modal, TagsInput } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconTag } from '@tabler/icons-react';
 
-import { useAppDispatch } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { createTag } from '../../../store/reducers/createTag';
 import { addTag } from '../../../store/reducers/addTag';
 
 function AddTag() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const userId = useAppSelector((state) => state.login.data.userId);
 
   // Retrieve ID of the activity
   const { id } = useParams();
@@ -31,7 +33,7 @@ function AddTag() {
     const createdTag = await dispatch(
       createTag({
         name: nameValue[0],
-        user_id: 1,
+        user_id: userId,
       })
     ).unwrap();
 

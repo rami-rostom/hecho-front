@@ -11,7 +11,7 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
-import { useAppDispatch } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { updateTag as editTag } from '../../../store/reducers/updateTag';
 
 type TagProps = {
@@ -24,6 +24,8 @@ function UpdateTag(props: TagProps) {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const userId = useAppSelector((state) => state.login.data.userId);
 
   // Retrieve ID of the activity
   const { id } = useParams();
@@ -43,7 +45,7 @@ function UpdateTag(props: TagProps) {
       editTag({
         id: tagId,
         name: nameValue[0],
-        user_id: 1,
+        user_id: userId,
       })
     ).then(() => navigate(0));
   };

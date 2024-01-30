@@ -4,7 +4,11 @@ import { axiosInstance } from '../../utils/axios';
 import { TagState } from '../../@types/tag';
 
 const initialState: TagState = {
-  tags: [],
+  tags: {
+    id: '',
+    name: '',
+    user_id: 0,
+  },
   isLoading: false,
   error: null,
 };

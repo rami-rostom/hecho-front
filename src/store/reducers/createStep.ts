@@ -8,7 +8,7 @@ const initialState: NewStepState = {
     name: '',
     distance: 0,
     duration: '',
-    user_id: 1,
+    user_id: 0,
   },
   isLoading: false,
   error: null,

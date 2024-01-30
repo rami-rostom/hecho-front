@@ -14,7 +14,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { TimeInput } from '@mantine/dates';
 import { IconPlus } from '@tabler/icons-react';
 
-import { useAppDispatch } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { sumDurations } from '../../../utils/calculation';
 import { createStep } from '../../../store/reducers/createStep';
 import { addStep } from '../../../store/reducers/addStep';
@@ -30,6 +30,8 @@ function AddStep(props: ActivityProps) {
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const userId = useAppSelector((state) => state.login.data.userId);
 
   // Retrieve ID of the activity
   const { id } = useParams();
@@ -56,7 +58,7 @@ function AddStep(props: ActivityProps) {
           name: nameValue,
           distance: distanceValue,
           duration: '',
-          user_id: 1,
+          user_id: userId,
         })
       ).unwrap();
 
@@ -99,7 +101,7 @@ function AddStep(props: ActivityProps) {
           name: nameValue,
           distance: null,
           duration: durationValue,
-          user_id: 1,
+          user_id: userId,
         })
       ).unwrap();
 
@@ -139,7 +141,7 @@ function AddStep(props: ActivityProps) {
           name: nameValue,
           distance: distanceValue,
           duration: durationValue,
-          user_id: 1,
+          user_id: userId,
         })
       ).unwrap();
 

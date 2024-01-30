@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Tooltip, UnstyledButton } from '@mantine/core';
 import { IconCopy } from '@tabler/icons-react';
 
-import { useAppDispatch } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { createStep } from '../../../store/reducers/createStep';
 import { addStep } from '../../../store/reducers/addStep';
 import { updateActivity } from '../../../store/reducers/updateActivity';
@@ -30,6 +30,8 @@ function DuplicateStep(props: StepProps) {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  const userId = useAppSelector((state) => state.login.data.userId);
+
   // Retrieve ID of the activity
   const { id } = useParams();
   if (!id) throw new Error('Invalid id');
@@ -43,7 +45,7 @@ function DuplicateStep(props: StepProps) {
         name: stepName,
         distance: stepDistance,
         duration: stepDuration,
-        user_id: 1,
+        user_id: userId,
       })
     ).unwrap();
 

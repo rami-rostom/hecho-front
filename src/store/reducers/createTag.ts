@@ -6,7 +6,7 @@ import { NewTag, NewTagState } from '../../@types/tag';
 const initialState: NewTagState = {
   tags: {
     name: '',
-    user_id: 1,
+    user_id: 0,
   },
   isLoading: false,
   error: null,
