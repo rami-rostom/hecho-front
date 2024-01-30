@@ -2,6 +2,9 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchUserActivities } from '../../store/reducers/getUserActivities';
+import { Button, Title, Tooltip } from '@mantine/core';
+import { IconRun } from '@tabler/icons-react';
+import SportTab from '../../components/Activity/SportTab/SportTab';
 
 function Activities() {
   const dispatch = useAppDispatch();
@@ -24,8 +27,10 @@ function Activities() {
 
   return (
     <>
-      <div>Activities</div>
-      <div>Activities</div>
+      <Title order={1}>Activitiés</Title>
+
+      {/* Component to filter activities by sport */}
+      <SportTab />
     </>
   );
 }
