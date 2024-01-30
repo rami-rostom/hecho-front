@@ -25,6 +25,12 @@ export type ActivityState = {
   error: null | string;
 };
 
+export type ActivitiesState = {
+  activity: Activity[];
+  isLoading: boolean;
+  error: null | string;
+};
+
 // New activity states
 export type NewActivity = {
   name: string;

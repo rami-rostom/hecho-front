@@ -1,27 +1,10 @@
 /* eslint-disable import/prefer-default-export */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { ActivityState } from '../../@types/activity';
+import { ActivitiesState } from '../../@types/activity';
 import { axiosInstance } from '../../utils/axios';
 
-const initialState: ActivityState = {
-  activity: {
-    id: '',
-    name: '',
-    sport_id: '',
-    date_scheduled: '',
-    date_accomplished: '',
-    distance: 0,
-    duration: '',
-    pace: 0,
-    user_id: 0,
-    hecho: false || true,
-    sport: {
-      id: 0,
-      name: '',
-    },
-    steps: [],
-    tags: [],
-  },
+const initialState: ActivitiesState = {
+  activity: [],
   isLoading: true,
   error: null,
 };
