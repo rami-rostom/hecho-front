@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
         element: <EditActivity />,
       },
       {
-        path: '/activities',
+        path: '/activities/user/:id',
         element: <Activities />,
       },
     ],

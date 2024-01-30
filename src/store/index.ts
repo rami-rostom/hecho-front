@@ -4,6 +4,7 @@ import loginReducer from './reducers/login';
 import registerReducer from './reducers/register';
 import createActivityReducer from './reducers/createActivity';
 import getActivityReducer from './reducers/getActivity';
+import getUserActivitiesReducer from './reducers/getUserActivities';
 import hechoReducer from './reducers/hecho';
 import stepReducer from './reducers/createStep';
 import addStepReducer from './reducers/addStep';
@@ -21,6 +22,7 @@ const store = configureStore({
     login: loginReducer,
     register: registerReducer,
     getActivity: getActivityReducer,
+    getUserActivities: getUserActivitiesReducer,
     createActivity: createActivityReducer,
     updateActivity: updateActivityReducer,
     deleteActivity: deleteActivityReducer,

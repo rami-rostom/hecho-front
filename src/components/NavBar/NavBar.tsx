@@ -26,6 +26,7 @@ import './NavBar.scss';
 
 function NavBar() {
   const isLogged = useAppSelector((state) => state.login.logged);
+  const userId = useAppSelector((state) => state.login.data.userId);
 
   return (
     <>
@@ -55,7 +56,7 @@ function NavBar() {
                 childrenOffset={0}
               >
                 <NavLink
-                  href="/activities"
+                  href={`/activities/user/${userId}`}
                   label="Mes activités"
                   leftSection={<IconRun size="1rem" stroke={1.5} />}
                 />
