@@ -17,6 +17,7 @@ function Home() {
             pb={'5rem'}
             gap={'0rem'}
           >
+            {/* Responsive view for big phone, tablet, desktop */}
             <Title
               order={1}
               ta={'center'}
@@ -38,6 +39,7 @@ function Home() {
               PLANIFIE. TRANSPIRE. PROFITE.
             </Title>
 
+            {/* Responsive view for small phone */}
             <Title
               order={1}
               ta={'center'}
@@ -61,7 +63,13 @@ function Home() {
             </Title>
 
             <Stack align="center" pt={'3rem'}>
-              <Button color="button.0" variant="outline" className="home-btn">
+              <Button
+                component="a"
+                href="/login"
+                color="button.0"
+                variant="outline"
+                className="home-btn"
+              >
                 Se connecter
               </Button>
             </Stack>

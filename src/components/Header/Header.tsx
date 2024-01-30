@@ -9,21 +9,15 @@ import {
   Menu,
   rem,
   Button,
-  Transition,
 } from '@mantine/core';
 import { IconLogout, IconSettings, IconUserFilled } from '@tabler/icons-react';
 
 import { useAppSelector } from '../../hooks/redux';
 
 import './Header.scss';
-import { useWindowScroll } from '@mantine/hooks';
 
 function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
   const isLogged = useAppSelector((state) => state.login.logged);
-
-  const [scroll] = useWindowScroll();
-
-  console.log(scroll.y);
 
   return (
     <>

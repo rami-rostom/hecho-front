@@ -9,6 +9,7 @@ import {
   MantineProvider,
   Modal,
   NumberInput,
+  PasswordInput,
   Select,
   TagsInput,
   TextInput,
@@ -68,6 +69,11 @@ const theme = createTheme({
       },
     }),
     TextInput: TextInput.extend({
+      styles: {
+        input: { backgroundColor: 'var(--mantine-color-palette-7)' },
+      },
+    }),
+    PasswordInput: PasswordInput.extend({
       styles: {
         input: { backgroundColor: 'var(--mantine-color-palette-7)' },
       },

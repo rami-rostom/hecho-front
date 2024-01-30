@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import Root from './routes/Root/Root';
 import Home from './routes/Home/Home';
+import Login from './routes/Login/Login';
 import Activity from './routes/Activity/Activity';
 import CreateActivity from './routes/CreateActivity/CreateActivity';
 import EditActivity from './routes/EditActivity/EditActivity';
@@ -15,6 +16,10 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
       },
       {
         path: '/activity/:id',
