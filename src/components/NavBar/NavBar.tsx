@@ -55,7 +55,7 @@ function NavBar() {
                 childrenOffset={0}
               >
                 <NavLink
-                  href="#"
+                  href="/activities"
                   label="Mes activités"
                   leftSection={<IconRun size="1rem" stroke={1.5} />}
                 />
