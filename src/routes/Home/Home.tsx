@@ -5,6 +5,7 @@ import './Home.scss';
 
 function Home() {
   const isLogged = useAppSelector((state) => state.login.logged);
+  console.log(isLogged);
 
   return (
     <>

@@ -50,7 +50,8 @@ const loginReducer = createSlice({
       LocalStorage.removeItem('user');
       state.logged = false;
       state.token = undefined;
-      state.pseudo = undefined;
+      state.refreshToken = undefined;
+      state.username = undefined;
     },
   },
   extraReducers(builder) {
@@ -65,9 +66,21 @@ const loginReducer = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.pseudo = action.payload.pseudo;
-        state.token = action.payload.token;
-        state.logged = action.payload.logged;
+        state.logged = true;
+
+        const response = action.payload;
+
+        const authData = {
+          data: {
+            userId: response.userId,
+            username: response.username,
+            token: response.token,
+            refreshToken: response.refreshToken,
+          },
+          logged: true,
+        };
+
+        LocalStorage.setItem('user', authData);
       });
   },
 });

@@ -7,13 +7,16 @@ export type LoginState = {
   isLoading: boolean;
   error?: string;
   logged: boolean;
-  pseudo?: string;
+  username?: string;
   token?: string;
+  refreshToken?: string;
   credentials: LoginCredentials;
 };
 
 export type UserData = {
-  pseudo: string;
+  userId: number;
+  username: string;
   token: string;
+  refreshToken: string;
   logged: boolean;
 };
