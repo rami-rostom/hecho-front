@@ -16,6 +16,7 @@ import { useAppDispatch } from '../../hooks/redux';
 import { login } from '../../store/reducers/login';
 
 import './Login.scss';
+import Register from '../../components/Register/Register';
 
 function Login() {
   const navigate = useNavigate();
@@ -80,6 +81,8 @@ function Login() {
           <Anchor href="#" size="sm" c={'palette.4'}>
             Mot de passe oublié ?
           </Anchor>
+          {/* Component to create a new account */}
+          <Register />
         </Container>
       </Stack>
     </>

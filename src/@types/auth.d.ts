@@ -21,3 +21,16 @@ export type UserData = {
   refreshToken: string;
   logged: boolean;
 };
+
+export type Register = {
+  email: string;
+  username: string;
+  password: string;
+  confirmation: string;
+};
+
+export type RegisterState = {
+  register: Register;
+  isLoading: boolean;
+  error: null | string;
+};
