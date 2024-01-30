@@ -7,6 +7,7 @@ import {
   createTheme,
   MantineColorsTuple,
   MantineProvider,
+  Menu,
   Modal,
   NumberInput,
   PasswordInput,
@@ -102,6 +103,11 @@ const theme = createTheme({
     Select: Select.extend({
       styles: {
         input: { backgroundColor: 'var(--mantine-color-palette-7)' },
+        dropdown: { backgroundColor: 'var(--mantine-color-palette-7)' },
+      },
+    }),
+    Menu: Menu.extend({
+      styles: {
         dropdown: { backgroundColor: 'var(--mantine-color-palette-7)' },
       },
     }),

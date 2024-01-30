@@ -18,6 +18,13 @@ export const initialState: LoginState = {
     email: 'ramirez@hecho.io',
     password: 'Password1!',
   },
+  data: {
+    userId: 0,
+    username: '',
+    token: '',
+    refreshToken: '',
+    logged: false,
+  },
   ...userData,
 };
 

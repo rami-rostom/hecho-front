@@ -10,6 +10,7 @@ export type LoginState = {
   username?: string;
   token?: string;
   refreshToken?: string;
+  data: UserData;
   credentials: LoginCredentials;
 };
 

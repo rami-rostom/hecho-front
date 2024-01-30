@@ -18,6 +18,7 @@ import './Header.scss';
 
 function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
   const isLogged = useAppSelector((state) => state.login.logged);
+  const username = useAppSelector((state) => state.login.data.username);
 
   return (
     <>
@@ -111,7 +112,7 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
 
             <Group>
               <Text size="md" fw={500} visibleFrom="sm">
-                Hello Rami
+                Hello {username}
               </Text>
 
               {/* Menu dropdown on click on avatar */}
