@@ -53,7 +53,7 @@ const loginReducer = createSlice({
       const { value, field } = action.payload;
       state.credentials[field] = value;
     },
-    logOut(state) {
+    logout(state) {
       LocalStorage.removeItem('user');
       state.logged = false;
       state.token = undefined;
@@ -92,5 +92,5 @@ const loginReducer = createSlice({
   },
 });
 
-export const { changeInputLoginValue, logOut } = loginReducer.actions;
+export const { changeInputLoginValue, logout } = loginReducer.actions;
 export default loginReducer.reducer;

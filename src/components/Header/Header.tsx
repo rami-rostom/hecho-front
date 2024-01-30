@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import {
   AppShell,
   Burger,
@@ -12,13 +13,22 @@ import {
 } from '@mantine/core';
 import { IconLogout, IconSettings, IconUserFilled } from '@tabler/icons-react';
 
-import { useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { logout } from '../../store/reducers/login';
 
 import './Header.scss';
 
 function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const isLogged = useAppSelector((state) => state.login.logged);
   const username = useAppSelector((state) => state.login.data.username);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/');
+  };
 
   return (
     <>
@@ -68,6 +78,8 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
                 size="xs"
                 radius="xl"
                 pr="1rem"
+                component="a"
+                href="/login"
               >
                 Se connecter
               </Button>
@@ -160,6 +172,7 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
                   </Menu.Item>
                   <Menu.Item
                     color="red"
+                    onClick={handleLogout}
                     leftSection={
                       <IconLogout style={{ width: rem(14), height: rem(14) }} />
                     }
