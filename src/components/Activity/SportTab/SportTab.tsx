@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { Button, Tooltip } from '@mantine/core';
 import {
@@ -14,10 +14,10 @@ import { fetchUserActivities } from '../../../store/reducers/getUserActivities';
 import { Activity } from '../../../@types/activity';
 
 type ActivitiesProps = {
-  clickedSport: (activities: Activity[]) => void;
+  activitiesSport: (activities: Activity[]) => void;
 };
 
-function SportTab({ clickedSport }: ActivitiesProps) {
+function SportTab({ activitiesSport }: ActivitiesProps) {
   const dispatch = useAppDispatch();
 
   // Retrieve user ID from state
@@ -35,36 +35,36 @@ function SportTab({ clickedSport }: ActivitiesProps) {
 
   // Update activities data according to the sport filter
   const handleAllActivities = () => {
-    clickedSport(activitiesData);
+    activitiesSport(activitiesData);
   };
 
   const handleRunningActivities = () => {
     const running = activitiesData.filter(
       (activity) => activity.sport_id == '1'
     );
-    clickedSport(running);
+    activitiesSport(running);
   };
 
   const handleTrailActivities = () => {
     const trail = activitiesData.filter((activity) => activity.sport_id == '2');
-    clickedSport(trail);
+    activitiesSport(trail);
   };
 
   const handleBikeActivities = () => {
     const bike = activitiesData.filter((activity) => activity.sport_id == '3');
-    clickedSport(bike);
+    activitiesSport(bike);
   };
 
   const handleSwimActivities = () => {
     const swim = activitiesData.filter((activity) => activity.sport_id == '4');
-    clickedSport(swim);
+    activitiesSport(swim);
   };
 
   const handleHikingActivities = () => {
     const hiking = activitiesData.filter(
       (activity) => activity.sport_id == '5'
     );
-    clickedSport(hiking);
+    activitiesSport(hiking);
   };
 
   return (

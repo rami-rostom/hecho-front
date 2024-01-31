@@ -25,7 +25,7 @@ function Activities() {
 
   // Update clickActivities state when activitiesData change
   useEffect(() => {
-    setClickActivities(activitiesData);
+    setFilterActivities(activitiesData);
   }, [activitiesData]);
 
   // Fetch and render all user activities
@@ -33,11 +33,11 @@ function Activities() {
     dispatch(fetchUserActivities(id));
   }, [dispatch, id]);
 
-  const [clickActivities, setClickActivities] = useState(activitiesData);
+  const [filterActivities, setFilterActivities] = useState(activitiesData);
 
   // Update clickActivities state according to the sport filter
-  const clickedSport = (clickActivities: SetStateAction<Activity[]>) => {
-    setClickActivities(clickActivities);
+  const filteredActivities = (filterActivities: SetStateAction<Activity[]>) => {
+    setFilterActivities(filterActivities);
   };
 
   return (
@@ -46,14 +46,14 @@ function Activities() {
         <Title order={1}>Activités</Title>
         <Group justify="space-between">
           {/* Component to filter activities if they are done or not */}
-          <HechoTab />
+          <HechoTab activitiesHecho={filteredActivities} />
 
           {/* Component to filter activities by sport */}
-          <SportTab clickedSport={clickedSport} />
+          <SportTab activitiesSport={filteredActivities} />
         </Group>
-        {/* Component to render activities of the user */}
 
-        <UserActivities activities={clickActivities} />
+        {/* Component to render activities of the user */}
+        <UserActivities activities={filterActivities} />
 
         <Group justify="flex-end">
           <Button
