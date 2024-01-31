@@ -15,12 +15,13 @@ export const initialState: LoginState = {
   isLoading: false,
   logged: false,
   credentials: {
-    email: 'ramirez@hecho.io',
-    password: 'Password1!',
+    email: '',
+    password: '',
   },
   data: {
     userId: 0,
     username: '',
+    username_slug: '',
     token: '',
     refreshToken: '',
     logged: false,
@@ -59,6 +60,7 @@ const loginReducer = createSlice({
       state.token = undefined;
       state.refreshToken = undefined;
       state.username = undefined;
+      state.username_slug = undefined;
     },
   },
   extraReducers(builder) {
@@ -81,6 +83,7 @@ const loginReducer = createSlice({
           data: {
             userId: response.userId,
             username: response.username,
+            username_slug: response.username_slug,
             token: response.token,
             refreshToken: response.refreshToken,
           },

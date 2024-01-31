@@ -17,8 +17,7 @@ function Activities() {
   const dispatch = useAppDispatch();
 
   // Retrieve user ID
-  const { id } = useParams();
-  if (!id) throw new Error('Invalid id');
+  const id = useAppSelector((state) => state.login.data.userId);
 
   // Render all user activities
   useEffect(() => {
@@ -39,11 +38,11 @@ function Activities() {
       {activitiesData
         ? activitiesData.map((activity) => (
             <Stack key={activity.id}>
-              <Group>
+              <Group gap={'xl'} justify="space-between">
                 <IconRun size={'1.3rem'} />
 
                 <Stack gap={'0rem'}>
-                  <Text>{activity.date_scheduled}</Text>
+                  <Text>{convertDateFormat(activity.date_scheduled)}</Text>
                   <Text size="xs" tt={'uppercase'}>
                     Date prévue
                   </Text>

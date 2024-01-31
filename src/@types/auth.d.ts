@@ -8,6 +8,7 @@ export type LoginState = {
   error?: string;
   logged: boolean;
   username?: string;
+  username_slug?: string;
   token?: string;
   refreshToken?: string;
   data: UserData;
@@ -17,6 +18,7 @@ export type LoginState = {
 export type UserData = {
   userId: number;
   username: string;
+  username_slug: string;
   token: string;
   refreshToken: string;
   logged: boolean;
