@@ -13,7 +13,7 @@ import {
 } from '@mantine/core';
 
 import ActivityIcon from '../../components/Activity/ActivityIcon/ActivityIcon';
-import Hecho from '../../components/Hecho/Hecho';
+import Hecho from '../../components/Hecho/HechoBtn/HechoBtn';
 import RemoveStep from '../../components/Step/RemoveStep/RemoveStep';
 import DeleteActivity from '../../components/Activity/DeleteActivity/DeleteActivity';
 import UpdateStep from '../../components/Step/UpdateStep/UpdateStep';

@@ -6,11 +6,11 @@ import { DatePickerInput } from '@mantine/dates';
 import { useDisclosure } from '@mantine/hooks';
 import { notifications } from '@mantine/notifications';
 
-import { useAppDispatch } from '../../hooks/redux';
-import { fetchActivity } from '../../store/reducers/getActivity';
-import { hecho } from '../../store/reducers/hecho';
+import { useAppDispatch } from '../../../hooks/redux';
+import { fetchActivity } from '../../../store/reducers/getActivity';
+import { hecho } from '../../../store/reducers/hecho';
 
-function Hecho() {
+function HechoBtn() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -86,4 +86,4 @@ function Hecho() {
   );
 }
 
-export default Hecho;
+export default HechoBtn;

@@ -11,6 +11,7 @@ import {
   Modal,
   NumberInput,
   PasswordInput,
+  SegmentedControl,
   Select,
   TagsInput,
   TextInput,
@@ -109,6 +110,11 @@ const theme = createTheme({
     Menu: Menu.extend({
       styles: {
         dropdown: { backgroundColor: 'var(--mantine-color-palette-7)' },
+      },
+    }),
+    SegmentedControl: SegmentedControl.extend({
+      styles: {
+        root: { backgroundColor: 'var(--mantine-color-palette-7)' },
       },
     }),
   },

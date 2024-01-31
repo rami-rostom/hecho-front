@@ -11,11 +11,23 @@ function SportTab() {
   return (
     <>
       <Button.Group>
-        <Button color="button.4" variant="outline" size="compact-sm" px={'lg'}>
+        <Button
+          color="button.4"
+          variant="outline"
+          size="compact-sm"
+          radius={'md'}
+          px={'lg'}
+        >
           Tout
         </Button>
 
-        <Button color="button.4" variant="outline" size="compact-sm" px={'lg'}>
+        <Button
+          color="button.4"
+          variant="outline"
+          size="compact-sm"
+          radius={'md'}
+          px={'lg'}
+        >
           <Tooltip
             label="Running"
             position="bottom"
@@ -29,7 +41,13 @@ function SportTab() {
           </Tooltip>
         </Button>
 
-        <Button color="button.4" variant="outline" size="compact-sm" px={'lg'}>
+        <Button
+          color="button.4"
+          variant="outline"
+          size="compact-sm"
+          radius={'md'}
+          px={'lg'}
+        >
           <Tooltip
             label="Trail"
             position="bottom"
@@ -43,7 +61,13 @@ function SportTab() {
           </Tooltip>
         </Button>
 
-        <Button color="button.4" variant="outline" size="compact-sm" px={'lg'}>
+        <Button
+          color="button.4"
+          variant="outline"
+          size="compact-sm"
+          radius={'md'}
+          px={'lg'}
+        >
           <Tooltip
             label="Vélo"
             position="bottom"
@@ -57,7 +81,13 @@ function SportTab() {
           </Tooltip>
         </Button>
 
-        <Button color="button.4" variant="outline" size="compact-sm" px={'lg'}>
+        <Button
+          color="button.4"
+          variant="outline"
+          size="compact-sm"
+          radius={'md'}
+          px={'lg'}
+        >
           <Tooltip
             label="Natation"
             position="bottom"
@@ -71,7 +101,13 @@ function SportTab() {
           </Tooltip>
         </Button>
 
-        <Button color="button.4" variant="outline" size="compact-sm" px={'lg'}>
+        <Button
+          color="button.4"
+          variant="outline"
+          size="compact-sm"
+          radius={'md'}
+          px={'lg'}
+        >
           <Tooltip
             label="Randonnée"
             position="bottom"

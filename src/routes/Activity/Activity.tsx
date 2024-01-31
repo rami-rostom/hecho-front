@@ -16,7 +16,7 @@ import {
 } from '@mantine/core';
 
 import ActivityIcon from '../../components/Activity/ActivityIcon/ActivityIcon';
-import Hecho from '../../components/Hecho/Hecho';
+import HechoBtn from '../../components/Hecho/HechoBtn/HechoBtn';
 import AddStep from '../../components/Step/AddStep/AddStep';
 import RemoveStep from '../../components/Step/RemoveStep/RemoveStep';
 import DeleteActivity from '../../components/Activity/DeleteActivity/DeleteActivity';
@@ -379,7 +379,7 @@ function Activity() {
               <Button color="button.0">HECHO</Button>
             ) : (
               // Component to update accomplished date and tag the activity as HECHO
-              <Hecho />
+              <HechoBtn />
             )}
           </Stack>
         </Flex>
