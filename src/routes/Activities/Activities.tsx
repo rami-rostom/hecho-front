@@ -1,42 +1,44 @@
-import { useEffect } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 
-import {
-  Button,
-  Flex,
-  Group,
-  Stack,
-  Text,
-  Title,
-  UnstyledButton,
-} from '@mantine/core';
-import { IconPlus, IconRun } from '@tabler/icons-react';
+import { Button, Group, Stack, Title } from '@mantine/core';
+import { IconPlus } from '@tabler/icons-react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchUserActivities } from '../../store/reducers/getUserActivities';
+import { Activity } from '../../@types/activity';
 import SportTab from '../../components/Activity/SportTab/SportTab';
 import HechoTab from '../../components/Hecho/HechoTab/HechoTab';
-import {
-  convertDateFormat,
-  convertDurationToMin,
-  paceCalcul,
-} from '../../utils/calculation';
+import UserActivities from '../../components/Activity/UserActivities/UserActivities';
 
 import './Activities.scss';
 
 function Activities() {
   const dispatch = useAppDispatch();
 
-  // Retrieve user ID
+  // Retrieve user ID from state
   const id = useAppSelector((state) => state.login.data.userId);
 
-  // Render all user activities
+  // Retrieve user activities from state
+  const activitiesData = useAppSelector(
+    (state) => state.getUserActivities.activity
+  );
+
+  // Update clickActivities state when activitiesData change
+  useEffect(() => {
+    setClickActivities(activitiesData);
+  }, [activitiesData]);
+
+  // Fetch and render all user activities
   useEffect(() => {
     dispatch(fetchUserActivities(id));
   }, [dispatch, id]);
 
-  const activitiesData = useAppSelector(
-    (state) => state.getUserActivities.activity
-  );
+  const [clickActivities, setClickActivities] = useState(activitiesData);
+
+  // Update clickActivities state according to the sport filter
+  const clickedSport = (clickActivities: SetStateAction<Activity[]>) => {
+    setClickActivities(clickActivities);
+  };
 
   return (
     <>
@@ -46,110 +48,13 @@ function Activities() {
         <Group justify="space-between">
           {/* Component to filter activities if they are done or not */}
           <HechoTab />
+
           {/* Component to filter activities by sport */}
-          <SportTab />
+          <SportTab clickedSport={clickedSport} />
         </Group>
 
-        <Stack gap={'lg'}>
-          {activitiesData
-            ? activitiesData.map((activity) => (
-                <Flex
-                  key={activity.id}
-                  align={'center'}
-                  justify={'space-between'}
-                  wrap={'wrap'}
-                  gap={'1rem'}
-                  px={'xl'}
-                  py={'0.3rem'}
-                  className="activity-item"
-                >
-                  <Group gap={'xl'}>
-                    <Stack w={'1.5rem'}>
-                      <IconRun
-                        color="var(--mantine-color-button-5)"
-                        size={'1.3rem'}
-                      />
-                    </Stack>
-
-                    <Stack gap={'0rem'} w={'6rem'}>
-                      <Text>{convertDateFormat(activity.date_scheduled)}</Text>
-                      <Text size="0.6rem" tt={'uppercase'}>
-                        Date prévue
-                      </Text>
-                    </Stack>
-                  </Group>
-
-                  <Stack gap={'0rem'} w={'40%'}>
-                    <UnstyledButton
-                      component="a"
-                      href={`/activity/${activity.id}`}
-                      className="activity-link"
-                    >
-                      {activity.name}
-                    </UnstyledButton>
-                    <Text size="0.6rem" tt={'uppercase'}>
-                      {activity.sport.name}
-                    </Text>
-                  </Stack>
-
-                  {activity.distance === null ? (
-                    <Stack gap={'0rem'} w={'3rem'}>
-                      <Text>--</Text>
-                      <Text size="0.6rem" tt={'uppercase'}>
-                        Distance
-                      </Text>
-                    </Stack>
-                  ) : (
-                    <Stack gap={'0rem'} w={'3rem'}>
-                      <Text>{activity.distance} km</Text>
-                      <Text size="0.6rem" tt={'uppercase'}>
-                        Distance
-                      </Text>
-                    </Stack>
-                  )}
-
-                  {activity.duration === '00:00:00' ? (
-                    <Stack gap={'0rem'} w={'4rem'}>
-                      <Text>--</Text>
-                      <Text size="0.6rem" tt={'uppercase'}>
-                        Durée
-                      </Text>
-                    </Stack>
-                  ) : (
-                    <Stack gap={'0rem'} w={'4rem'}>
-                      <Text>{activity.duration}</Text>
-                      <Text size="0.6rem" tt={'uppercase'}>
-                        Durée
-                      </Text>
-                    </Stack>
-                  )}
-
-                  {activity.distance === null ||
-                  activity.duration === '00:00:00' ? (
-                    <Stack gap={'0rem'}>
-                      <Text>--</Text>
-                      <Text size="0.6rem" tt={'uppercase'}>
-                        Allure moyenne
-                      </Text>
-                    </Stack>
-                  ) : (
-                    <Stack gap={'0rem'}>
-                      <Text>
-                        {paceCalcul(
-                          convertDurationToMin(activity.duration),
-                          activity.distance
-                        )}{' '}
-                        min/km
-                      </Text>
-                      <Text size="0.6rem" tt={'uppercase'}>
-                        Allure moyenne
-                      </Text>
-                    </Stack>
-                  )}
-                </Flex>
-              ))
-            : []}
-        </Stack>
+        {/* Component to render activities of the user */}
+        <UserActivities activities={clickActivities} />
 
         <Group justify="flex-end">
           <Button
