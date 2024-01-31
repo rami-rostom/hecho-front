@@ -1,7 +1,15 @@
 import { useEffect } from 'react';
 
-import { Flex, Group, Stack, Text, Title, UnstyledButton } from '@mantine/core';
-import { IconRun } from '@tabler/icons-react';
+import {
+  Button,
+  Flex,
+  Group,
+  Stack,
+  Text,
+  Title,
+  UnstyledButton,
+} from '@mantine/core';
+import { IconPlus, IconRun } from '@tabler/icons-react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchUserActivities } from '../../store/reducers/getUserActivities';
@@ -118,6 +126,18 @@ function Activities() {
               ))
             : []}
         </Stack>
+
+        <Group justify="flex-end">
+          <Button
+            color="button.0"
+            size="compact-xs"
+            component="a"
+            href="/activity/create"
+          >
+            <IconPlus size="1rem" className="activity__steps-button" />
+            Nouvelle activité
+          </Button>
+        </Group>
       </Stack>
     </>
   );
