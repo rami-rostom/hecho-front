@@ -13,6 +13,8 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchUserActivities } from '../../../store/reducers/getUserActivities';
 import { Activity } from '../../../@types/activity';
 
+import './SportTab.scss';
+
 type ActivitiesProps = {
   activitiesSport: (activities: Activity[]) => void;
 };
@@ -77,6 +79,7 @@ function SportTab({ activitiesSport }: ActivitiesProps) {
           radius={'md'}
           px={'lg'}
           onClick={handleAllActivities}
+          className="tab-btn"
         >
           Tout
         </Button>
@@ -88,6 +91,7 @@ function SportTab({ activitiesSport }: ActivitiesProps) {
           radius={'md'}
           px={'lg'}
           onClick={handleRunningActivities}
+          className="tab-btn"
         >
           <Tooltip
             label="Running"
@@ -109,6 +113,7 @@ function SportTab({ activitiesSport }: ActivitiesProps) {
           radius={'md'}
           px={'lg'}
           onClick={handleTrailActivities}
+          className="tab-btn"
         >
           <Tooltip
             label="Trail"
@@ -130,6 +135,7 @@ function SportTab({ activitiesSport }: ActivitiesProps) {
           radius={'md'}
           px={'lg'}
           onClick={handleBikeActivities}
+          className="tab-btn"
         >
           <Tooltip
             label="Vélo"
@@ -151,6 +157,7 @@ function SportTab({ activitiesSport }: ActivitiesProps) {
           radius={'md'}
           px={'lg'}
           onClick={handleSwimActivities}
+          className="tab-btn"
         >
           <Tooltip
             label="Natation"
@@ -172,6 +179,7 @@ function SportTab({ activitiesSport }: ActivitiesProps) {
           radius={'md'}
           px={'lg'}
           onClick={handleHikingActivities}
+          className="tab-btn"
         >
           <Tooltip
             label="Randonnée"
