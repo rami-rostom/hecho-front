@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import { Button, Tooltip } from '@mantine/core';
+import { Center, SegmentedControl, rem } from '@mantine/core';
 import {
   IconBike,
   IconMountain,
@@ -12,8 +12,6 @@ import {
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchUserActivities } from '../../../store/reducers/getUserActivities';
 import { Activity } from '../../../@types/activity';
-
-import './SportTab.scss';
 
 type ActivitiesProps = {
   activitiesSport: (activities: Activity[]) => void;
@@ -35,165 +33,108 @@ function SportTab({ activitiesSport }: ActivitiesProps) {
     (state) => state.getUserActivities.activity
   );
 
-  // Update activities data according to the sport filter
-  const handleAllActivities = () => {
-    activitiesSport(activitiesData);
-  };
+  const [sportValue, setSportValue] = useState('all');
 
-  const handleRunningActivities = () => {
-    const running = activitiesData.filter(
-      (activity) => activity.sport_id == '1'
-    );
-    activitiesSport(running);
-  };
+  // Update activities datas when sport value change
+  useEffect(() => {
+    if (sportValue === 'all') {
+      activitiesSport(activitiesData);
+    }
 
-  const handleTrailActivities = () => {
-    const trail = activitiesData.filter((activity) => activity.sport_id == '2');
-    activitiesSport(trail);
-  };
+    if (sportValue === 'running') {
+      const running = activitiesData.filter(
+        (activity) => activity.sport_id == '1'
+      );
+      activitiesSport(running);
+    }
 
-  const handleBikeActivities = () => {
-    const bike = activitiesData.filter((activity) => activity.sport_id == '3');
-    activitiesSport(bike);
-  };
+    if (sportValue === 'trail') {
+      const trail = activitiesData.filter(
+        (activity) => activity.sport_id == '2'
+      );
+      activitiesSport(trail);
+    }
 
-  const handleSwimActivities = () => {
-    const swim = activitiesData.filter((activity) => activity.sport_id == '4');
-    activitiesSport(swim);
-  };
+    if (sportValue === 'bike') {
+      const bike = activitiesData.filter(
+        (activity) => activity.sport_id == '3'
+      );
+      activitiesSport(bike);
+    }
 
-  const handleHikingActivities = () => {
-    const hiking = activitiesData.filter(
-      (activity) => activity.sport_id == '5'
-    );
-    activitiesSport(hiking);
-  };
+    if (sportValue === 'swim') {
+      const swim = activitiesData.filter(
+        (activity) => activity.sport_id == '4'
+      );
+      activitiesSport(swim);
+    }
+
+    if (sportValue === 'hiking') {
+      const hiking = activitiesData.filter(
+        (activity) => activity.sport_id == '5'
+      );
+      activitiesSport(hiking);
+    }
+  }, [sportValue]);
 
   return (
     <>
-      <Button.Group>
-        <Button
-          color="button.5"
-          variant="outline"
-          size="compact-sm"
-          radius={'md'}
-          px={'lg'}
-          onClick={handleAllActivities}
-          className="tab-btn"
-        >
-          Tout
-        </Button>
-
-        <Button
-          color="button.5"
-          variant="outline"
-          size="compact-sm"
-          radius={'md'}
-          px={'lg'}
-          onClick={handleRunningActivities}
-          className="tab-btn"
-        >
-          <Tooltip
-            label="Running"
-            position="top"
-            offset={5}
-            openDelay={300}
-            closeDelay={150}
-            transitionProps={{ transition: 'slide-down', duration: 200 }}
-            withArrow
-          >
-            <IconRun size={'1.3rem'} />
-          </Tooltip>
-        </Button>
-
-        <Button
-          color="button.5"
-          variant="outline"
-          size="compact-sm"
-          radius={'md'}
-          px={'lg'}
-          onClick={handleTrailActivities}
-          className="tab-btn"
-        >
-          <Tooltip
-            label="Trail"
-            position="top"
-            offset={5}
-            openDelay={300}
-            closeDelay={150}
-            transitionProps={{ transition: 'slide-down', duration: 200 }}
-            withArrow
-          >
-            <IconMountain size={'1.3rem'} />
-          </Tooltip>
-        </Button>
-
-        <Button
-          color="button.5"
-          variant="outline"
-          size="compact-sm"
-          radius={'md'}
-          px={'lg'}
-          onClick={handleBikeActivities}
-          className="tab-btn"
-        >
-          <Tooltip
-            label="Vélo"
-            position="top"
-            offset={5}
-            openDelay={300}
-            closeDelay={150}
-            transitionProps={{ transition: 'slide-down', duration: 200 }}
-            withArrow
-          >
-            <IconBike size={'1.3rem'} />
-          </Tooltip>
-        </Button>
-
-        <Button
-          color="button.5"
-          variant="outline"
-          size="compact-sm"
-          radius={'md'}
-          px={'lg'}
-          onClick={handleSwimActivities}
-          className="tab-btn"
-        >
-          <Tooltip
-            label="Natation"
-            position="top"
-            offset={5}
-            openDelay={300}
-            closeDelay={150}
-            transitionProps={{ transition: 'slide-down', duration: 200 }}
-            withArrow
-          >
-            <IconSwimming size={'1.3rem'} />
-          </Tooltip>
-        </Button>
-
-        <Button
-          color="button.5"
-          variant="outline"
-          size="compact-sm"
-          radius={'md'}
-          px={'lg'}
-          onClick={handleHikingActivities}
-          className="tab-btn"
-        >
-          <Tooltip
-            label="Randonnée"
-            position="top"
-            offset={5}
-            openDelay={300}
-            closeDelay={150}
-            transitionProps={{ transition: 'slide-down', duration: 200 }}
-            withArrow
-          >
-            <IconTrekking size={'1.3rem'} />
-          </Tooltip>
-        </Button>
-      </Button.Group>
+      <SegmentedControl
+        color="button.5"
+        size="xs"
+        w={'70%'}
+        radius="md"
+        value={sportValue}
+        onChange={setSportValue}
+        data={[
+          { label: 'Tout', value: 'all' },
+          {
+            label: (
+              <Center style={{ gap: 10 }}>
+                <IconRun style={{ width: rem(16), height: rem(16) }} />
+                <span>Running</span>
+              </Center>
+            ),
+            value: 'running',
+          },
+          {
+            label: (
+              <Center style={{ gap: 10 }}>
+                <IconMountain style={{ width: rem(16), height: rem(16) }} />
+                <span>Trail</span>
+              </Center>
+            ),
+            value: 'trail',
+          },
+          {
+            label: (
+              <Center style={{ gap: 10 }}>
+                <IconBike style={{ width: rem(16), height: rem(16) }} />
+                <span>Vélo</span>
+              </Center>
+            ),
+            value: 'bike',
+          },
+          {
+            label: (
+              <Center style={{ gap: 10 }}>
+                <IconSwimming style={{ width: rem(16), height: rem(16) }} />
+                <span>Natation</span>
+              </Center>
+            ),
+            value: 'swim',
+          },
+          {
+            label: (
+              <Center style={{ gap: 10 }}>
+                <IconTrekking style={{ width: rem(16), height: rem(16) }} />
+                <span>Randonnée</span>
+              </Center>
+            ),
+            value: 'hiking',
+          },
+        ]}
+      />
     </>
   );
 }

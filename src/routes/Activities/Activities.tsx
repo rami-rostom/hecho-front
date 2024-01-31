@@ -44,12 +44,13 @@ function Activities() {
     <>
       <Stack gap={'xl'} px={'5rem'} py={'xl'}>
         <Title order={1}>Activités</Title>
-        <Group justify="space-between">
-          {/* Component to filter activities if they are done or not */}
-          <HechoTab activitiesHecho={filteredActivities} />
 
+        <Group justify="space-between">
           {/* Component to filter activities by sport */}
           <SportTab activitiesSport={filteredActivities} />
+
+          {/* Component to filter activities if they are done or not */}
+          <HechoTab activitiesHecho={filteredActivities} />
         </Group>
 
         {/* Component to render activities of the user */}

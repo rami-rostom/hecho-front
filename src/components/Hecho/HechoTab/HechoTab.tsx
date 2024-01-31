@@ -13,8 +13,6 @@ type ActivitiesProps = {
 function HechoTab({ activitiesHecho }: ActivitiesProps) {
   const dispatch = useAppDispatch();
 
-  const [hechoValue, setHechoValue] = useState('all');
-
   // Retrieve user ID from state
   const id = useAppSelector((state) => state.login.data.userId);
 
@@ -27,6 +25,8 @@ function HechoTab({ activitiesHecho }: ActivitiesProps) {
   const activitiesData = useAppSelector(
     (state) => state.getUserActivities.activity
   );
+
+  const [hechoValue, setHechoValue] = useState('all');
 
   // Update activities datas when hecho value change
   useEffect(() => {
@@ -54,6 +54,7 @@ function HechoTab({ activitiesHecho }: ActivitiesProps) {
       <SegmentedControl
         color="button.5"
         size="xs"
+        w={'20%'}
         radius="md"
         value={hechoValue}
         onChange={setHechoValue}
