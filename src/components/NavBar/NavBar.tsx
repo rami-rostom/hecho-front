@@ -102,7 +102,7 @@ function NavBar() {
                 my="xl"
                 px="xs"
                 py="md"
-                bg="palette.6"
+                bg="palette.7"
                 className="navbar__counter"
                 visibleFrom="sm"
               >

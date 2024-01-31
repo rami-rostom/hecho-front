@@ -55,32 +55,32 @@ function CreateActivity() {
 
   return (
     <>
-      <Title order={1}>Créer une nouvelle activité</Title>
-      <Box maw={340} mx="auto">
-        <form onSubmit={handleFormSubmit}>
-          <Stack gap="1rem">
-            <TextInput
-              withAsterisk
-              label="Nom"
-              placeholder="Nom de l'activité"
-              onChange={(event) => setNameValue(event.target.value)}
-            />
+      <Stack gap={'xl'} px={'5rem'} py={'xl'}>
+        <Title order={1}>Créer une nouvelle activité</Title>
+        <Stack px={'15rem'}>
+          <form onSubmit={handleFormSubmit}>
+            <Stack gap="1rem">
+              <TextInput
+                withAsterisk
+                label="Nom"
+                placeholder="Nom de l'activité"
+                onChange={(event) => setNameValue(event.target.value)}
+              />
 
-            <Select
-              withAsterisk
-              label="Type"
-              placeholder="Type de l'activité"
-              data={[
-                { label: 'Course à pied', value: '1' },
-                { label: 'Trail', value: '2' },
-                { label: 'Vélo', value: '3' },
-                { label: 'Natation', value: '4' },
-                { label: 'Randonnée', value: '5' },
-              ]}
-              onChange={setTypeValue}
-            />
+              <Select
+                withAsterisk
+                label="Type"
+                placeholder="Type de l'activité"
+                data={[
+                  { label: 'Course à pied', value: '1' },
+                  { label: 'Trail', value: '2' },
+                  { label: 'Vélo', value: '3' },
+                  { label: 'Natation', value: '4' },
+                  { label: 'Randonnée', value: '5' },
+                ]}
+                onChange={setTypeValue}
+              />
 
-            {typeValue && (
               <DatePickerInput
                 clearable
                 required
@@ -98,16 +98,16 @@ function CreateActivity() {
                   },
                 }}
               />
-            )}
 
-            <Group justify="flex-end" mt="md">
-              <Button color="button.0" type="submit">
-                Créer l&apos;activité
-              </Button>
-            </Group>
-          </Stack>
-        </form>
-      </Box>
+              <Group justify="flex-end" mt="md">
+                <Button color="button.0" type="submit">
+                  Créer l&apos;activité
+                </Button>
+              </Group>
+            </Stack>
+          </form>
+        </Stack>
+      </Stack>
     </>
   );
 }

@@ -8,7 +8,7 @@ function HechoTab() {
   return (
     <>
       <SegmentedControl
-        color="button.4"
+        color="button.5"
         size="xs"
         radius="md"
         value={value}

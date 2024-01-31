@@ -40,7 +40,7 @@ const palette: MantineColorsTuple = [
   '#14131c', // 6: background lighter dark
   '#1c1b29', // 7: background lighter lighter dark
   '#2e2f3e', // 8: stroke grey
-  'black', // 9: stroke black
+  '#252336', // 9: background lighter lighter lighter dark
 ];
 
 const button: MantineColorsTuple = [

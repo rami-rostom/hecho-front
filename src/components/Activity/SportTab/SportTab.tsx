@@ -12,7 +12,7 @@ function SportTab() {
     <>
       <Button.Group>
         <Button
-          color="button.4"
+          color="button.5"
           variant="outline"
           size="compact-sm"
           radius={'md'}
@@ -22,7 +22,7 @@ function SportTab() {
         </Button>
 
         <Button
-          color="button.4"
+          color="button.5"
           variant="outline"
           size="compact-sm"
           radius={'md'}
@@ -30,11 +30,11 @@ function SportTab() {
         >
           <Tooltip
             label="Running"
-            position="bottom"
+            position="top"
             offset={5}
             openDelay={300}
             closeDelay={150}
-            transitionProps={{ transition: 'slide-up', duration: 200 }}
+            transitionProps={{ transition: 'slide-down', duration: 200 }}
             withArrow
           >
             <IconRun size={'1.3rem'} />
@@ -42,7 +42,7 @@ function SportTab() {
         </Button>
 
         <Button
-          color="button.4"
+          color="button.5"
           variant="outline"
           size="compact-sm"
           radius={'md'}
@@ -50,11 +50,11 @@ function SportTab() {
         >
           <Tooltip
             label="Trail"
-            position="bottom"
+            position="top"
             offset={5}
             openDelay={300}
             closeDelay={150}
-            transitionProps={{ transition: 'slide-up', duration: 200 }}
+            transitionProps={{ transition: 'slide-down', duration: 200 }}
             withArrow
           >
             <IconMountain size={'1.3rem'} />
@@ -62,7 +62,7 @@ function SportTab() {
         </Button>
 
         <Button
-          color="button.4"
+          color="button.5"
           variant="outline"
           size="compact-sm"
           radius={'md'}
@@ -70,11 +70,11 @@ function SportTab() {
         >
           <Tooltip
             label="Vélo"
-            position="bottom"
+            position="top"
             offset={5}
             openDelay={300}
             closeDelay={150}
-            transitionProps={{ transition: 'slide-up', duration: 200 }}
+            transitionProps={{ transition: 'slide-down', duration: 200 }}
             withArrow
           >
             <IconBike size={'1.3rem'} />
@@ -82,7 +82,7 @@ function SportTab() {
         </Button>
 
         <Button
-          color="button.4"
+          color="button.5"
           variant="outline"
           size="compact-sm"
           radius={'md'}
@@ -90,11 +90,11 @@ function SportTab() {
         >
           <Tooltip
             label="Natation"
-            position="bottom"
+            position="top"
             offset={5}
             openDelay={300}
             closeDelay={150}
-            transitionProps={{ transition: 'slide-up', duration: 200 }}
+            transitionProps={{ transition: 'slide-down', duration: 200 }}
             withArrow
           >
             <IconSwimming size={'1.3rem'} />
@@ -102,7 +102,7 @@ function SportTab() {
         </Button>
 
         <Button
-          color="button.4"
+          color="button.5"
           variant="outline"
           size="compact-sm"
           radius={'md'}
@@ -110,11 +110,11 @@ function SportTab() {
         >
           <Tooltip
             label="Randonnée"
-            position="bottom"
+            position="top"
             offset={5}
             openDelay={300}
             closeDelay={150}
-            transitionProps={{ transition: 'slide-up', duration: 200 }}
+            transitionProps={{ transition: 'slide-down', duration: 200 }}
             withArrow
           >
             <IconTrekking size={'1.3rem'} />

@@ -1,27 +1,19 @@
 import { useEffect } from 'react';
 
-import {
-  Container,
-  Flex,
-  Group,
-  Stack,
-  Text,
-  Title,
-  UnstyledButton,
-} from '@mantine/core';
+import { Flex, Group, Stack, Text, Title, UnstyledButton } from '@mantine/core';
 import { IconRun } from '@tabler/icons-react';
 
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { fetchUserActivities } from '../../store/reducers/getUserActivities';
+import SportTab from '../../components/Activity/SportTab/SportTab';
+import HechoTab from '../../components/Hecho/HechoTab/HechoTab';
 import {
   convertDateFormat,
   convertDurationToMin,
   paceCalcul,
 } from '../../utils/calculation';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchUserActivities } from '../../store/reducers/getUserActivities';
-import SportTab from '../../components/Activity/SportTab/SportTab';
 
 import './Activities.scss';
-import HechoTab from '../../components/Hecho/HechoTab/HechoTab';
 
 function Activities() {
   const dispatch = useAppDispatch();
@@ -40,8 +32,8 @@ function Activities() {
 
   return (
     <>
-      <Container w={'100%'}>
-        <Title order={1}>Activitiés</Title>
+      <Stack gap={'xl'} px={'5rem'} py={'xl'}>
+        <Title order={1}>Activités</Title>
 
         <Group justify="space-between">
           {/* Component to filter activities if they are done or not */}
@@ -53,19 +45,33 @@ function Activities() {
         <Stack gap={'lg'}>
           {activitiesData
             ? activitiesData.map((activity) => (
-                <Group key={activity.id} gap={'2rem'}>
-                  <Stack w={'2rem'}>
-                    <IconRun size={'1.3rem'} />
-                  </Stack>
+                <Flex
+                  key={activity.id}
+                  align={'center'}
+                  justify={'space-between'}
+                  wrap={'wrap'}
+                  gap={'1rem'}
+                  px={'xl'}
+                  py={'0.3rem'}
+                  className="activity-item"
+                >
+                  <Group gap={'xl'}>
+                    <Stack w={'1.5rem'}>
+                      <IconRun
+                        color="var(--mantine-color-button-5)"
+                        size={'1.3rem'}
+                      />
+                    </Stack>
 
-                  <Stack gap={'0rem'} w={'7rem'}>
-                    <Text>{convertDateFormat(activity.date_scheduled)}</Text>
-                    <Text size="0.7rem" tt={'uppercase'}>
-                      Date prévue
-                    </Text>
-                  </Stack>
+                    <Stack gap={'0rem'} w={'6rem'}>
+                      <Text>{convertDateFormat(activity.date_scheduled)}</Text>
+                      <Text size="0.6rem" tt={'uppercase'}>
+                        Date prévue
+                      </Text>
+                    </Stack>
+                  </Group>
 
-                  <Stack gap={'0rem'} w={'10rem'}>
+                  <Stack gap={'0rem'} w={'40%'}>
                     <UnstyledButton
                       component="a"
                       href={`/activity/${activity.id}`}
@@ -73,27 +79,27 @@ function Activities() {
                     >
                       {activity.name}
                     </UnstyledButton>
-                    <Text size="0.7rem" tt={'uppercase'}>
+                    <Text size="0.6rem" tt={'uppercase'}>
                       {activity.sport.name}
                     </Text>
                   </Stack>
 
-                  <Stack gap={'0rem'} w={'5rem'}>
+                  <Stack gap={'0rem'} w={'3rem'}>
                     <Text>{activity.distance} km</Text>
-                    <Text size="0.7rem" tt={'uppercase'}>
+                    <Text size="0.6rem" tt={'uppercase'}>
                       Distance
                     </Text>
                   </Stack>
 
-                  <Stack gap={'0rem'} w={'5rem'}>
+                  <Stack gap={'0rem'} w={'4rem'}>
                     <Text>{activity.duration}</Text>
-                    <Text size="0.7rem" tt={'uppercase'}>
+                    <Text size="0.6rem" tt={'uppercase'}>
                       Durée
                     </Text>
                   </Stack>
 
                   {activity.distance && activity.duration ? (
-                    <Stack gap={'0rem'} w={'rem'}>
+                    <Stack gap={'0rem'}>
                       <Text>
                         {paceCalcul(
                           convertDurationToMin(activity.duration),
@@ -101,18 +107,18 @@ function Activities() {
                         )}{' '}
                         min/km
                       </Text>
-                      <Text size="0.7rem" tt={'uppercase'}>
+                      <Text size="0.6rem" tt={'uppercase'}>
                         Allure moyenne
                       </Text>
                     </Stack>
                   ) : (
                     []
                   )}
-                </Group>
+                </Flex>
               ))
             : []}
         </Stack>
-      </Container>
+      </Stack>
     </>
   );
 }
