@@ -158,6 +158,12 @@ function UserActivities(props: ActivitiesProps) {
               )}
             </Flex>
           ))}
+
+        {activities.length === 0 && (
+          <Group justify="center" py={'xs'} className="activity-item">
+            <Text>Aucune activité réalisée pour ce sport.</Text>
+          </Group>
+        )}
       </Stack>
     </>
   );
