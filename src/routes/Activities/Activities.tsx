@@ -92,21 +92,47 @@ function Activities() {
                     </Text>
                   </Stack>
 
-                  <Stack gap={'0rem'} w={'3rem'}>
-                    <Text>{activity.distance} km</Text>
-                    <Text size="0.6rem" tt={'uppercase'}>
-                      Distance
-                    </Text>
-                  </Stack>
+                  {activity.distance === null ? (
+                    <Stack gap={'0rem'} w={'3rem'}>
+                      <Text>--</Text>
+                      <Text size="0.6rem" tt={'uppercase'}>
+                        Distance
+                      </Text>
+                    </Stack>
+                  ) : (
+                    <Stack gap={'0rem'} w={'3rem'}>
+                      <Text>{activity.distance} km</Text>
+                      <Text size="0.6rem" tt={'uppercase'}>
+                        Distance
+                      </Text>
+                    </Stack>
+                  )}
 
-                  <Stack gap={'0rem'} w={'4rem'}>
-                    <Text>{activity.duration}</Text>
-                    <Text size="0.6rem" tt={'uppercase'}>
-                      Durée
-                    </Text>
-                  </Stack>
+                  {activity.duration === '00:00:00' ? (
+                    <Stack gap={'0rem'} w={'4rem'}>
+                      <Text>--</Text>
+                      <Text size="0.6rem" tt={'uppercase'}>
+                        Durée
+                      </Text>
+                    </Stack>
+                  ) : (
+                    <Stack gap={'0rem'} w={'4rem'}>
+                      <Text>{activity.duration}</Text>
+                      <Text size="0.6rem" tt={'uppercase'}>
+                        Durée
+                      </Text>
+                    </Stack>
+                  )}
 
-                  {activity.distance && activity.duration ? (
+                  {activity.distance === null ||
+                  activity.duration === '00:00:00' ? (
+                    <Stack gap={'0rem'}>
+                      <Text>--</Text>
+                      <Text size="0.6rem" tt={'uppercase'}>
+                        Allure moyenne
+                      </Text>
+                    </Stack>
+                  ) : (
                     <Stack gap={'0rem'}>
                       <Text>
                         {paceCalcul(
@@ -119,8 +145,6 @@ function Activities() {
                         Allure moyenne
                       </Text>
                     </Stack>
-                  ) : (
-                    []
                   )}
                 </Flex>
               ))

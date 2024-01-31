@@ -43,11 +43,13 @@ function NavBar() {
                 fw={600}
                 defaultOpened
                 childrenOffset={0}
+                className="navbar__link"
               >
                 <NavLink
                   href="#"
                   label="Mon flux"
                   leftSection={<IconBrandFeedly size="1rem" stroke={1.5} />}
+                  className="navbar__link"
                 />
               </NavLink>
 
@@ -56,34 +58,46 @@ function NavBar() {
                 fw={600}
                 defaultOpened
                 childrenOffset={0}
+                className="navbar__link"
               >
                 <NavLink
                   href={`/activities/user/${usernameSlug}`}
                   label="Mes activités"
                   leftSection={<IconRun size="1rem" stroke={1.5} />}
+                  className="navbar__link"
                 />
                 <NavLink
                   href="#"
                   label="Mon calendrier"
                   leftSection={<IconCalendar size="1rem" stroke={1.5} />}
+                  className="navbar__link"
                 />
                 <NavLink
                   href="/activity/create"
                   label="Nouvelle activité"
                   leftSection={<IconCalendarPlus size="1rem" stroke={1.5} />}
+                  className="navbar__link"
                 />
               </NavLink>
 
-              <NavLink label="Profil" fw={600} defaultOpened childrenOffset={0}>
+              <NavLink
+                label="Profil"
+                fw={600}
+                defaultOpened
+                childrenOffset={0}
+                className="navbar__link"
+              >
                 <NavLink
                   href="#"
                   label="Mon profil"
                   leftSection={<IconUserFilled size="1rem" stroke={1.5} />}
+                  className="navbar__link"
                 />
                 <NavLink
                   href="#"
                   label="Paramètres"
                   leftSection={<IconSettings size="1rem" stroke={1.5} />}
+                  className="navbar__link"
                 />
               </NavLink>
             </Stack>
