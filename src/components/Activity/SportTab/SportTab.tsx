@@ -82,7 +82,111 @@ function SportTab({ activitiesSport }: ActivitiesProps) {
       <SegmentedControl
         color="button.5"
         size="xs"
-        w={'50%'}
+        w={'60%'}
+        visibleFrom="xs"
+        radius="md"
+        value={sportValue}
+        onChange={setSportValue}
+        data={[
+          { label: 'Tout', value: 'all' },
+          {
+            label: (
+              <Center>
+                <Tooltip
+                  label="Running"
+                  position="top"
+                  offset={5}
+                  openDelay={300}
+                  closeDelay={150}
+                  transitionProps={{ transition: 'slide-down', duration: 200 }}
+                  withArrow
+                >
+                  <IconRun style={{ width: rem(18), height: rem(18) }} />
+                </Tooltip>
+              </Center>
+            ),
+            value: 'running',
+          },
+          {
+            label: (
+              <Center>
+                <Tooltip
+                  label="Trail"
+                  position="top"
+                  offset={5}
+                  openDelay={300}
+                  closeDelay={150}
+                  transitionProps={{ transition: 'slide-down', duration: 200 }}
+                  withArrow
+                >
+                  <IconMountain style={{ width: rem(18), height: rem(18) }} />
+                </Tooltip>
+              </Center>
+            ),
+            value: 'trail',
+          },
+          {
+            label: (
+              <Center>
+                <Tooltip
+                  label="Vélo"
+                  position="top"
+                  offset={5}
+                  openDelay={300}
+                  closeDelay={150}
+                  transitionProps={{ transition: 'slide-down', duration: 200 }}
+                  withArrow
+                >
+                  <IconBike style={{ width: rem(18), height: rem(18) }} />
+                </Tooltip>
+              </Center>
+            ),
+            value: 'bike',
+          },
+          {
+            label: (
+              <Center>
+                <Tooltip
+                  label="Natation"
+                  position="top"
+                  offset={5}
+                  openDelay={300}
+                  closeDelay={150}
+                  transitionProps={{ transition: 'slide-down', duration: 200 }}
+                  withArrow
+                >
+                  <IconSwimming style={{ width: rem(18), height: rem(18) }} />
+                </Tooltip>
+              </Center>
+            ),
+            value: 'swim',
+          },
+          {
+            label: (
+              <Center>
+                <Tooltip
+                  label="Randonnée"
+                  position="top"
+                  offset={5}
+                  openDelay={300}
+                  closeDelay={150}
+                  transitionProps={{ transition: 'slide-down', duration: 200 }}
+                  withArrow
+                >
+                  <IconTrekking style={{ width: rem(18), height: rem(18) }} />
+                </Tooltip>
+              </Center>
+            ),
+            value: 'hiking',
+          },
+        ]}
+      />
+
+      {/* Responsive design for phone */}
+      <SegmentedControl
+        color="button.5"
+        size="xs"
+        hiddenFrom="xs"
         radius="md"
         value={sportValue}
         onChange={setSportValue}

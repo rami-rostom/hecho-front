@@ -54,7 +54,6 @@ function HechoTab({ activitiesHecho }: ActivitiesProps) {
       <SegmentedControl
         color="button.5"
         size="xs"
-        w={'20%'}
         radius="md"
         value={hechoValue}
         onChange={setHechoValue}
