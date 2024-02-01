@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Center, SegmentedControl, rem } from '@mantine/core';
+import { Center, Group, SegmentedControl, Tooltip, rem } from '@mantine/core';
 import {
   IconBike,
   IconMountain,
@@ -82,7 +82,7 @@ function SportTab({ activitiesSport }: ActivitiesProps) {
       <SegmentedControl
         color="button.5"
         size="xs"
-        w={'70%'}
+        w={'50%'}
         radius="md"
         value={sportValue}
         onChange={setSportValue}
@@ -90,45 +90,90 @@ function SportTab({ activitiesSport }: ActivitiesProps) {
           { label: 'Tout', value: 'all' },
           {
             label: (
-              <Center style={{ gap: 10 }}>
-                <IconRun style={{ width: rem(16), height: rem(16) }} />
-                <span>Running</span>
+              <Center>
+                <Tooltip
+                  label="Running"
+                  position="top"
+                  offset={5}
+                  openDelay={300}
+                  closeDelay={150}
+                  transitionProps={{ transition: 'slide-down', duration: 200 }}
+                  withArrow
+                >
+                  <IconRun style={{ width: rem(18), height: rem(18) }} />
+                </Tooltip>
               </Center>
             ),
             value: 'running',
           },
           {
             label: (
-              <Center style={{ gap: 10 }}>
-                <IconMountain style={{ width: rem(16), height: rem(16) }} />
-                <span>Trail</span>
+              <Center>
+                <Tooltip
+                  label="Trail"
+                  position="top"
+                  offset={5}
+                  openDelay={300}
+                  closeDelay={150}
+                  transitionProps={{ transition: 'slide-down', duration: 200 }}
+                  withArrow
+                >
+                  <IconMountain style={{ width: rem(18), height: rem(18) }} />
+                </Tooltip>
               </Center>
             ),
             value: 'trail',
           },
           {
             label: (
-              <Center style={{ gap: 10 }}>
-                <IconBike style={{ width: rem(16), height: rem(16) }} />
-                <span>Vélo</span>
+              <Center>
+                <Tooltip
+                  label="Vélo"
+                  position="top"
+                  offset={5}
+                  openDelay={300}
+                  closeDelay={150}
+                  transitionProps={{ transition: 'slide-down', duration: 200 }}
+                  withArrow
+                >
+                  <IconBike style={{ width: rem(18), height: rem(18) }} />
+                </Tooltip>
               </Center>
             ),
             value: 'bike',
           },
           {
             label: (
-              <Center style={{ gap: 10 }}>
-                <IconSwimming style={{ width: rem(16), height: rem(16) }} />
-                <span>Natation</span>
+              <Center>
+                <Tooltip
+                  label="Natation"
+                  position="top"
+                  offset={5}
+                  openDelay={300}
+                  closeDelay={150}
+                  transitionProps={{ transition: 'slide-down', duration: 200 }}
+                  withArrow
+                >
+                  <IconSwimming style={{ width: rem(18), height: rem(18) }} />
+                </Tooltip>
               </Center>
             ),
             value: 'swim',
           },
           {
             label: (
-              <Center style={{ gap: 10 }}>
-                <IconTrekking style={{ width: rem(16), height: rem(16) }} />
-                <span>Randonnée</span>
+              <Center>
+                <Tooltip
+                  label="Randonnée"
+                  position="top"
+                  offset={5}
+                  openDelay={300}
+                  closeDelay={150}
+                  transitionProps={{ transition: 'slide-down', duration: 200 }}
+                  withArrow
+                >
+                  <IconTrekking style={{ width: rem(18), height: rem(18) }} />
+                </Tooltip>
               </Center>
             ),
             value: 'hiking',
