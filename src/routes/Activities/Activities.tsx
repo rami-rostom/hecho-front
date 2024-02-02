@@ -1,6 +1,6 @@
 import { SetStateAction, useEffect, useState } from 'react';
 
-import { Button, Group, Stack, Title } from '@mantine/core';
+import { Button, Group, Stack, Text, Title } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -43,7 +43,9 @@ function Activities() {
   return (
     <>
       <Stack gap={'xl'} px={'5rem'} py={'xl'}>
-        <Title order={1}>Activités</Title>
+        <Title order={1} size="1.2rem" tt="uppercase" lts="0.15rem" fw={300}>
+          Activités
+        </Title>
 
         <Group justify="space-between">
           {/* Component to filter activities by sport */}

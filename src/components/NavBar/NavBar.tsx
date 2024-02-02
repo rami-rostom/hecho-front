@@ -46,7 +46,7 @@ function NavBar() {
                 className="navbar__link"
               >
                 <NavLink
-                  href="#"
+                  href="/"
                   label="Mon flux"
                   leftSection={<IconBrandFeedly size="1rem" stroke={1.5} />}
                   className="navbar__link"

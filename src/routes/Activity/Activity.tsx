@@ -58,11 +58,18 @@ function Activity() {
   );
 
   return (
-    <Container p="md" className="activity">
+    <Container py="xl" className="activity">
       <Container px="-1rem" className="activity__banner">
-        <Text tt="uppercase" lts="0.15rem" pb="xs" fw={300}>
+        <Title
+          order={1}
+          size="1.2rem"
+          tt="uppercase"
+          lts="0.15rem"
+          pb="md"
+          fw={300}
+        >
           Activité
-        </Text>
+        </Title>
         <Group justify="space-between">
           <Group gap="1rem">
             {/* Component for dynamic icon based on sport */}

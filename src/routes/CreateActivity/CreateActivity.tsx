@@ -56,7 +56,9 @@ function CreateActivity() {
   return (
     <>
       <Stack gap={'xl'} px={'5rem'} py={'xl'}>
-        <Title order={1}>Créer une nouvelle activité</Title>
+        <Title order={1} size="1.2rem" tt="uppercase" lts="0.15rem" fw={300}>
+          Nouvelle activité
+        </Title>
         <Stack px={'15rem'}>
           <form onSubmit={handleFormSubmit}>
             <Stack gap="1rem">

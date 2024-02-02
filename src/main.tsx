@@ -25,6 +25,7 @@ import { router } from './router';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import '@mantine/notifications/styles.css';
+import '@mantine/carousel/styles.css';
 
 import './styles/index.scss';
 import store from './store';

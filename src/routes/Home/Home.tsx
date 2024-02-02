@@ -1,5 +1,7 @@
 import { Button, Stack, Title } from '@mantine/core';
+
 import { useAppSelector } from '../../hooks/redux';
+import Bento from '../../components/Dashboard/Bento/Bento';
 
 import './Home.scss';
 
@@ -77,10 +79,7 @@ function Home() {
         </>
       ) : (
         <>
-          <div>Hecho - Homepage</div>
-          <Button color="button.0" component="a" href="/activity/create">
-            Nouvelle activité
-          </Button>
+          <Bento />
         </>
       )}
     </>
