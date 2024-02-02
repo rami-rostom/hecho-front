@@ -42,44 +42,43 @@ function UserActivitiesCarousel(props: ActivitiesProps) {
                   className="activity-item"
                 >
                   {/* Icon section */}
-                  <Group>
-                    <Stack>
-                      {activity.sport_id == '1' && (
-                        <IconRun
-                          color="var(--mantine-color-button-5)"
-                          size={'1.3rem'}
-                        />
-                      )}
 
-                      {activity.sport_id == '2' && (
-                        <IconMountain
-                          color="var(--mantine-color-button-5)"
-                          size={'1.3rem'}
-                        />
-                      )}
+                  <Stack>
+                    {activity.sport_id == '1' && (
+                      <IconRun
+                        color="var(--mantine-color-button-5)"
+                        size={'1.3rem'}
+                      />
+                    )}
 
-                      {activity.sport_id == '3' && (
-                        <IconBike
-                          color="var(--mantine-color-button-5)"
-                          size={'1.3rem'}
-                        />
-                      )}
+                    {activity.sport_id == '2' && (
+                      <IconMountain
+                        color="var(--mantine-color-button-5)"
+                        size={'1.3rem'}
+                      />
+                    )}
 
-                      {activity.sport_id == '4' && (
-                        <IconSwimming
-                          color="var(--mantine-color-button-5)"
-                          size={'1.3rem'}
-                        />
-                      )}
+                    {activity.sport_id == '3' && (
+                      <IconBike
+                        color="var(--mantine-color-button-5)"
+                        size={'1.3rem'}
+                      />
+                    )}
 
-                      {activity.sport_id == '5' && (
-                        <IconTrekking
-                          color="var(--mantine-color-button-5)"
-                          size={'1.3rem'}
-                        />
-                      )}
-                    </Stack>
-                  </Group>
+                    {activity.sport_id == '4' && (
+                      <IconSwimming
+                        color="var(--mantine-color-button-5)"
+                        size={'1.3rem'}
+                      />
+                    )}
+
+                    {activity.sport_id == '5' && (
+                      <IconTrekking
+                        color="var(--mantine-color-button-5)"
+                        size={'1.3rem'}
+                      />
+                    )}
+                  </Stack>
 
                   {/* Name section */}
                   <Stack gap={'0rem'} align="center">
@@ -118,14 +117,14 @@ function UserActivitiesCarousel(props: ActivitiesProps) {
 
                     {/* Conditionnal render for distance */}
                     {activity.distance === null ? (
-                      <Stack gap={'0rem'} w={'3rem'} align="center">
+                      <Stack gap={'0rem'} align="center">
                         <Text>--</Text>
                         <Text size="0.6rem" tt={'uppercase'}>
                           Distance
                         </Text>
                       </Stack>
                     ) : (
-                      <Stack gap={'0rem'} w={'3rem'} align="center">
+                      <Stack gap={'0rem'} align="center">
                         <Text>{activity.distance} km</Text>
                         <Text size="0.6rem" tt={'uppercase'}>
                           Distance
@@ -135,14 +134,14 @@ function UserActivitiesCarousel(props: ActivitiesProps) {
 
                     {/* Conditionnal render for duration */}
                     {activity.duration === '00:00:00' ? (
-                      <Stack gap={'0rem'} w={'4rem'} align="center">
+                      <Stack gap={'0rem'} align="center">
                         <Text>--</Text>
                         <Text size="0.6rem" tt={'uppercase'}>
                           Durée
                         </Text>
                       </Stack>
                     ) : (
-                      <Stack gap={'0rem'} w={'4rem'} align="center">
+                      <Stack gap={'0rem'} align="center">
                         <Text>{activity.duration}</Text>
                         <Text size="0.6rem" tt={'uppercase'}>
                           Durée

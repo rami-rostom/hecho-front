@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import { Button, Container, Grid, Title } from '@mantine/core';
-import { BarChart } from '@mantine/charts';
+import { Button, Center, Container, Grid, Text, Title } from '@mantine/core';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchUserActivities } from '../../../store/reducers/getUserActivities';
@@ -35,6 +34,24 @@ function Bento() {
     (activity) => activity.hecho === false
   );
 
+  // Filter last seven days done activties
+  const [activitiesThisWeek, setActivitiesThisWeek] = useState(activitiesData);
+
+  const filteredActivities = activitiesData.filter((activity) => {
+    if (activity.date_accomplished) {
+      const differenceInMs =
+        Number(new Date()) - Number(new Date(activity.date_accomplished));
+
+      const differenceInDays = differenceInMs / (1000 * 60 * 60 * 24);
+
+      return differenceInDays <= 7;
+    }
+  });
+
+  useEffect(() => {
+    setActivitiesThisWeek(filteredActivities);
+  }, [activitiesData]);
+
   return (
     <>
       <Container px={'md'} py={'xl'}>
@@ -50,8 +67,9 @@ function Bento() {
         </Title>
 
         <Container>
-          <Grid grow gutter={'lg'}>
-            <Grid.Col span={4} className="bento__item">
+          <Grid grow gutter={'xl'}>
+            {/* Done activities section */}
+            <Grid.Col span={4} className="bento__item" m={'md'}>
               <Title
                 order={2}
                 size="0.8rem"
@@ -72,7 +90,7 @@ function Bento() {
               )}
             </Grid.Col>
 
-            <Grid.Col span={4} className="bento__item">
+            <Grid.Col span={4} className="bento__item" m={'md'}>
               <Title
                 order={2}
                 size="0.8rem"
@@ -83,13 +101,18 @@ function Bento() {
               >
                 Cette semaine
               </Title>
+
+              <Center>
+                <Text>{activitiesThisWeek.length}</Text>
+              </Center>
             </Grid.Col>
 
-            <Grid.Col span={4} className="bento__item">
+            <Grid.Col span={4} className="bento__item" m={'md'}>
               3
             </Grid.Col>
 
-            <Grid.Col span={4} className="bento__item">
+            {/* Activities to do section */}
+            <Grid.Col span={4} className="bento__item" m={'md'}>
               <Title
                 order={2}
                 size="0.8rem"
@@ -110,7 +133,7 @@ function Bento() {
               )}
             </Grid.Col>
 
-            <Grid.Col span={4} className="bento__item">
+            <Grid.Col span={4} className="bento__item" m={'md'}>
               5
             </Grid.Col>
           </Grid>
