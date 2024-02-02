@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import { Button, Container, Grid, Title } from '@mantine/core';
+import { BarChart } from '@mantine/charts';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchUserActivities } from '../../../store/reducers/getUserActivities';
@@ -27,6 +28,11 @@ function Bento() {
   // Filter for done activities only
   const activitiesHecho = activitiesData.filter(
     (activity) => activity.hecho === true
+  );
+
+  // Filter for planified activities
+  const activitiesNoHecho = activitiesData.filter(
+    (activity) => activity.hecho === false
   );
 
   return (
@@ -84,7 +90,24 @@ function Bento() {
             </Grid.Col>
 
             <Grid.Col span={4} className="bento__item">
-              4
+              <Title
+                order={2}
+                size="0.8rem"
+                tt="uppercase"
+                lts="0.15rem"
+                fw={300}
+                pb={'sm'}
+              >
+                Activités à réaliser
+              </Title>
+
+              {activitiesData.length > 0 ? (
+                <UserActivitiesCarousel activities={activitiesNoHecho} />
+              ) : (
+                <Button color="button.0" component="a" href="/activity/create">
+                  Nouvelle activité
+                </Button>
+              )}
             </Grid.Col>
 
             <Grid.Col span={4} className="bento__item">

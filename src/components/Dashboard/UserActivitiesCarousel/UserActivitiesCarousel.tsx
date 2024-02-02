@@ -97,12 +97,24 @@ function UserActivitiesCarousel(props: ActivitiesProps) {
 
                   {/* Date, distance, duration and pace section */}
                   <Group justify="center">
-                    <Stack gap={'0rem'} align="center">
-                      <Text>{convertDateFormat(activity.date_scheduled)}</Text>
-                      <Text size="0.6rem" tt={'uppercase'}>
-                        Date prévue
-                      </Text>
-                    </Stack>
+                    {/* Conditionnal render for date */}
+                    {activity.date_accomplished === null ? (
+                      <Stack gap={'0rem'} align="center">
+                        <Text>--</Text>
+                        <Text size="0.6rem" tt={'uppercase'}>
+                          Date Hecho
+                        </Text>
+                      </Stack>
+                    ) : (
+                      <Stack gap={'0rem'} align="center">
+                        <Text>
+                          {convertDateFormat(activity.date_accomplished)}
+                        </Text>
+                        <Text size="0.6rem" tt={'uppercase'}>
+                          Date Hecho
+                        </Text>
+                      </Stack>
+                    )}
 
                     {/* Conditionnal render for distance */}
                     {activity.distance === null ? (
