@@ -8,6 +8,7 @@ import {
   Stack,
   Text,
   Title,
+  UnstyledButton,
 } from '@mantine/core';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
@@ -19,8 +20,12 @@ import './Bento.scss';
 function Bento() {
   const dispatch = useAppDispatch();
 
-  // Retrieve user ID from state
+  // Retrieve user ID and slug from state
   const id = useAppSelector((state) => state.login.data.userId);
+
+  const usernameSlug = useAppSelector(
+    (state) => state.login.data.username_slug
+  );
 
   // Fetch and render all user activities
   useEffect(() => {
@@ -134,7 +139,12 @@ function Bento() {
 
               <Stack justify="center" h={'85%'}>
                 <Stack align="center" gap={0}>
-                  <Text size="0.7rem" tt={'uppercase'}>
+                  <Text
+                    size="0.7rem"
+                    tt={'uppercase'}
+                    component="a"
+                    href={`/activities/user/${usernameSlug}`}
+                  >
                     Activités HECHO
                   </Text>
 
@@ -155,7 +165,12 @@ function Bento() {
                 </Stack>
 
                 <Stack align="center" gap={0}>
-                  <Text size="0.7rem" tt={'uppercase'}>
+                  <Text
+                    size="0.7rem"
+                    tt={'uppercase'}
+                    component="a"
+                    href={`/activities/user/${usernameSlug}`}
+                  >
                     Distance parcourue (en km)
                   </Text>
                   <Text c={'palette.0'} fw={700}>

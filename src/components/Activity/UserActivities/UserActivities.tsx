@@ -101,14 +101,14 @@ function UserActivities(props: ActivitiesProps) {
 
               {/* Conditionnal render for distance */}
               {activity.distance === null ? (
-                <Stack gap={'0rem'} w={'3rem'}>
+                <Stack gap={'0rem'} w={'5rem'}>
                   <Text>--</Text>
                   <Text size="0.6rem" tt={'uppercase'}>
                     Distance
                   </Text>
                 </Stack>
               ) : (
-                <Stack gap={'0rem'} w={'3rem'}>
+                <Stack gap={'0rem'} w={'5rem'}>
                   <Text>{activity.distance} km</Text>
                   <Text size="0.6rem" tt={'uppercase'}>
                     Distance
