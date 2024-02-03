@@ -1,6 +1,14 @@
 import { useEffect, useState } from 'react';
 
-import { Button, Center, Container, Grid, Text, Title } from '@mantine/core';
+import {
+  Button,
+  Container,
+  Grid,
+  RingProgress,
+  Stack,
+  Text,
+  Title,
+} from '@mantine/core';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchUserActivities } from '../../../store/reducers/getUserActivities';
@@ -52,6 +60,28 @@ function Bento() {
     setActivitiesThisWeek(filteredActivities);
   }, [activitiesData]);
 
+  // Calculation number of km done this week
+  let distanceThisWeek = 0;
+
+  for (const activity of activitiesThisWeek) {
+    let distance = activity.distance;
+    distanceThisWeek += Number(distance);
+  }
+
+  const [animatedValue, setAnimatedValue] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAnimatedValue((oldValue) => {
+        const newValue = oldValue + 1;
+
+        return newValue <= 100 ? newValue : oldValue; // Réinitialise à 0 après avoir atteint 100
+      });
+    }, 5); // ajustez la durée de l'intervalle selon vos besoins
+
+    return () => clearInterval(interval); // Nettoie l'intervalle lorsque le composant est démonté
+  }, []);
+
   return (
     <>
       <Container px={'md'} py={'xl'}>
@@ -102,9 +132,37 @@ function Bento() {
                 Cette semaine
               </Title>
 
-              <Center>
-                <Text>{activitiesThisWeek.length}</Text>
-              </Center>
+              <Stack justify="center" h={'85%'}>
+                <Stack align="center" gap={0}>
+                  <Text size="0.7rem" tt={'uppercase'}>
+                    Activités HECHO
+                  </Text>
+
+                  <RingProgress
+                    roundCaps
+                    sections={[
+                      {
+                        value: animatedValue,
+                        color: 'var(--mantine-color-palette-0)',
+                      },
+                    ]}
+                    label={
+                      <Text c="palette.0" fw={700} ta="center" size="xl">
+                        {activitiesThisWeek.length}
+                      </Text>
+                    }
+                  />
+                </Stack>
+
+                <Stack align="center" gap={0}>
+                  <Text size="0.7rem" tt={'uppercase'}>
+                    Distance parcourue (en km)
+                  </Text>
+                  <Text c={'palette.0'} fw={700}>
+                    {distanceThisWeek}
+                  </Text>
+                </Stack>
+              </Stack>
             </Grid.Col>
 
             <Grid.Col span={4} className="bento__item" m={'md'}>
@@ -121,7 +179,7 @@ function Bento() {
                 fw={300}
                 pb={'sm'}
               >
-                Activités à réaliser
+                Activités prévues
               </Title>
 
               {activitiesData.length > 0 ? (
