@@ -61,6 +61,12 @@ function NavBar() {
                 className="navbar__link"
               >
                 <NavLink
+                  href="/activity/create"
+                  label="Nouvelle activité"
+                  leftSection={<IconCalendarPlus size="1rem" stroke={1.5} />}
+                  className="navbar__link"
+                />
+                <NavLink
                   href={`/activities/user/${usernameSlug}`}
                   label="Mes activités"
                   leftSection={<IconRun size="1rem" stroke={1.5} />}
@@ -70,12 +76,6 @@ function NavBar() {
                   href="#"
                   label="Mon calendrier"
                   leftSection={<IconCalendar size="1rem" stroke={1.5} />}
-                  className="navbar__link"
-                />
-                <NavLink
-                  href="/activity/create"
-                  label="Nouvelle activité"
-                  leftSection={<IconCalendarPlus size="1rem" stroke={1.5} />}
                   className="navbar__link"
                 />
               </NavLink>

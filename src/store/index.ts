@@ -16,6 +16,8 @@ import updateActivityReducer from './reducers/updateActivity';
 import getTagReducer from './reducers/getTag';
 import addTagReducer from './reducers/addTag';
 import updateTagReducer from './reducers/updateTag';
+import createGoalReducer from './reducers/createGoal';
+import getGoalReducer from './reducers/getGoal';
 
 const store = configureStore({
   reducer: {
@@ -35,6 +37,8 @@ const store = configureStore({
     getTag: getTagReducer,
     addTag: addTagReducer,
     updateTag: updateTagReducer,
+    createGoal: createGoalReducer,
+    getGoal: getGoalReducer,
   },
 });
 
