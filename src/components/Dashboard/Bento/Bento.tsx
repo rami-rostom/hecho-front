@@ -8,16 +8,16 @@ import {
   Stack,
   Text,
   Title,
-  UnstyledButton,
 } from '@mantine/core';
+import { Carousel } from '@mantine/carousel';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchUserActivities } from '../../../store/reducers/getUserActivities';
+import { sumDurations } from '../../../utils/calculation';
 import UserActivitiesCarousel from '../UserActivitiesCarousel/UserActivitiesCarousel';
+import UpdateActivityGoal from '../../Goal/UpdateActivityGoal';
 
 import './Bento.scss';
-import { Carousel, CarouselSlide } from '@mantine/carousel';
-import { sumDurations } from '../../../utils/calculation';
 
 function Bento() {
   const dispatch = useAppDispatch();
@@ -115,7 +115,7 @@ function Bento() {
         <Container>
           <Grid grow gutter={'xl'}>
             {/* Done activities section */}
-            <Grid.Col span={4} className="bento__item" m={'md'}>
+            <Grid.Col span={6} className="bento__item" m={'md'}>
               <Title
                 order={2}
                 size="0.8rem"
@@ -137,7 +137,7 @@ function Bento() {
             </Grid.Col>
 
             {/* This week section */}
-            <Grid.Col span={4} className="bento__item" m={'md'}>
+            <Grid.Col span={2} className="bento__item" m={'md'}>
               {/* Number of hecho activities */}
               <Title
                 order={2}
@@ -187,10 +187,10 @@ function Bento() {
                         component="a"
                         href={`/activities/user/${usernameSlug}`}
                       >
-                        Distance parcourue (en km)
+                        Distance parcourue
                       </Text>
                       <Text c={'palette.0'} fw={700}>
-                        {distanceThisWeek}
+                        {distanceThisWeek} km
                       </Text>
                     </Stack>
                   </Carousel.Slide>
@@ -214,7 +214,8 @@ function Bento() {
               </Stack>
             </Grid.Col>
 
-            <Grid.Col span={4} className="bento__item" m={'md'}>
+            {/* Weekly goal section */}
+            <Grid.Col span={2} className="bento__item" m={'md'}>
               <Title
                 order={2}
                 size="0.8rem"
@@ -225,10 +226,38 @@ function Bento() {
               >
                 Objectif hebdomadaire
               </Title>
+
+              <Stack align="center" justify="center" h={'85%'}>
+                <Stack align="center" gap={'0rem'}>
+                  <Text size="0.7rem" tt={'uppercase'}>
+                    Nombre d'activités
+                  </Text>
+
+                  <UpdateActivityGoal userId={id} />
+                </Stack>
+
+                <Stack align="center" gap={'0rem'}>
+                  <Text size="0.7rem" tt={'uppercase'}>
+                    Distance à parcourir
+                  </Text>
+                  <Text c={'palette.0'} fw={700}>
+                    40 km
+                  </Text>
+                </Stack>
+
+                <Stack align="center" gap={'0rem'}>
+                  <Text size="0.7rem" tt={'uppercase'}>
+                    Durée à réaliser
+                  </Text>
+                  <Text c={'palette.0'} fw={700}>
+                    04:00:00
+                  </Text>
+                </Stack>
+              </Stack>
             </Grid.Col>
 
             {/* Activities to do section */}
-            <Grid.Col span={4} className="bento__item" m={'md'}>
+            <Grid.Col span={6} className="bento__item" m={'md'}>
               <Title
                 order={2}
                 size="0.8rem"

@@ -4,13 +4,7 @@ import { axiosInstance } from '../../utils/axios';
 import { GoalState } from '../../@types/goal';
 
 const initialState: GoalState = {
-  goal: {
-    id: '',
-    activity: 0,
-    distance: 0,
-    duration: '',
-    user_id: 0,
-  },
+  goal: [],
   isLoading: true,
   error: null,
 };

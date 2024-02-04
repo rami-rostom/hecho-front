@@ -8,7 +8,7 @@ export type Goal = {
 };
 
 export type GoalState = {
-  goal: Goal;
+  goal: Goal[];
   isLoading: boolean;
   error: null | string;
 };
@@ -22,6 +22,12 @@ export type NewGoal = {
 
 export type NewGoalState = {
   goal: NewGoal;
+  isLoading: boolean;
+  error: null | string;
+};
+
+export type UpdateGoalState = {
+  goal: Goal;
   isLoading: boolean;
   error: null | string;
 };
