@@ -16,6 +16,8 @@ import { fetchUserActivities } from '../../../store/reducers/getUserActivities';
 import UserActivitiesCarousel from '../UserActivitiesCarousel/UserActivitiesCarousel';
 
 import './Bento.scss';
+import { Carousel, CarouselSlide } from '@mantine/carousel';
+import { sumDurations } from '../../../utils/calculation';
 
 function Bento() {
   const dispatch = useAppDispatch();
@@ -73,6 +75,15 @@ function Bento() {
     distanceThisWeek += Number(distance);
   }
 
+  // Calculation duration done this week
+  let durationThisWeek = '00:00:00';
+
+  for (const activity of activitiesThisWeek) {
+    let duration = activity.duration;
+    durationThisWeek = sumDurations(durationThisWeek, duration);
+  }
+
+  // Animation of ring progress value for a smooth render
   const [animatedValue, setAnimatedValue] = useState(0);
 
   useEffect(() => {
@@ -80,11 +91,11 @@ function Bento() {
       setAnimatedValue((oldValue) => {
         const newValue = oldValue + 1;
 
-        return newValue <= 100 ? newValue : oldValue; // Réinitialise à 0 après avoir atteint 100
+        return newValue <= 100 ? newValue : oldValue;
       });
-    }, 5); // ajustez la durée de l'intervalle selon vos besoins
+    }, 5);
 
-    return () => clearInterval(interval); // Nettoie l'intervalle lorsque le composant est démonté
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -125,7 +136,9 @@ function Bento() {
               )}
             </Grid.Col>
 
+            {/* This week section */}
             <Grid.Col span={4} className="bento__item" m={'md'}>
+              {/* Number of hecho activities */}
               <Title
                 order={2}
                 size="0.8rem"
@@ -164,24 +177,54 @@ function Bento() {
                   />
                 </Stack>
 
-                <Stack align="center" gap={0}>
-                  <Text
-                    size="0.7rem"
-                    tt={'uppercase'}
-                    component="a"
-                    href={`/activities/user/${usernameSlug}`}
-                  >
-                    Distance parcourue (en km)
-                  </Text>
-                  <Text c={'palette.0'} fw={700}>
-                    {distanceThisWeek}
-                  </Text>
-                </Stack>
+                {/* Distance and duration done this week */}
+                <Carousel controlSize={15} loop>
+                  <Carousel.Slide>
+                    <Stack align="center" gap={0}>
+                      <Text
+                        size="0.7rem"
+                        tt={'uppercase'}
+                        component="a"
+                        href={`/activities/user/${usernameSlug}`}
+                      >
+                        Distance parcourue (en km)
+                      </Text>
+                      <Text c={'palette.0'} fw={700}>
+                        {distanceThisWeek}
+                      </Text>
+                    </Stack>
+                  </Carousel.Slide>
+
+                  <Carousel.Slide>
+                    <Stack align="center" gap={0}>
+                      <Text
+                        size="0.7rem"
+                        tt={'uppercase'}
+                        component="a"
+                        href={`/activities/user/${usernameSlug}`}
+                      >
+                        Durée d'activités
+                      </Text>
+                      <Text c={'palette.0'} fw={700}>
+                        {durationThisWeek}
+                      </Text>
+                    </Stack>
+                  </Carousel.Slide>
+                </Carousel>
               </Stack>
             </Grid.Col>
 
             <Grid.Col span={4} className="bento__item" m={'md'}>
-              3
+              <Title
+                order={2}
+                size="0.8rem"
+                tt="uppercase"
+                lts="0.15rem"
+                fw={300}
+                pb={'sm'}
+              >
+                Objectif hebdomadaire
+              </Title>
             </Grid.Col>
 
             {/* Activities to do section */}
