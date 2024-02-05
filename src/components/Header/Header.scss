@@ -26,3 +26,7 @@
   opacity: 0;
   animation: fadeInTop 1s ease 1s forwards;
 }
+
+.menu-item:hover {
+  background-color: var(--mantine-color-palette-9);
+}

@@ -94,11 +94,6 @@ function CreateActivity() {
                   const date = event?.toDateString();
                   setDateValue(date);
                 }}
-                styles={{
-                  input: {
-                    backgroundColor: 'var(--mantine-color-palette-7)',
-                  },
-                }}
               />
 
               <Group justify="flex-end" mt="md">

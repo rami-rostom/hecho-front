@@ -3,7 +3,7 @@ export type Step = {
   id: string;
   name?: string;
   distance: number;
-  duration: string | number;
+  duration: string;
   user_id: number;
 };
 

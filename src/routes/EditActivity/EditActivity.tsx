@@ -49,11 +49,11 @@ function EditActivity() {
   const { steps, tags } = activityData;
 
   const speed = speedCalcul(
-    convertDurationToMin(activityData.duration),
+    Number(convertDurationToMin(activityData.duration)),
     activityData.distance
   );
   const pace = paceCalcul(
-    convertDurationToMin(activityData.duration),
+    Number(convertDurationToMin(activityData.duration)),
     activityData.distance
   );
 
@@ -224,7 +224,7 @@ function EditActivity() {
                             <Text fw={700}>
                               {/* Calculation of pace step */}
                               {speedCalcul(
-                                convertDurationToMin(step.duration),
+                                Number(convertDurationToMin(step.duration)),
                                 Number(step.distance)
                               )}{' '}
                               km/h
@@ -238,7 +238,7 @@ function EditActivity() {
                             <Text fw={700}>
                               {/* Calculation of pace step */}
                               {paceCalcul(
-                                convertDurationToMin(step.duration),
+                                Number(convertDurationToMin(step.duration)),
                                 Number(step.distance)
                               )}{' '}
                               min/km

@@ -7,8 +7,8 @@ export type Activity = {
   id: string;
   name: string;
   sport_id: string | null;
-  date_scheduled?: string;
-  date_accomplished?: string;
+  date_scheduled: string;
+  date_accomplished: string | undefined;
   distance: number;
   duration: string;
   pace: number;

@@ -146,7 +146,7 @@ function UserActivities(props: ActivitiesProps) {
                 <Stack gap={'0rem'}>
                   <Text>
                     {paceCalcul(
-                      convertDurationToMin(activity.duration),
+                      Number(convertDurationToMin(activity.duration)),
                       activity.distance
                     )}{' '}
                     min/km
@@ -290,7 +290,7 @@ function UserActivities(props: ActivitiesProps) {
                   <Stack gap={'0rem'}>
                     <Text>
                       {paceCalcul(
-                        convertDurationToMin(activity.duration),
+                        Number(convertDurationToMin(activity.duration)),
                         activity.distance
                       )}{' '}
                       min/km
@@ -439,7 +439,7 @@ function UserActivities(props: ActivitiesProps) {
                   <Stack gap={'0rem'}>
                     <Text>
                       {paceCalcul(
-                        convertDurationToMin(activity.duration),
+                        Number(convertDurationToMin(activity.duration)),
                         activity.distance
                       )}{' '}
                       min/km

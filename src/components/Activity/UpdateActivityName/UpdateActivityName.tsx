@@ -36,6 +36,8 @@ function UpdateActivityName(props: ActivityProps) {
         id: activityId,
         name: nameValue,
         sport_id: null,
+        date_scheduled: '',
+        date_accomplished: '',
         distance: 0,
         duration: '',
         pace: 0,

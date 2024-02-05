@@ -49,11 +49,11 @@ function Activity() {
   const { steps, tags } = activityData;
 
   const speed = speedCalcul(
-    convertDurationToMin(activityData.duration),
+    Number(convertDurationToMin(activityData.duration)),
     activityData.distance
   );
   const pace = paceCalcul(
-    convertDurationToMin(activityData.duration),
+    Number(convertDurationToMin(activityData.duration)),
     activityData.distance
   );
 
@@ -118,7 +118,7 @@ function Activity() {
                       <Text tt="capitalize" size="xl" fw={700}>
                         {step.name}
                       </Text>
-                      <Group>
+                      <Group align="flex-start">
                         {/* Component to duplicate the step */}
                         <DuplicateStep
                           stepName={step.name}
@@ -229,7 +229,7 @@ function Activity() {
                             <Text fw={700}>
                               {/* Calculation of pace step */}
                               {speedCalcul(
-                                convertDurationToMin(step.duration),
+                                Number(convertDurationToMin(step.duration)),
                                 Number(step.distance)
                               )}{' '}
                               km/h
@@ -243,7 +243,7 @@ function Activity() {
                             <Text fw={700}>
                               {/* Calculation of pace step */}
                               {paceCalcul(
-                                convertDurationToMin(step.duration),
+                                Number(convertDurationToMin(step.duration)),
                                 Number(step.distance)
                               )}{' '}
                               min/km

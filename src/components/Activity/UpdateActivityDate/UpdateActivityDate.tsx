@@ -21,9 +21,7 @@ function UpdateActivityDate(props: ActivityProps) {
   const dispatch = useAppDispatch();
 
   const [opened, { close, open }] = useDisclosure(false);
-  const [dateScheduledValue, setDateScheduledValue] = useState<
-    string | undefined
-  >('');
+  const [dateScheduledValue, setDateScheduledValue] = useState<string>('');
   const [dateAccomplishedValue, setDateAccomplishedValue] = useState<
     string | undefined
   >('');
@@ -72,7 +70,7 @@ function UpdateActivityDate(props: ActivityProps) {
                 placeholder="Choisir une date"
                 onChange={(event) => {
                   const date = event?.toDateString();
-                  setDateScheduledValue(date);
+                  setDateScheduledValue(date || '');
                 }}
               />
             ) : (

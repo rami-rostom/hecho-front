@@ -18,6 +18,8 @@
     margin-right: 5rem;
 
     &-step {
+      background-color: var(--mantine-color-palette-7);
+
       border: 1px solid rgb(93, 89, 89);
       border-radius: 1rem;
       box-shadow: 3px 3px 10px 0px rgba(126, 124, 124, 0.5);

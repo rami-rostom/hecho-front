@@ -159,6 +159,7 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
                         style={{ width: rem(14), height: rem(14) }}
                       />
                     }
+                    className="menu-item"
                   >
                     Profil
                   </Menu.Item>
@@ -168,6 +169,7 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
                         style={{ width: rem(14), height: rem(14) }}
                       />
                     }
+                    className="menu-item"
                   >
                     Paramètres
                   </Menu.Item>
@@ -177,6 +179,7 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
                     leftSection={
                       <IconLogout style={{ width: rem(14), height: rem(14) }} />
                     }
+                    className="menu-item"
                   >
                     Déconnexion
                   </Menu.Item>
