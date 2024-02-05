@@ -38,6 +38,10 @@ function UpdateActivityGoal(props: GoalProps) {
   const [openActivityHandler, activityHandler] = useDisclosure(false);
   const [activityValue, setActivityValue] = useState<number>(0);
 
+  const handleActivityChange = (value: string | number) => {
+    setActivityValue(value as number);
+  };
+
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -109,7 +113,7 @@ function UpdateActivityGoal(props: GoalProps) {
                   w={'5rem'}
                   size="xs"
                   defaultValue={goalActivity}
-                  onChange={setActivityValue}
+                  onChange={handleActivityChange}
                 />
                 <UnstyledButton type="submit">
                   <IconCircleCheck color="var(--mantine-color-button-0)" />

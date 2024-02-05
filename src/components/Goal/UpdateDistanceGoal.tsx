@@ -38,6 +38,10 @@ function UpdateDistanceGoal(props: GoalProps) {
   const [openDistanceHandler, distanceHandler] = useDisclosure(false);
   const [distanceValue, setDistanceValue] = useState<number>(0);
 
+  const handleDistanceChange = (value: string | number) => {
+    setDistanceValue(value as number);
+  };
+
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -110,7 +114,7 @@ function UpdateDistanceGoal(props: GoalProps) {
                   w={'5rem'}
                   size="xs"
                   defaultValue={goalDistance}
-                  onChange={setDistanceValue}
+                  onChange={handleDistanceChange}
                 />
                 <UnstyledButton type="submit">
                   <IconCircleCheck color="var(--mantine-color-button-0)" />

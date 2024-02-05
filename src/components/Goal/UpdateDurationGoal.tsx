@@ -1,13 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  Group,
-  NumberInput,
-  Text,
-  Tooltip,
-  UnstyledButton,
-} from '@mantine/core';
+import { Group, Text, Tooltip, UnstyledButton } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { TimeInput } from '@mantine/dates';
 import { IconCircleCheck, IconCircleX, IconPencil } from '@tabler/icons-react';

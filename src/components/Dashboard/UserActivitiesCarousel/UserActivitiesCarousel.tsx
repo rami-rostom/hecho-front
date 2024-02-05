@@ -107,7 +107,7 @@ function UserActivitiesCarousel(props: ActivitiesProps) {
                     ) : (
                       <Stack gap={'0rem'} align="center">
                         <Text>
-                          {convertDateFormat(activity.date_accomplished)}
+                          {convertDateFormat(activity.date_accomplished || '')}
                         </Text>
                         <Text size="0.6rem" tt={'uppercase'}>
                           Date Hecho
@@ -164,7 +164,7 @@ function UserActivitiesCarousel(props: ActivitiesProps) {
                       <Stack gap={'0rem'} align="center">
                         <Text>
                           {paceCalcul(
-                            convertDurationToMin(activity.duration),
+                            Number(convertDurationToMin(activity.duration)),
                             activity.distance
                           )}{' '}
                           min/km
