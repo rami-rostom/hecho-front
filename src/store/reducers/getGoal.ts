@@ -25,14 +25,7 @@ const getGoalSlice = createSlice({
       })
       .addCase(fetchGoal.fulfilled, (state, action) => {
         state.isLoading = false;
-
-        const payloadKeys = Object.keys(action.payload);
-
-        payloadKeys.forEach((key) => {
-          if (action.payload[key] !== null) {
-            state.goal[key] = action.payload[key];
-          }
-        });
+        state.goal = action.payload;
       });
   },
 });

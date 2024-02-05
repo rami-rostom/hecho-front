@@ -13,6 +13,7 @@ import { Carousel } from '@mantine/carousel';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchUserActivities } from '../../../store/reducers/getUserActivities';
+import { fetchGoal } from '../../../store/reducers/getGoal';
 import { sumDurations } from '../../../utils/calculation';
 import UserActivitiesCarousel from '../UserActivitiesCarousel/UserActivitiesCarousel';
 import UpdateActivityGoal from '../../Goal/UpdateActivityGoal';
@@ -31,14 +32,19 @@ function Bento() {
     (state) => state.login.data.username_slug
   );
 
-  // Retrieve user goals from state
-  const goalData = useAppSelector((state) => state.getGoal.goal);
-  const goalActivity = goalData && goalData[0] ? goalData[0].activity : 0;
-
   // Fetch and render all user activities
   useEffect(() => {
     dispatch(fetchUserActivities(id));
   }, [dispatch, id]);
+
+  // Fetch user goal
+  useEffect(() => {
+    dispatch(fetchGoal(id));
+  }, [dispatch, id]);
+
+  // Retrieve user goals from state
+  const goalData = useAppSelector((state) => state.getGoal.goal);
+  const goalActivity = goalData && goalData[0] ? goalData[0].activity : 0;
 
   // Retrieve user activities from state
   const activitiesData = useAppSelector(
@@ -109,7 +115,7 @@ function Bento() {
     }, 5);
 
     return () => clearInterval(interval);
-  }, [compareToGoalValue]);
+  }, [compareToGoalValue, activitiesData]);
 
   return (
     <>
@@ -140,12 +146,23 @@ function Bento() {
                 Dernières activités
               </Title>
 
-              {activitiesData.length > 0 ? (
+              {activitiesHecho.length > 0 ? (
                 <UserActivitiesCarousel activities={activitiesHecho} />
               ) : (
-                <Button color="button.0" component="a" href="/activity/create">
-                  Nouvelle activité
-                </Button>
+                <Stack align="center" justify="center" h={'70%'}>
+                  <Text size="0.7rem" tt={'uppercase'}>
+                    Aucune activité réalisée pour le moment.
+                  </Text>
+                  <Button
+                    color="button.0"
+                    size="compact-xs"
+                    variant="outline"
+                    component="a"
+                    href="/activity/create"
+                  >
+                    Nouvelle activité
+                  </Button>
+                </Stack>
               )}
             </Grid.Col>
 
@@ -283,12 +300,23 @@ function Bento() {
                 Activités prévues
               </Title>
 
-              {activitiesData.length > 0 ? (
+              {activitiesNoHecho.length > 0 ? (
                 <UserActivitiesCarousel activities={activitiesNoHecho} />
               ) : (
-                <Button color="button.0" component="a" href="/activity/create">
-                  Nouvelle activité
-                </Button>
+                <Stack align="center" justify="center" h={'70%'}>
+                  <Text size="0.7rem" tt={'uppercase'}>
+                    Aucune activité planifiée pour le moment.
+                  </Text>
+                  <Button
+                    color="button.0"
+                    size="compact-xs"
+                    variant="outline"
+                    component="a"
+                    href="/activity/create"
+                  >
+                    Nouvelle activité
+                  </Button>
+                </Stack>
               )}
             </Grid.Col>
 

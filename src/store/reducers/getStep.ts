@@ -31,14 +31,7 @@ const getStepSlice = createSlice({
       })
       .addCase(fetchStep.fulfilled, (state, action) => {
         state.isLoading = false;
-
-        const payloadKeys = Object.keys(action.payload);
-
-        payloadKeys.forEach((key) => {
-          if (action.payload[key] !== null) {
-            state.step[key] = action.payload[key];
-          }
-        });
+        state.step = action.payload;
       });
   },
 });

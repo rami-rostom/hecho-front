@@ -45,14 +45,7 @@ const getActivitySlice = createSlice({
       })
       .addCase(fetchActivity.fulfilled, (state, action) => {
         state.isLoading = false;
-
-        const payloadKeys = Object.keys(action.payload);
-
-        payloadKeys.forEach((key) => {
-          if (action.payload[key] !== null) {
-            state.activity[key] = action.payload[key];
-          }
-        });
+        state.activity = action.payload;
       });
   },
 });

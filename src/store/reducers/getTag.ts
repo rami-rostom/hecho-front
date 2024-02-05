@@ -29,14 +29,7 @@ const getTagSlice = createSlice({
       })
       .addCase(fetchTag.fulfilled, (state, action) => {
         state.isLoading = false;
-
-        const payloadKeys = Object.keys(action.payload);
-
-        payloadKeys.forEach((key) => {
-          if (action.payload[key] !== null) {
-            state.tags[key] = action.payload[key];
-          }
-        });
+        state.tags = action.payload;
       });
   },
 });
