@@ -97,7 +97,7 @@ function AddStep(props: ActivityProps) {
           steps: [],
           tags: [],
         })
-      ).then(() => navigate(0));
+      );
     }
 
     // User select duration as type

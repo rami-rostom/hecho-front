@@ -1,6 +1,10 @@
 /* eslint-disable import/prefer-default-export */
 
-// Function to transform duration in minutes
+/**
+ * Function to transform duration in minutes
+ * @param duration value in HH:mm:ss
+ * @returns Return duration in minutes
+ */
 export const convertDurationToMin = (duration: string) => {
   if (duration) {
     const [heures, minutes, secondes] = duration
@@ -14,6 +18,8 @@ export const convertDurationToMin = (duration: string) => {
   }
   return duration;
 };
+
+// ---------------------------------------------------------------------------//
 
 /**
  * Function for calculating the speed of activity
@@ -31,6 +37,8 @@ export const speedCalcul = (duration: number, distance: number) => {
   return speedResult.toFixed(2);
 };
 
+// ---------------------------------------------------------------------------//
+
 /**
  * Function for calculating the pace of activity
  * @param duration value in minutes
@@ -44,6 +52,8 @@ export const paceCalcul = (duration: number, distance: number) => {
   return paceResult.toFixed(2);
 };
 
+// ---------------------------------------------------------------------------//
+
 /**
  * Function to transform date into DAY-MONTH-YEAR format
  * @param oldFormatDate date in format YEAR-MONTH-DAY
@@ -54,6 +64,8 @@ export const convertDateFormat = (oldFormatDate: string) => {
   const newFormatDate = `${day}-${month}-${year}`;
   return newFormatDate;
 };
+
+// ---------------------------------------------------------------------------//
 
 /**
  * Function to sum two durations in format HH:mm:ss
@@ -90,6 +102,8 @@ export const sumDurations = (duration1: string, duration2: string) => {
 
   return convertToDuration(totalSeconds);
 };
+
+// ---------------------------------------------------------------------------//
 
 /**
  * Function to sub two durations in format HH:mm:ss
