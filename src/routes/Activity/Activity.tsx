@@ -57,6 +57,11 @@ function Activity() {
     activityData.distance
   );
 
+  // Function who render true or false if one of the step has an empty duration or distance value
+  const emptyPaceAndSpeed = activityData.steps.find(
+    (step) => step.duration === '' || step.distance === null
+  );
+
   return (
     <Container py="xl" className="activity">
       <Container px="-1rem" className="activity__banner">
@@ -323,8 +328,8 @@ function Activity() {
               </Stack>
             )}
 
-            {activityData.duration !== '00:00:00' &&
-            activityData.distance != null ? (
+            {/* Conditionnal render of pace and speed */}
+            {!emptyPaceAndSpeed ? (
               <>
                 <Stack gap="0rem">
                   {speed === 'NaN' ? (
@@ -336,7 +341,6 @@ function Activity() {
                     Vitesse moyenne
                   </Text>
                 </Stack>
-
                 <Stack gap="0rem">
                   {pace === 'NaN' ? (
                     <Text fw={500}>--</Text>
