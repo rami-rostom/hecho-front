@@ -11,6 +11,7 @@ import {
   em,
 } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
+import { useMediaQuery } from '@mantine/hooks';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchUserActivities } from '../../../store/reducers/getUserActivities';
@@ -22,7 +23,6 @@ import UpdateDistanceGoal from '../../Goal/UpdateDistanceGoal';
 import UpdateDurationGoal from '../../Goal/UpdateDurationGoal';
 
 import './Bento.scss';
-import { useMediaQuery } from '@mantine/hooks';
 
 function Bento() {
   const dispatch = useAppDispatch();

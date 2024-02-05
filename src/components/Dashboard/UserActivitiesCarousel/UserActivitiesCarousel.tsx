@@ -1,4 +1,6 @@
 import { Flex, Group, Stack, Text, UnstyledButton, em } from '@mantine/core';
+import { Carousel } from '@mantine/carousel';
+import { useMediaQuery } from '@mantine/hooks';
 import {
   IconBike,
   IconMountain,
@@ -15,8 +17,6 @@ import {
 } from '../../../utils/calculation';
 
 import './UserActivitiesCarousel.scss';
-import { Carousel } from '@mantine/carousel';
-import { useMediaQuery } from '@mantine/hooks';
 
 type ActivitiesProps = {
   activities: Activity[];

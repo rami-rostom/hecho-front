@@ -13,7 +13,9 @@ import {
   Stack,
   Text,
   Title,
+  em,
 } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 
 import ActivityIcon from '../../components/Activity/ActivityIcon/ActivityIcon';
 import HechoBtn from '../../components/Hecho/HechoBtn/HechoBtn';
@@ -62,6 +64,9 @@ function Activity() {
     (step) => step.duration === '' || step.distance === null
   );
 
+  // Boolean for responsive design
+  const isMobile = useMediaQuery(`(max-width: ${em(600)})`);
+
   return (
     <Container py="xl" className="activity">
       <Container px="-1rem" className="activity__banner">
@@ -108,7 +113,7 @@ function Activity() {
       </Container>
 
       <Container className="activity__main">
-        <Flex justify="space-between">
+        <Flex justify="space-between" direction={isMobile ? 'column' : 'row'}>
           <Stack align="stretch" gap="xl" className="activity__steps">
             {/* List of steps or none if no steps in the activity */}
             {steps
@@ -285,114 +290,235 @@ function Activity() {
             </Group>
           </Stack>
 
-          <Stack className="activity__aside">
-            <Stack gap="0rem">
-              <Text fw={500} tt="uppercase">
-                {activityData.sport.name}
-              </Text>
-              <Text size="xs" fs="italic">
-                Type
-              </Text>
-            </Stack>
+          {!isMobile && (
+            <Stack className="activity__aside">
+              <Stack gap="0rem">
+                <Text fw={500} tt="uppercase">
+                  {activityData.sport.name}
+                </Text>
+                <Text size="xs" fs="italic">
+                  Type
+                </Text>
+              </Stack>
 
-            {activityData.duration == '' ||
-            activityData.duration === '00:00:00' ? (
-              <Stack gap="0rem">
-                <Text fw={500}>--</Text>
-                <Text size="xs" fs="italic">
-                  Temps total
-                </Text>
-              </Stack>
-            ) : (
-              <Stack gap="0rem">
-                <Text fw={500}>{activityData.duration}</Text>
-                <Text size="xs" fs="italic">
-                  Temps total
-                </Text>
-              </Stack>
-            )}
-
-            {activityData.distance === null ? (
-              <Stack gap="0rem">
-                <Text fw={500}>--</Text>
-                <Text size="xs" fs="italic">
-                  Distance
-                </Text>
-              </Stack>
-            ) : (
-              <Stack gap="0rem">
-                <Text fw={500}>{activityData.distance} km</Text>
-                <Text size="xs" fs="italic">
-                  Distance
-                </Text>
-              </Stack>
-            )}
-
-            {/* Conditionnal render of pace and speed */}
-            {!emptyPaceAndSpeed ? (
-              <>
+              {activityData.duration == '' ||
+              activityData.duration === '00:00:00' ? (
                 <Stack gap="0rem">
-                  {speed === 'NaN' ? (
-                    <Text fw={500}>--</Text>
-                  ) : (
-                    <Text fw={500}>{speed} km/h</Text>
-                  )}
+                  <Text fw={500}>--</Text>
                   <Text size="xs" fs="italic">
-                    Vitesse moyenne
+                    Temps total
                   </Text>
                 </Stack>
+              ) : (
                 <Stack gap="0rem">
-                  {pace === 'NaN' ? (
-                    <Text fw={500}>--</Text>
-                  ) : (
-                    <Text fw={500}>{pace} min/km</Text>
-                  )}
+                  <Text fw={500}>{activityData.duration}</Text>
                   <Text size="xs" fs="italic">
-                    Allure
+                    Temps total
                   </Text>
                 </Stack>
-              </>
-            ) : (
-              []
-            )}
+              )}
 
-            <Divider my="0.3rem" />
+              {activityData.distance === null ? (
+                <Stack gap="0rem">
+                  <Text fw={500}>--</Text>
+                  <Text size="xs" fs="italic">
+                    Distance
+                  </Text>
+                </Stack>
+              ) : (
+                <Stack gap="0rem">
+                  <Text fw={500}>{activityData.distance} km</Text>
+                  <Text size="xs" fs="italic">
+                    Distance
+                  </Text>
+                </Stack>
+              )}
 
-            <Stack gap="0rem">
-              {activityData.date_scheduled && (
+              {/* Conditionnal render of pace and speed */}
+              {!emptyPaceAndSpeed ? (
                 <>
+                  <Stack gap="0rem">
+                    {speed === 'NaN' ? (
+                      <Text fw={500}>--</Text>
+                    ) : (
+                      <Text fw={500}>{speed} km/h</Text>
+                    )}
+                    <Text size="xs" fs="italic">
+                      Vitesse moyenne
+                    </Text>
+                  </Stack>
+                  <Stack gap="0rem">
+                    {pace === 'NaN' ? (
+                      <Text fw={500}>--</Text>
+                    ) : (
+                      <Text fw={500}>{pace} min/km</Text>
+                    )}
+                    <Text size="xs" fs="italic">
+                      Allure
+                    </Text>
+                  </Stack>
+                </>
+              ) : (
+                []
+              )}
+
+              <Divider my="0.3rem" />
+
+              <Stack gap="0rem">
+                {activityData.date_scheduled && (
+                  <>
+                    <Text fw={500}>
+                      {/* Function to transform date into DAY-MONTH-YEAR format */}
+                      {convertDateFormat(activityData.date_scheduled)}
+                    </Text>
+                    <Text size="xs" fs="italic">
+                      Date prévue
+                    </Text>
+                  </>
+                )}
+              </Stack>
+
+              <Stack gap="0rem">
+                {activityData.date_accomplished ? (
                   <Text fw={500}>
                     {/* Function to transform date into DAY-MONTH-YEAR format */}
-                    {convertDateFormat(activityData.date_scheduled)}
+                    {convertDateFormat(activityData.date_accomplished)}
+                  </Text>
+                ) : (
+                  <Text fw={500}>À réaliser</Text>
+                )}
+                <Text size="xs" fs="italic">
+                  Date accomplissement
+                </Text>
+              </Stack>
+
+              {activityData.hecho ? (
+                <Button color="button.0">HECHO</Button>
+              ) : (
+                // Component to update accomplished date and tag the activity as HECHO
+                <HechoBtn />
+              )}
+            </Stack>
+          )}
+
+          {isMobile && (
+            <Stack className="activity__aside" align="center">
+              <Group>
+                <Stack gap="0rem" align="center">
+                  <Text fw={500} tt="uppercase">
+                    {activityData.sport.name}
                   </Text>
                   <Text size="xs" fs="italic">
-                    Date prévue
+                    Type
                   </Text>
-                </>
-              )}
-            </Stack>
+                </Stack>
+              </Group>
 
-            <Stack gap="0rem">
-              {activityData.date_accomplished ? (
-                <Text fw={500}>
-                  {/* Function to transform date into DAY-MONTH-YEAR format */}
-                  {convertDateFormat(activityData.date_accomplished)}
-                </Text>
-              ) : (
-                <Text fw={500}>À réaliser</Text>
-              )}
-              <Text size="xs" fs="italic">
-                Date accomplissement
-              </Text>
-            </Stack>
+              <Group w={'80%'} justify="space-between">
+                {activityData.duration == '' ||
+                activityData.duration === '00:00:00' ? (
+                  <Stack gap="0rem" align="flex-start">
+                    <Text fw={500}>--</Text>
+                    <Text size="xs" fs="italic">
+                      Temps total
+                    </Text>
+                  </Stack>
+                ) : (
+                  <Stack gap="0rem" align="flex-start">
+                    <Text fw={500}>{activityData.duration}</Text>
+                    <Text size="xs" fs="italic">
+                      Temps total
+                    </Text>
+                  </Stack>
+                )}
 
-            {activityData.hecho ? (
-              <Button color="button.0">HECHO</Button>
-            ) : (
-              // Component to update accomplished date and tag the activity as HECHO
-              <HechoBtn />
-            )}
-          </Stack>
+                {activityData.distance === null ? (
+                  <Stack gap="0rem" align="flex-end">
+                    <Text fw={500}>--</Text>
+                    <Text size="xs" fs="italic">
+                      Distance
+                    </Text>
+                  </Stack>
+                ) : (
+                  <Stack gap="0rem" align="flex-end">
+                    <Text fw={500}>{activityData.distance} km</Text>
+                    <Text size="xs" fs="italic">
+                      Distance
+                    </Text>
+                  </Stack>
+                )}
+              </Group>
+
+              <Group w={'80%'} justify="space-between">
+                {/* Conditionnal render of pace and speed */}
+                {!emptyPaceAndSpeed ? (
+                  <>
+                    <Stack gap="0rem" align="flex-start">
+                      {speed === 'NaN' ? (
+                        <Text fw={500}>--</Text>
+                      ) : (
+                        <Text fw={500}>{speed} km/h</Text>
+                      )}
+                      <Text size="xs" fs="italic">
+                        Vitesse moyenne
+                      </Text>
+                    </Stack>
+                    <Stack gap="0rem" align="flex-end">
+                      {pace === 'NaN' ? (
+                        <Text fw={500}>--</Text>
+                      ) : (
+                        <Text fw={500}>{pace} min/km</Text>
+                      )}
+                      <Text size="xs" fs="italic">
+                        Allure
+                      </Text>
+                    </Stack>
+                  </>
+                ) : (
+                  []
+                )}
+              </Group>
+
+              <Group w={'80%'} justify="space-between">
+                <Stack gap="0rem" align="flex-start">
+                  {activityData.date_scheduled && (
+                    <>
+                      <Text fw={500}>
+                        {/* Function to transform date into DAY-MONTH-YEAR format */}
+                        {convertDateFormat(activityData.date_scheduled)}
+                      </Text>
+                      <Text size="xs" fs="italic">
+                        Date prévue
+                      </Text>
+                    </>
+                  )}
+                </Stack>
+
+                <Stack gap="0rem" align="flex-end">
+                  {activityData.date_accomplished ? (
+                    <Text fw={500}>
+                      {/* Function to transform date into DAY-MONTH-YEAR format */}
+                      {convertDateFormat(activityData.date_accomplished)}
+                    </Text>
+                  ) : (
+                    <Text fw={500}>À réaliser</Text>
+                  )}
+                  <Text size="xs" fs="italic">
+                    Date accomplissement
+                  </Text>
+                </Stack>
+              </Group>
+
+              <Group>
+                {activityData.hecho ? (
+                  <Button color="button.0">HECHO</Button>
+                ) : (
+                  // Component to update accomplished date and tag the activity as HECHO
+                  <HechoBtn />
+                )}
+              </Group>
+            </Stack>
+          )}
         </Flex>
       </Container>
     </Container>
