@@ -18,6 +18,8 @@ import UserActivitiesCarousel from '../UserActivitiesCarousel/UserActivitiesCaro
 import UpdateActivityGoal from '../../Goal/UpdateActivityGoal';
 
 import './Bento.scss';
+import UpdateDistanceGoal from '../../Goal/UpdateDistanceGoal';
+import UpdateDurationGoal from '../../Goal/UpdateDurationGoal';
 
 function Bento() {
   const dispatch = useAppDispatch();
@@ -233,6 +235,7 @@ function Bento() {
                     Nombre d'activités
                   </Text>
 
+                  {/* Component to render goal activity and update it */}
                   <UpdateActivityGoal userId={id} />
                 </Stack>
 
@@ -240,18 +243,18 @@ function Bento() {
                   <Text size="0.7rem" tt={'uppercase'}>
                     Distance à parcourir
                   </Text>
-                  <Text c={'palette.0'} fw={700}>
-                    40 km
-                  </Text>
+
+                  {/* Component to render goal distance and update it */}
+                  <UpdateDistanceGoal userId={id} />
                 </Stack>
 
                 <Stack align="center" gap={'0rem'}>
                   <Text size="0.7rem" tt={'uppercase'}>
                     Durée à réaliser
                   </Text>
-                  <Text c={'palette.0'} fw={700}>
-                    04:00:00
-                  </Text>
+
+                  {/* Component to render goal distance and update it */}
+                  <UpdateDurationGoal userId={id} />
                 </Stack>
               </Stack>
             </Grid.Col>
@@ -278,9 +281,9 @@ function Bento() {
               )}
             </Grid.Col>
 
-            <Grid.Col span={4} className="bento__item" m={'md'}>
+            {/* <Grid.Col span={4} className="bento__item" m={'md'}>
               5
-            </Grid.Col>
+            </Grid.Col> */}
           </Grid>
         </Container>
       </Container>

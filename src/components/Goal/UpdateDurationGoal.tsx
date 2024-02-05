@@ -14,12 +14,13 @@ import { IconCircleCheck, IconCircleX, IconPencil } from '@tabler/icons-react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { updateGoal } from '../../store/reducers/updateGoal';
 import { fetchGoal } from '../../store/reducers/getGoal';
+import { TimeInput } from '@mantine/dates';
 
 type GoalProps = {
   userId: number;
 };
 
-function UpdateActivityGoal(props: GoalProps) {
+function UpdateDurationGoal(props: GoalProps) {
   const { userId } = props;
 
   const navigate = useNavigate();
@@ -32,10 +33,11 @@ function UpdateActivityGoal(props: GoalProps) {
 
   const goalData = useAppSelector((state) => state.getGoal.goal);
 
-  const goalActivity = goalData && goalData[0] ? goalData[0].activity : 0;
+  const goalDuration =
+    goalData && goalData[0] ? goalData[0].duration : '00:00:00';
 
-  const [openActivityHandler, activityHandler] = useDisclosure(false);
-  const [activityValue, setActivityValue] = useState<number>(0);
+  const [openDurationHandler, durationHandler] = useDisclosure(false);
+  const [durationValue, setDurationValue] = useState<string>('');
 
   const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -43,9 +45,9 @@ function UpdateActivityGoal(props: GoalProps) {
     dispatch(
       updateGoal({
         id: goalData[0].id,
-        activity: activityValue,
+        activity: 0,
         distance: 0,
-        duration: '',
+        duration: durationValue,
         user_id: 0,
       })
     ).then(() => navigate(0));
@@ -54,12 +56,12 @@ function UpdateActivityGoal(props: GoalProps) {
   return (
     <>
       <Group>
-        {!openActivityHandler ? (
+        {!openDurationHandler ? (
           <>
             <Text c={'palette.0'} fw={700}>
-              {goalActivity}
+              {goalDuration}
             </Text>
-            <UnstyledButton onClick={() => activityHandler.open()}>
+            <UnstyledButton onClick={() => durationHandler.open()}>
               <Tooltip
                 label="Modifier"
                 position="right"
@@ -80,18 +82,17 @@ function UpdateActivityGoal(props: GoalProps) {
           <form onSubmit={handleFormSubmit}>
             <Group gap={'sm'}>
               <Group gap={'0.1rem'}>
-                <NumberInput
+                <TimeInput
                   py={'xs'}
-                  w={'5rem'}
-                  size="xs"
-                  defaultValue={goalActivity}
-                  onChange={setActivityValue}
+                  withSeconds
+                  onChange={(event) => setDurationValue(event.target.value)}
                 />
+
                 <UnstyledButton type="submit">
                   <IconCircleCheck color="var(--mantine-color-button-0)" />
                 </UnstyledButton>
 
-                <UnstyledButton onClick={() => activityHandler.close()}>
+                <UnstyledButton onClick={() => durationHandler.close()}>
                   <IconCircleX color="var(--mantine-color-button-4)" />
                 </UnstyledButton>
               </Group>
@@ -103,4 +104,4 @@ function UpdateActivityGoal(props: GoalProps) {
   );
 }
 
-export default UpdateActivityGoal;
+export default UpdateDurationGoal;

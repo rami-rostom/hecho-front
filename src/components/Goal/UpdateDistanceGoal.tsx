@@ -19,7 +19,7 @@ type GoalProps = {
   userId: number;
 };
 
-function UpdateActivityGoal(props: GoalProps) {
+function UpdateDistanceGoal(props: GoalProps) {
   const { userId } = props;
 
   const navigate = useNavigate();
@@ -32,10 +32,10 @@ function UpdateActivityGoal(props: GoalProps) {
 
   const goalData = useAppSelector((state) => state.getGoal.goal);
 
-  const goalActivity = goalData && goalData[0] ? goalData[0].activity : 0;
+  const goalDistance = goalData && goalData[0] ? goalData[0].distance : 0;
 
-  const [openActivityHandler, activityHandler] = useDisclosure(false);
-  const [activityValue, setActivityValue] = useState<number>(0);
+  const [openDistanceHandler, distanceHandler] = useDisclosure(false);
+  const [distanceValue, setDistanceValue] = useState<number>(0);
 
   const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -43,8 +43,8 @@ function UpdateActivityGoal(props: GoalProps) {
     dispatch(
       updateGoal({
         id: goalData[0].id,
-        activity: activityValue,
-        distance: 0,
+        activity: 0,
+        distance: distanceValue,
         duration: '',
         user_id: 0,
       })
@@ -54,12 +54,12 @@ function UpdateActivityGoal(props: GoalProps) {
   return (
     <>
       <Group>
-        {!openActivityHandler ? (
+        {!openDistanceHandler ? (
           <>
             <Text c={'palette.0'} fw={700}>
-              {goalActivity}
+              {goalDistance} km
             </Text>
-            <UnstyledButton onClick={() => activityHandler.open()}>
+            <UnstyledButton onClick={() => distanceHandler.open()}>
               <Tooltip
                 label="Modifier"
                 position="right"
@@ -84,14 +84,14 @@ function UpdateActivityGoal(props: GoalProps) {
                   py={'xs'}
                   w={'5rem'}
                   size="xs"
-                  defaultValue={goalActivity}
-                  onChange={setActivityValue}
+                  defaultValue={goalDistance}
+                  onChange={setDistanceValue}
                 />
                 <UnstyledButton type="submit">
                   <IconCircleCheck color="var(--mantine-color-button-0)" />
                 </UnstyledButton>
 
-                <UnstyledButton onClick={() => activityHandler.close()}>
+                <UnstyledButton onClick={() => distanceHandler.close()}>
                   <IconCircleX color="var(--mantine-color-button-4)" />
                 </UnstyledButton>
               </Group>
@@ -103,4 +103,4 @@ function UpdateActivityGoal(props: GoalProps) {
   );
 }
 
-export default UpdateActivityGoal;
+export default UpdateDistanceGoal;
