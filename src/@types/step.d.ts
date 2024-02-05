@@ -16,7 +16,7 @@ export type StepState = {
 // New step states
 export type NewStep = {
   name?: string;
-  distance?: number;
+  distance?: number | null;
   duration?: string | number;
   user_id: number;
 };

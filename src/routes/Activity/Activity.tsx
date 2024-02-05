@@ -48,6 +48,8 @@ function Activity() {
   const activityData = useAppSelector((state) => state.getActivity.activity);
   const { steps, tags } = activityData;
 
+  console.log(steps);
+
   const speed = speedCalcul(
     Number(convertDurationToMin(activityData.duration)),
     activityData.distance

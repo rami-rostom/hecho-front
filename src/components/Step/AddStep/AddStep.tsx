@@ -43,6 +43,10 @@ function AddStep(props: ActivityProps) {
   const [distanceValue, setDistanceValue] = useState<number>();
   const [typeValue, setTypeValue] = useState<string | null>('');
 
+  const handleDistanceValue = (value: string | number) => {
+    setDistanceValue(value as number);
+  };
+
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -81,6 +85,8 @@ function AddStep(props: ActivityProps) {
           distance: Number(activityDistance) + Number(distanceValue),
           name: '',
           sport_id: null,
+          date_scheduled: '',
+          date_accomplished: '',
           pace: 0,
           user_id: 0,
           hecho: false,
@@ -121,6 +127,8 @@ function AddStep(props: ActivityProps) {
           distance: activityDistance,
           name: '',
           sport_id: null,
+          date_scheduled: '',
+          date_accomplished: '',
           pace: 0,
           user_id: 0,
           hecho: false,
@@ -161,6 +169,8 @@ function AddStep(props: ActivityProps) {
           distance: Number(activityDistance) + Number(distanceValue),
           name: '',
           sport_id: null,
+          date_scheduled: '',
+          date_accomplished: '',
           pace: 0,
           user_id: 0,
           hecho: false,
@@ -224,7 +234,7 @@ function AddStep(props: ActivityProps) {
                 placeholder="Distance de l'étape"
                 min={0}
                 value={distanceValue}
-                onChange={setDistanceValue}
+                onChange={handleDistanceValue}
               />
             )}
 
@@ -246,7 +256,7 @@ function AddStep(props: ActivityProps) {
                   placeholder="Distance de l'étape"
                   min={0}
                   value={distanceValue}
-                  onChange={setDistanceValue}
+                  onChange={handleDistanceValue}
                 />
               </>
             )}
