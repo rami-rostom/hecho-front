@@ -8,6 +8,7 @@ import {
   Stack,
   Text,
   Title,
+  em,
 } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
 
@@ -21,9 +22,13 @@ import UpdateDistanceGoal from '../../Goal/UpdateDistanceGoal';
 import UpdateDurationGoal from '../../Goal/UpdateDurationGoal';
 
 import './Bento.scss';
+import { useMediaQuery } from '@mantine/hooks';
 
 function Bento() {
   const dispatch = useAppDispatch();
+
+  // Boolean for responsive design
+  const isMobile = useMediaQuery(`(max-width: ${em(600)})`);
 
   // Retrieve user ID and slug from state
   const id = useAppSelector((state) => state.login.data.userId);
@@ -131,10 +136,15 @@ function Bento() {
           Tableau de bord
         </Title>
 
-        <Container>
+        <Container px={'lg'}>
           <Grid grow gutter={'xl'}>
             {/* Done activities section */}
-            <Grid.Col span={6} className="bento__item" m={'md'}>
+            <Grid.Col
+              span={6}
+              className="bento__item"
+              mx={isMobile ? '0rem' : 'md'}
+              my={isMobile ? 'md' : 'md'}
+            >
               <Title
                 order={2}
                 size="0.8rem"
@@ -147,6 +157,7 @@ function Bento() {
               </Title>
 
               {activitiesHecho.length > 0 ? (
+                // Component to render all done activities in a carousel
                 <UserActivitiesCarousel activities={activitiesHecho} />
               ) : (
                 <Stack align="center" justify="center" h={'70%'}>
@@ -167,7 +178,12 @@ function Bento() {
             </Grid.Col>
 
             {/* This week section */}
-            <Grid.Col span={3} className="bento__item" m={'md'}>
+            <Grid.Col
+              span={3}
+              className="bento__item"
+              mx={isMobile ? '0.35rem' : 'md'}
+              my={isMobile ? 'md' : 'md'}
+            >
               {/* Number of hecho activities */}
               <Title
                 order={2}
@@ -245,7 +261,12 @@ function Bento() {
             </Grid.Col>
 
             {/* Weekly goal section */}
-            <Grid.Col span={3} className="bento__item" m={'md'}>
+            <Grid.Col
+              span={3}
+              className="bento__item"
+              mx={isMobile ? '0.35rem' : 'md'}
+              my={isMobile ? 'md' : 'md'}
+            >
               <Title
                 order={2}
                 size="0.8rem"
@@ -288,7 +309,12 @@ function Bento() {
             </Grid.Col>
 
             {/* Activities to do section */}
-            <Grid.Col span={6} className="bento__item" m={'md'}>
+            <Grid.Col
+              span={6}
+              className="bento__item"
+              mx={isMobile ? '0rem' : 'md'}
+              my={isMobile ? 'md' : 'md'}
+            >
               <Title
                 order={2}
                 size="0.8rem"
@@ -301,6 +327,7 @@ function Bento() {
               </Title>
 
               {activitiesNoHecho.length > 0 ? (
+                // Component to render all not done activities in a carousel
                 <UserActivitiesCarousel activities={activitiesNoHecho} />
               ) : (
                 <Stack align="center" justify="center" h={'70%'}>
@@ -319,10 +346,6 @@ function Bento() {
                 </Stack>
               )}
             </Grid.Col>
-
-            {/* <Grid.Col span={4} className="bento__item" m={'md'}>
-              5
-            </Grid.Col> */}
           </Grid>
         </Container>
       </Container>

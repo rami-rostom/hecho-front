@@ -1,4 +1,4 @@
-import { Flex, Group, Stack, Text, UnstyledButton } from '@mantine/core';
+import { Flex, Group, Stack, Text, UnstyledButton, em } from '@mantine/core';
 import {
   IconBike,
   IconMountain,
@@ -16,6 +16,7 @@ import {
 
 import './UserActivitiesCarousel.scss';
 import { Carousel } from '@mantine/carousel';
+import { useMediaQuery } from '@mantine/hooks';
 
 type ActivitiesProps = {
   activities: Activity[];
@@ -24,10 +25,19 @@ type ActivitiesProps = {
 function UserActivitiesCarousel(props: ActivitiesProps) {
   const { activities } = props;
 
+  // Boolean for responsive design
+  const isMobile = useMediaQuery(`(max-width: ${em(600)})`);
+
   return (
     <>
       <Stack gap={'lg'}>
-        <Carousel height={215} controlSize={15} withIndicators loop>
+        <Carousel
+          height={215}
+          controlSize={15}
+          withIndicators
+          loop
+          withControls={isMobile ? false : true}
+        >
           {activities &&
             activities.map((activity) => (
               <Carousel.Slide key={activity.id}>
