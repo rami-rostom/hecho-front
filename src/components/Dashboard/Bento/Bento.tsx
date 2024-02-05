@@ -167,7 +167,7 @@ function Bento() {
             </Grid.Col>
 
             {/* This week section */}
-            <Grid.Col span={2} className="bento__item" m={'md'}>
+            <Grid.Col span={3} className="bento__item" m={'md'}>
               {/* Number of hecho activities */}
               <Title
                 order={2}
@@ -245,7 +245,7 @@ function Bento() {
             </Grid.Col>
 
             {/* Weekly goal section */}
-            <Grid.Col span={2} className="bento__item" m={'md'}>
+            <Grid.Col span={3} className="bento__item" m={'md'}>
               <Title
                 order={2}
                 size="0.8rem"

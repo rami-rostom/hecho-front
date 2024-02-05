@@ -9,12 +9,13 @@ import {
   UnstyledButton,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { TimeInput } from '@mantine/dates';
 import { IconCircleCheck, IconCircleX, IconPencil } from '@tabler/icons-react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { updateGoal } from '../../store/reducers/updateGoal';
 import { fetchGoal } from '../../store/reducers/getGoal';
-import { TimeInput } from '@mantine/dates';
+import { createGoal } from '../../store/reducers/createGoal';
 
 type GoalProps = {
   userId: number;
@@ -39,18 +40,41 @@ function UpdateDurationGoal(props: GoalProps) {
   const [openDurationHandler, durationHandler] = useDisclosure(false);
   const [durationValue, setDurationValue] = useState<string>('');
 
-  const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    dispatch(
-      updateGoal({
-        id: goalData[0].id,
-        activity: 0,
-        distance: 0,
-        duration: durationValue,
-        user_id: 0,
-      })
-    ).then(() => navigate(0));
+    if (goalData.length === 0) {
+      const createdGoal = await dispatch(
+        createGoal({
+          activity: '0',
+          distance: '0',
+          duration: '00:00:00',
+          user_id: userId,
+        })
+      ).unwrap();
+
+      const goalId = createdGoal.id;
+
+      await dispatch(
+        updateGoal({
+          id: goalId,
+          activity: 0,
+          distance: 0,
+          duration: durationValue,
+          user_id: 0,
+        })
+      ).then(() => navigate(0));
+    } else {
+      await dispatch(
+        updateGoal({
+          id: goalData[0].id,
+          activity: 0,
+          distance: 0,
+          duration: durationValue,
+          user_id: 0,
+        })
+      ).then(() => navigate(0));
+    }
   };
 
   return (

@@ -49,7 +49,7 @@ function Register() {
     setConfirmationValue(confirmation);
   };
 
-  const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     dispatch(
@@ -59,7 +59,7 @@ function Register() {
         password: passwordValue,
         confirmation: confirmationValue,
       })
-    );
+    ).unwrap();
 
     close();
     navigate('/login');

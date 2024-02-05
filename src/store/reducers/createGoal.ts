@@ -5,8 +5,8 @@ import { NewGoal, NewGoalState } from '../../@types/goal';
 
 const initialState: NewGoalState = {
   goal: {
-    activity: 0,
-    distance: 0,
+    activity: '',
+    distance: '',
     duration: '',
     user_id: 0,
   },

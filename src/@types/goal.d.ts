@@ -14,8 +14,8 @@ export type GoalState = {
 };
 
 export type NewGoal = {
-  activity: number;
-  distance: number;
+  activity: string;
+  distance: string;
   duration: string;
   user_id: number;
 };

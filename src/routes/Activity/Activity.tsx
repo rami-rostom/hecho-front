@@ -261,7 +261,7 @@ function Activity() {
 
             <Group justify="flex-end" gap="xs">
               {/* Component button and modal to create a new step */}
-              {activityData.duration == '' ? (
+              {activityData.duration === null ? (
                 <AddStep
                   activityDuration={'00:00:00'}
                   activityDistance={activityData.distance}
@@ -291,7 +291,7 @@ function Activity() {
             </Stack>
 
             {activityData.duration == '' ||
-            activityData.duration == '00:00:00' ? (
+            activityData.duration === '00:00:00' ? (
               <Stack gap="0rem">
                 <Text fw={500}>--</Text>
                 <Text size="xs" fs="italic">
@@ -307,7 +307,7 @@ function Activity() {
               </Stack>
             )}
 
-            {activityData.distance == 0 ? (
+            {activityData.distance === null ? (
               <Stack gap="0rem">
                 <Text fw={500}>--</Text>
                 <Text size="xs" fs="italic">
@@ -324,7 +324,7 @@ function Activity() {
             )}
 
             {activityData.duration !== '00:00:00' &&
-            activityData.distance != 0 ? (
+            activityData.distance != null ? (
               <>
                 <Stack gap="0rem">
                   {speed === 'NaN' ? (
