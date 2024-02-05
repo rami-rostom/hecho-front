@@ -1,6 +1,5 @@
 import {
   AppShell,
-  AppShellNavbar,
   Container,
   Flex,
   Group,
@@ -23,12 +22,38 @@ import {
 import { useAppSelector } from '../../hooks/redux';
 
 import './NavBar.scss';
+import { useEffect, useState } from 'react';
 
 function NavBar() {
   const isLogged = useAppSelector((state) => state.login.logged);
   const usernameSlug = useAppSelector(
     (state) => state.login.data.username_slug
   );
+
+  // Retrieve user activities from state
+  const activitiesData = useAppSelector(
+    (state) => state.getUserActivities.activity
+  );
+
+  // Filter last seven days done activties
+  const [activitiesThisWeek, setActivitiesThisWeek] = useState(activitiesData);
+
+  const filteredActivities = activitiesData.filter((activity) => {
+    if (activity.date_accomplished) {
+      const differenceInMs =
+        Number(new Date()) - Number(new Date(activity.date_accomplished));
+
+      const differenceInDays = differenceInMs / (1000 * 60 * 60 * 24);
+
+      return differenceInDays <= 7;
+    }
+  });
+
+  useEffect(() => {
+    setActivitiesThisWeek(filteredActivities);
+  }, [activitiesData]);
+
+  const nbActivitiesThisWeek = activitiesThisWeek.length;
 
   return (
     <>
@@ -126,7 +151,9 @@ function NavBar() {
                     <Text size="md" fw={800}>
                       Activités
                     </Text>
-                    <Text size="xs">Cette semaine : 0</Text>
+                    <Text size="xs">
+                      Cette semaine : {nbActivitiesThisWeek}
+                    </Text>
                   </Group>
                 </Flex>
               </Container>
