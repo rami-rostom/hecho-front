@@ -16,10 +16,10 @@ import { fetchUserActivities } from '../../../store/reducers/getUserActivities';
 import { sumDurations } from '../../../utils/calculation';
 import UserActivitiesCarousel from '../UserActivitiesCarousel/UserActivitiesCarousel';
 import UpdateActivityGoal from '../../Goal/UpdateActivityGoal';
-
-import './Bento.scss';
 import UpdateDistanceGoal from '../../Goal/UpdateDistanceGoal';
 import UpdateDurationGoal from '../../Goal/UpdateDurationGoal';
+
+import './Bento.scss';
 
 function Bento() {
   const dispatch = useAppDispatch();
@@ -30,6 +30,10 @@ function Bento() {
   const usernameSlug = useAppSelector(
     (state) => state.login.data.username_slug
   );
+
+  // Retrieve user goals from state
+  const goalData = useAppSelector((state) => state.getGoal.goal);
+  const goalActivity = goalData && goalData[0] ? goalData[0].activity : 0;
 
   // Fetch and render all user activities
   useEffect(() => {
@@ -69,6 +73,8 @@ function Bento() {
     setActivitiesThisWeek(filteredActivities);
   }, [activitiesData]);
 
+  const nbActivitiesThisWeek = activitiesThisWeek.length;
+
   // Calculation number of km done this week
   let distanceThisWeek = 0;
 
@@ -85,6 +91,11 @@ function Bento() {
     durationThisWeek = sumDurations(durationThisWeek, duration);
   }
 
+  // Calculation percentage of done activities compare to goal
+  const percentageDoneActivityWithGoal =
+    (nbActivitiesThisWeek * 100) / goalActivity;
+  const compareToGoalValue = Number(percentageDoneActivityWithGoal.toFixed(0));
+
   // Animation of ring progress value for a smooth render
   const [animatedValue, setAnimatedValue] = useState(0);
 
@@ -93,12 +104,12 @@ function Bento() {
       setAnimatedValue((oldValue) => {
         const newValue = oldValue + 1;
 
-        return newValue <= 100 ? newValue : oldValue;
+        return newValue <= compareToGoalValue ? newValue : oldValue;
       });
     }, 5);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [compareToGoalValue]);
 
   return (
     <>
@@ -173,7 +184,7 @@ function Bento() {
                     ]}
                     label={
                       <Text c="palette.0" fw={700} ta="center" size="xl">
-                        {activitiesThisWeek.length}
+                        {nbActivitiesThisWeek}
                       </Text>
                     }
                   />
