@@ -11,7 +11,9 @@ import {
   Menu,
   rem,
   Button,
+  em,
 } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { IconLogout, IconSettings, IconUserFilled } from '@tabler/icons-react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -30,6 +32,9 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
     dispatch(logout());
     navigate('/');
   };
+
+  // Boolean for responsive design
+  const isMobile = useMediaQuery(`(max-width: ${em(600)})`);
 
   return (
     <>
@@ -115,7 +120,7 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
                   c="palette.0"
                   size="2.5rem"
                   tt="uppercase"
-                  pl="1.3rem"
+                  pl={isMobile ? '0rem' : '1.3rem'}
                   className="header__logo"
                 >
                   Hecho

@@ -300,6 +300,7 @@ function Activity() {
             </Group>
           </Stack>
 
+          {/* Aside section responsive render if not a mobile */}
           {!isMobile && (
             <Stack className="activity__aside">
               <Stack gap="0rem">
@@ -411,6 +412,7 @@ function Activity() {
             </Stack>
           )}
 
+          {/* Aside section responsive render if mobile */}
           {isMobile && (
             <Stack className="activity__aside" align="center" gap={'sm'}>
               <Group>

@@ -279,6 +279,7 @@ function EditActivity() {
             </Group>
           </Stack>
 
+          {/* Aside section responsive render if not a mobile */}
           {!isMobile && (
             <Stack className="activity__aside">
               <Stack gap="0rem">
@@ -401,6 +402,7 @@ function EditActivity() {
             </Stack>
           )}
 
+          {/* Aside section responsive render if mobile */}
           {isMobile && (
             <Stack className="activity__aside" align="center" gap={'sm'}>
               <Group>

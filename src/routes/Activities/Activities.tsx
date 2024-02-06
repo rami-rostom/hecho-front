@@ -1,6 +1,7 @@
 import { SetStateAction, useEffect, useState } from 'react';
 
-import { Button, Group, Stack, Text, Title } from '@mantine/core';
+import { Button, Group, Stack, Title, em } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { IconPlus } from '@tabler/icons-react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -40,9 +41,12 @@ function Activities() {
     setFilterActivities(filterActivities);
   };
 
+  // Boolean for responsive design
+  const isMobile = useMediaQuery(`(max-width: ${em(600)})`);
+
   return (
     <>
-      <Stack gap={'xl'} px={'5rem'} py={'xl'}>
+      <Stack gap={'xl'} px={isMobile ? '2rem' : '5rem'} py={'xl'}>
         <Title order={1} size="1.2rem" tt="uppercase" lts="0.15rem" fw={300}>
           Activités
         </Title>
