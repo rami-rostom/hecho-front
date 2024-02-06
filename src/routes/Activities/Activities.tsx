@@ -1,8 +1,7 @@
 import { SetStateAction, useEffect, useState } from 'react';
 
-import { Button, Group, Stack, Title, em } from '@mantine/core';
+import { Group, Stack, Title, em } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import { IconPlus } from '@tabler/icons-react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchUserActivities } from '../../store/reducers/getUserActivities';
@@ -10,6 +9,7 @@ import { Activity } from '../../@types/activity';
 import SportTab from '../../components/Activity/SportTab/SportTab';
 import HechoTab from '../../components/Hecho/HechoTab/HechoTab';
 import UserActivities from '../../components/Activity/UserActivities/UserActivities';
+import CreateActivity from '../../components/Activity/CreateActivity/CreateActivity';
 
 import './Activities.scss';
 
@@ -63,15 +63,7 @@ function Activities() {
         <UserActivities activities={filterActivities} />
 
         <Group justify="flex-end">
-          <Button
-            color="button.0"
-            size="compact-xs"
-            component="a"
-            href="/activity/create"
-          >
-            <IconPlus size="1rem" className="activity__steps-button" />
-            Nouvelle activité
-          </Button>
+          <CreateActivity />
         </Group>
       </Stack>
     </>

@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import {
   AppShell,
   Container,
@@ -17,14 +20,19 @@ import {
   IconSettings,
   IconTargetArrow,
   IconCalendarPlus,
+  IconLogout,
 } from '@tabler/icons-react';
 
-import { useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { logout } from '../../store/reducers/login';
+import NavBarCreateActivity from '../Activity/NavBarCreateActivity/NavBarCreateActivity';
 
 import './NavBar.scss';
-import { useEffect, useState } from 'react';
 
 function NavBar() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const isLogged = useAppSelector((state) => state.login.logged);
   const usernameSlug = useAppSelector(
     (state) => state.login.data.username_slug
@@ -54,6 +62,20 @@ function NavBar() {
   }, [activitiesData]);
 
   const nbActivitiesThisWeek = activitiesThisWeek.length;
+
+  // Function to empty local storage and to disconnect user
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/');
+  };
+
+  // Open and close create activity modal on navlink click
+  const [isCreateActivityModalOpen, setCreateActivityModalOpen] =
+    useState(false);
+
+  const handleCreateActivityModal = () => {
+    setCreateActivityModalOpen(true);
+  };
 
   return (
     <>
@@ -86,11 +108,17 @@ function NavBar() {
                 className="navbar__link"
               >
                 <NavLink
-                  href="/activity/create"
+                  onClick={handleCreateActivityModal}
                   label="Nouvelle activité"
                   leftSection={<IconCalendarPlus size="1rem" stroke={1.5} />}
                   className="navbar__link"
                 />
+                {/* Component to open create activity modal */}
+                <NavBarCreateActivity
+                  isOpen={isCreateActivityModalOpen}
+                  onClose={() => setCreateActivityModalOpen(false)}
+                />
+
                 <NavLink
                   href={`/activities/user/${usernameSlug}`}
                   label="Mes activités"
@@ -124,6 +152,13 @@ function NavBar() {
                   leftSection={<IconSettings size="1rem" stroke={1.5} />}
                   className="navbar__link"
                 />
+                <NavLink
+                  c={'button.2'}
+                  onClick={handleLogout}
+                  label="Se déconnecter"
+                  leftSection={<IconLogout size="1rem" stroke={1.5} />}
+                  className="navbar__link"
+                />
               </NavLink>
             </Stack>
 
@@ -138,7 +173,7 @@ function NavBar() {
               withArrow
             >
               <Container
-                my="xl"
+                my="md"
                 px="xs"
                 py="md"
                 bg="palette.7"

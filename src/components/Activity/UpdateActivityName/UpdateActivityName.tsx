@@ -7,8 +7,9 @@ import {
   Title,
   Tooltip,
   UnstyledButton,
+  em,
 } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { useDisclosure, useMediaQuery } from '@mantine/hooks';
 import { IconCircleCheck, IconCircleX, IconPencil } from '@tabler/icons-react';
 
 import { useAppDispatch } from '../../../hooks/redux';
@@ -52,11 +53,17 @@ function UpdateActivityName(props: ActivityProps) {
       })
     ).then(() => navigate(0));
   };
+
+  // Boolean for responsive design
+  const isMobile = useMediaQuery(`(max-width: ${em(600)})`);
+
   return (
     <>
       {!openNameHandler ? (
         <>
-          <Title order={1}>{activityName}</Title>
+          <Title order={1} size={isMobile ? '1.5rem' : '2rem'}>
+            {activityName}
+          </Title>
 
           <UnstyledButton onClick={() => nameHandler.open()}>
             <Tooltip

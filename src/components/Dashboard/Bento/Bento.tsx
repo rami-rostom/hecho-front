@@ -21,6 +21,7 @@ import UserActivitiesCarousel from '../UserActivitiesCarousel/UserActivitiesCaro
 import UpdateActivityGoal from '../../Goal/UpdateActivityGoal';
 import UpdateDistanceGoal from '../../Goal/UpdateDistanceGoal';
 import UpdateDurationGoal from '../../Goal/UpdateDurationGoal';
+import CreateActivity from '../../Activity/CreateActivity/CreateActivity';
 
 import './Bento.scss';
 
@@ -164,15 +165,7 @@ function Bento() {
                   <Text size="0.7rem" tt={'uppercase'}>
                     Aucune activité réalisée pour le moment.
                   </Text>
-                  <Button
-                    color="button.0"
-                    size="compact-xs"
-                    variant="outline"
-                    component="a"
-                    href="/activity/create"
-                  >
-                    Nouvelle activité
-                  </Button>
+                  <CreateActivity />
                 </Stack>
               )}
             </Grid.Col>
@@ -334,15 +327,7 @@ function Bento() {
                   <Text size="0.7rem" tt={'uppercase'}>
                     Aucune activité planifiée pour le moment.
                   </Text>
-                  <Button
-                    color="button.0"
-                    size="compact-xs"
-                    variant="outline"
-                    component="a"
-                    href="/activity/create"
-                  >
-                    Nouvelle activité
-                  </Button>
+                  <CreateActivity />
                 </Stack>
               )}
             </Grid.Col>

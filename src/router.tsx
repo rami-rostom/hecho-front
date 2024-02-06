@@ -4,7 +4,6 @@ import Root from './routes/Root/Root';
 import Home from './routes/Home/Home';
 import Login from './routes/Login/Login';
 import Activity from './routes/Activity/Activity';
-import CreateActivity from './routes/CreateActivity/CreateActivity';
 import EditActivity from './routes/EditActivity/EditActivity';
 import Activities from './routes/Activities/Activities';
 
@@ -25,10 +24,6 @@ export const router = createBrowserRouter([
       {
         path: '/activity/:id',
         element: <Activity />,
-      },
-      {
-        path: '/activity/create',
-        element: <CreateActivity />,
       },
       {
         path: '/activity/:id/edit',

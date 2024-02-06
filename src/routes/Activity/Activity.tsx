@@ -84,7 +84,9 @@ function Activity() {
           <Group gap="1rem">
             {/* Component for dynamic icon based on sport */}
             <ActivityIcon />
-            <Title order={1}>{activityData.name}</Title>
+            <Title size={isMobile ? '1.5rem' : '2rem'} order={1}>
+              {activityData.name}
+            </Title>
             {tags
               ? tags.map((tag) => (
                   <Badge
