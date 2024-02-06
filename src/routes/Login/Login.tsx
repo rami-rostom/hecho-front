@@ -66,14 +66,12 @@ function Login() {
                 label="E-mail"
                 placeholder="Saisir une adresse e-mail"
                 required
-                defaultValue={'ramirez@hecho.io'}
                 onChange={handleChangeEmailValue}
               />
               <PasswordInput
                 label="Mot de passe"
                 placeholder="Saisir un mot de passe"
                 required
-                defaultValue={'Password1!'}
                 onChange={handleChangePasswordValue}
               />
             </Stack>
