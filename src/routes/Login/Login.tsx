@@ -10,7 +10,9 @@ import {
   Stack,
   TextInput,
   Title,
+  em,
 } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 
 import { useAppDispatch } from '../../hooks/redux';
 import { login } from '../../store/reducers/login';
@@ -21,6 +23,9 @@ import Register from '../../components/Register/Register';
 function Login() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  // Boolean for responsive design
+  const isMobile = useMediaQuery(`(max-width: ${em(600)})`);
 
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
@@ -51,7 +56,7 @@ function Login() {
   return (
     <>
       <Stack justify="center" h={'90vh'}>
-        <Container className="login-container">
+        <Container w={isMobile ? '80%' : '30%'} className="login-container">
           <Title order={1} size={'1.5rem'}>
             Se connecter
           </Title>
