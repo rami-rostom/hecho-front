@@ -77,7 +77,7 @@ function UpdateActivityDate(props: ActivityProps) {
               <DatePickerInput
                 clearable
                 valueFormat="DD MMMM YYYY"
-                label="Date accomplissement"
+                label="Date réalisation"
                 placeholder="Choisir une date"
                 onChange={(event) => {
                   const date = event?.toDateString();

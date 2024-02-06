@@ -64,7 +64,7 @@ function HechoBtn() {
               clearable
               required
               valueFormat="DD MMMM YYYY"
-              label="Date accomplissement"
+              label="Date réalisation"
               placeholder="Choisir une date"
               minDate={new Date()}
               onChange={(event) => {

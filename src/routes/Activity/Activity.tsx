@@ -113,8 +113,18 @@ function Activity() {
       </Container>
 
       <Container className="activity__main">
-        <Flex justify="space-between" direction={isMobile ? 'column' : 'row'}>
-          <Stack align="stretch" gap="xl" className="activity__steps">
+        <Flex
+          justify="space-between"
+          gap={'xl'}
+          direction={isMobile ? 'column' : 'row'}
+        >
+          <Stack
+            align="stretch"
+            w={'100%'}
+            mr={isMobile ? '0rem' : '3rem'}
+            gap={isMobile ? 'lg' : 'xl'}
+            className="activity__steps"
+          >
             {/* List of steps or none if no steps in the activity */}
             {steps
               ? steps.map((step) => (
@@ -388,7 +398,7 @@ function Activity() {
                   <Text fw={500}>À réaliser</Text>
                 )}
                 <Text size="xs" fs="italic">
-                  Date accomplissement
+                  Date réalisation
                 </Text>
               </Stack>
 
@@ -402,7 +412,7 @@ function Activity() {
           )}
 
           {isMobile && (
-            <Stack className="activity__aside" align="center">
+            <Stack className="activity__aside" align="center" gap={'sm'}>
               <Group>
                 <Stack gap="0rem" align="center">
                   <Text fw={500} tt="uppercase">
@@ -463,6 +473,7 @@ function Activity() {
                         Vitesse moyenne
                       </Text>
                     </Stack>
+
                     <Stack gap="0rem" align="flex-end">
                       {pace === 'NaN' ? (
                         <Text fw={500}>--</Text>
@@ -504,7 +515,7 @@ function Activity() {
                     <Text fw={500}>À réaliser</Text>
                   )}
                   <Text size="xs" fs="italic">
-                    Date accomplissement
+                    Date réalisation
                   </Text>
                 </Stack>
               </Group>

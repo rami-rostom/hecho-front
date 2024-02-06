@@ -10,7 +10,9 @@ import {
   SimpleGrid,
   Stack,
   Text,
+  em,
 } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 
 import ActivityIcon from '../../components/Activity/ActivityIcon/ActivityIcon';
 import Hecho from '../../components/Hecho/HechoBtn/HechoBtn';
@@ -23,13 +25,13 @@ import AddTag from '../../components/Tag/AddTag/AddTag';
 import UpdateTag from '../../components/Tag/UpdateTag/UpdateTag';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { fetchActivity } from '../../store/reducers/getActivity';
 import {
   convertDateFormat,
   convertDurationToMin,
   paceCalcul,
   speedCalcul,
 } from '../../utils/calculation';
-import { fetchActivity } from '../../store/reducers/getActivity';
 
 import './EditActivity.scss';
 
@@ -56,6 +58,14 @@ function EditActivity() {
     Number(convertDurationToMin(activityData.duration)),
     activityData.distance
   );
+
+  // Function who render true or false if one of the step has an empty duration or distance value
+  const emptyPaceAndSpeed = activityData.steps.find(
+    (step) => step.duration === '' || step.distance === null
+  );
+
+  // Boolean for responsive design
+  const isMobile = useMediaQuery(`(max-width: ${em(600)})`);
 
   return (
     <Container p="md" className="activity">
@@ -97,8 +107,18 @@ function EditActivity() {
       </Container>
 
       <Container className="activity__main">
-        <Flex justify="space-between">
-          <Stack align="stretch" gap="xl" className="activity__steps">
+        <Flex
+          justify="space-between"
+          gap={'xl'}
+          direction={isMobile ? 'column' : 'row'}
+        >
+          <Stack
+            align="stretch"
+            w={'100%'}
+            mr={isMobile ? '0rem' : '3rem'}
+            gap={isMobile ? 'lg' : 'xl'}
+            className="activity__steps"
+          >
             {/* List of steps or none if no steps in the activity */}
             {steps
               ? steps.map((step) => (
@@ -259,125 +279,255 @@ function EditActivity() {
             </Group>
           </Stack>
 
-          <Stack className="activity__aside">
-            <Stack gap="0rem">
-              <Text fw={500} tt="uppercase">
-                {activityData.sport.name}
-              </Text>
-              <Text size="xs" fs="italic">
-                Type
-              </Text>
-            </Stack>
+          {!isMobile && (
+            <Stack className="activity__aside">
+              <Stack gap="0rem">
+                <Text fw={500} tt="uppercase">
+                  {activityData.sport.name}
+                </Text>
+                <Text size="xs" fs="italic">
+                  Type
+                </Text>
+              </Stack>
 
-            {activityData.duration == '' ||
-            activityData.duration == '00:00:00' ? (
-              <Stack gap="0rem">
-                <Text fw={500}>--</Text>
-                <Text size="xs" fs="italic">
-                  Temps total
-                </Text>
-              </Stack>
-            ) : (
-              <Stack gap="0rem">
-                <Text fw={500}>{activityData.duration}</Text>
-                <Text size="xs" fs="italic">
-                  Temps total
-                </Text>
-              </Stack>
-            )}
-
-            {activityData.distance == 0 ? (
-              <Stack gap="0rem">
-                <Text fw={500}>--</Text>
-                <Text size="xs" fs="italic">
-                  Distance
-                </Text>
-              </Stack>
-            ) : (
-              <Stack gap="0rem">
-                <Text fw={500}>{activityData.distance} km</Text>
-                <Text size="xs" fs="italic">
-                  Distance
-                </Text>
-              </Stack>
-            )}
-
-            {activityData.duration !== '00:00:00' &&
-            activityData.distance != 0 ? (
-              <>
+              {activityData.duration == '' ||
+              activityData.duration === '00:00:00' ? (
                 <Stack gap="0rem">
-                  {speed === 'NaN' ? (
-                    <Text fw={500}>--</Text>
-                  ) : (
-                    <Text fw={500}>{speed} km/h</Text>
-                  )}
+                  <Text fw={500}>--</Text>
                   <Text size="xs" fs="italic">
-                    Vitesse moyenne
+                    Temps total
                   </Text>
                 </Stack>
-
+              ) : (
                 <Stack gap="0rem">
-                  {pace === 'NaN' ? (
-                    <Text fw={500}>--</Text>
-                  ) : (
-                    <Text fw={500}>{pace} min/km</Text>
-                  )}
+                  <Text fw={500}>{activityData.duration}</Text>
                   <Text size="xs" fs="italic">
-                    Allure
+                    Temps total
                   </Text>
                 </Stack>
-              </>
-            ) : (
-              []
-            )}
+              )}
 
-            <Divider my="0.3rem" />
-
-            <Stack gap="0rem">
-              <Group gap="xs">
-                {activityData.date_scheduled && (
-                  <Text fw={500}>
-                    {/* Function to transform date into DAY-MONTH-YEAR format */}
-                    {convertDateFormat(activityData.date_scheduled)}
+              {activityData.distance === null ? (
+                <Stack gap="0rem">
+                  <Text fw={500}>--</Text>
+                  <Text size="xs" fs="italic">
+                    Distance
                   </Text>
-                )}
-                <UpdateActivityDate
-                  activityId={activityData.id}
-                  scheduledDate={true}
-                />
-              </Group>
-              <Text size="xs" fs="italic">
-                Date prévue
-              </Text>
-            </Stack>
+                </Stack>
+              ) : (
+                <Stack gap="0rem">
+                  <Text fw={500}>{activityData.distance} km</Text>
+                  <Text size="xs" fs="italic">
+                    Distance
+                  </Text>
+                </Stack>
+              )}
 
-            <Stack gap="0rem">
-              {activityData.date_accomplished ? (
+              {/* Conditionnal render of pace and speed */}
+              {!emptyPaceAndSpeed ? (
+                <>
+                  <Stack gap="0rem">
+                    {speed === 'NaN' ? (
+                      <Text fw={500}>--</Text>
+                    ) : (
+                      <Text fw={500}>{speed} km/h</Text>
+                    )}
+                    <Text size="xs" fs="italic">
+                      Vitesse moyenne
+                    </Text>
+                  </Stack>
+
+                  <Stack gap="0rem">
+                    {pace === 'NaN' ? (
+                      <Text fw={500}>--</Text>
+                    ) : (
+                      <Text fw={500}>{pace} min/km</Text>
+                    )}
+                    <Text size="xs" fs="italic">
+                      Allure
+                    </Text>
+                  </Stack>
+                </>
+              ) : (
+                []
+              )}
+
+              <Divider my="0.3rem" />
+
+              <Stack gap="0rem">
                 <Group gap="xs">
-                  <Text fw={500}>
-                    {/* Function to transform date into DAY-MONTH-YEAR format */}
-                    {convertDateFormat(activityData.date_accomplished)}
-                  </Text>
+                  {activityData.date_scheduled && (
+                    <Text fw={500}>
+                      {/* Function to transform date into DAY-MONTH-YEAR format */}
+                      {convertDateFormat(activityData.date_scheduled)}
+                    </Text>
+                  )}
                   <UpdateActivityDate
                     activityId={activityData.id}
-                    scheduledDate={false}
+                    scheduledDate={true}
                   />
                 </Group>
-              ) : (
-                <Text fw={500}>À réaliser</Text>
-              )}
-              <Text size="xs" fs="italic">
-                Date accomplissement
-              </Text>
-            </Stack>
+                <Text size="xs" fs="italic">
+                  Date prévue
+                </Text>
+              </Stack>
 
-            {activityData.hecho ? (
-              <Button color="button.0">HECHO</Button>
-            ) : (
-              // Component to update accomplished date and tag the activity as HECHO
-              <Hecho />
-            )}
-          </Stack>
+              <Stack gap="0rem">
+                {activityData.date_accomplished ? (
+                  <Group gap="xs">
+                    <Text fw={500}>
+                      {/* Function to transform date into DAY-MONTH-YEAR format */}
+                      {convertDateFormat(activityData.date_accomplished)}
+                    </Text>
+                    <UpdateActivityDate
+                      activityId={activityData.id}
+                      scheduledDate={false}
+                    />
+                  </Group>
+                ) : (
+                  <Text fw={500}>À réaliser</Text>
+                )}
+                <Text size="xs" fs="italic">
+                  Date réalisation
+                </Text>
+              </Stack>
+
+              {activityData.hecho ? (
+                <Button color="button.0">HECHO</Button>
+              ) : (
+                // Component to update accomplished date and tag the activity as HECHO
+                <Hecho />
+              )}
+            </Stack>
+          )}
+
+          {isMobile && (
+            <Stack className="activity__aside" align="center" gap={'sm'}>
+              <Group>
+                <Stack gap="0rem" align="center">
+                  <Text fw={500} tt="uppercase">
+                    {activityData.sport.name}
+                  </Text>
+                  <Text size="xs" fs="italic">
+                    Type
+                  </Text>
+                </Stack>
+              </Group>
+
+              <Group w={'85%'} justify="space-between">
+                {activityData.duration == '' ||
+                activityData.duration === '00:00:00' ? (
+                  <Stack gap="0rem" align="flex-start">
+                    <Text fw={500}>--</Text>
+                    <Text size="xs" fs="italic">
+                      Temps total
+                    </Text>
+                  </Stack>
+                ) : (
+                  <Stack gap="0rem" align="flex-start">
+                    <Text fw={500}>{activityData.duration}</Text>
+                    <Text size="xs" fs="italic">
+                      Temps total
+                    </Text>
+                  </Stack>
+                )}
+
+                {activityData.distance === null ? (
+                  <Stack gap="0rem" align="flex-end">
+                    <Text fw={500}>--</Text>
+                    <Text size="xs" fs="italic">
+                      Distance
+                    </Text>
+                  </Stack>
+                ) : (
+                  <Stack gap="0rem" align="flex-end">
+                    <Text fw={500}>{activityData.distance} km</Text>
+                    <Text size="xs" fs="italic">
+                      Distance
+                    </Text>
+                  </Stack>
+                )}
+              </Group>
+
+              <Group w={'85%'} justify="space-between">
+                {/* Conditionnal render of pace and speed */}
+                {!emptyPaceAndSpeed ? (
+                  <>
+                    <Stack gap="0rem" align="flex-start">
+                      {speed === 'NaN' ? (
+                        <Text fw={500}>--</Text>
+                      ) : (
+                        <Text fw={500}>{speed} km/h</Text>
+                      )}
+                      <Text size="xs" fs="italic">
+                        Vitesse moyenne
+                      </Text>
+                    </Stack>
+
+                    <Stack gap="0rem" align="flex-end">
+                      {pace === 'NaN' ? (
+                        <Text fw={500}>--</Text>
+                      ) : (
+                        <Text fw={500}>{pace} min/km</Text>
+                      )}
+                      <Text size="xs" fs="italic">
+                        Allure
+                      </Text>
+                    </Stack>
+                  </>
+                ) : (
+                  []
+                )}
+              </Group>
+
+              <Group w={'85%'} justify="space-between">
+                <Stack gap="0rem" align="flex-start">
+                  <Group gap="xs">
+                    {activityData.date_scheduled && (
+                      <Text fw={500}>
+                        {/* Function to transform date into DAY-MONTH-YEAR format */}
+                        {convertDateFormat(activityData.date_scheduled)}
+                      </Text>
+                    )}
+                    <UpdateActivityDate
+                      activityId={activityData.id}
+                      scheduledDate={true}
+                    />
+                  </Group>
+                  <Text size="xs" fs="italic">
+                    Date prévue
+                  </Text>
+                </Stack>
+
+                <Stack gap="0rem" align="flex-end">
+                  {activityData.date_accomplished ? (
+                    <Group gap="xs">
+                      <Text fw={500}>
+                        {/* Function to transform date into DAY-MONTH-YEAR format */}
+                        {convertDateFormat(activityData.date_accomplished)}
+                      </Text>
+                      <UpdateActivityDate
+                        activityId={activityData.id}
+                        scheduledDate={false}
+                      />
+                    </Group>
+                  ) : (
+                    <Text fw={500}>À réaliser</Text>
+                  )}
+                  <Text size="xs" fs="italic">
+                    Date réalisation
+                  </Text>
+                </Stack>
+              </Group>
+
+              {activityData.hecho ? (
+                <Button color="button.0">HECHO</Button>
+              ) : (
+                // Component to update accomplished date and tag the activity as HECHO
+                <Hecho />
+              )}
+            </Stack>
+          )}
         </Flex>
       </Container>
     </Container>
