@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: 'https://hecho-app.onrender.com/login',
+        path: '/login',
         element: <Login />,
       },
       {
