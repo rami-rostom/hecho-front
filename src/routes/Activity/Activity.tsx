@@ -27,10 +27,10 @@ import DuplicateStep from '../../components/Step/DuplicateStep/DuplicateStep';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchActivity } from '../../store/reducers/getActivity';
 import {
-  paceCalcul,
   speedCalcul,
   convertDateFormat,
   convertDurationToMin,
+  paceCalcul,
 } from '../../utils/calculation';
 
 import './Activity.scss';
@@ -54,10 +54,7 @@ function Activity() {
     Number(convertDurationToMin(activityData.duration)),
     activityData.distance
   );
-  const pace = paceCalcul(
-    Number(convertDurationToMin(activityData.duration)),
-    activityData.distance
-  );
+  const pace = paceCalcul(activityData.duration, activityData.distance);
 
   // Function who render true or false if one of the step has an empty duration or distance value
   const emptyPaceAndSpeed = activityData.steps.find(
@@ -265,7 +262,7 @@ function Activity() {
                             <Text fw={700}>
                               {/* Calculation of pace step */}
                               {paceCalcul(
-                                Number(convertDurationToMin(step.duration)),
+                                step.duration,
                                 Number(step.distance)
                               )}{' '}
                               min/km

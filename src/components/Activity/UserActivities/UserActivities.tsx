@@ -145,11 +145,7 @@ function UserActivities(props: ActivitiesProps) {
               ) : (
                 <Stack gap={'0rem'}>
                   <Text>
-                    {paceCalcul(
-                      Number(convertDurationToMin(activity.duration)),
-                      activity.distance
-                    )}{' '}
-                    min/km
+                    {paceCalcul(activity.duration, activity.distance)} min/km
                   </Text>
                   <Text size="0.6rem" tt={'uppercase'}>
                     Allure moyenne
@@ -289,11 +285,7 @@ function UserActivities(props: ActivitiesProps) {
                 ) : (
                   <Stack gap={'0rem'} align="center">
                     <Text>
-                      {paceCalcul(
-                        Number(convertDurationToMin(activity.duration)),
-                        activity.distance
-                      )}{' '}
-                      min/km
+                      {paceCalcul(activity.duration, activity.distance)} min/km
                     </Text>
                     <Text size="0.6rem" tt={'uppercase'}>
                       Allure moyenne
@@ -438,11 +430,7 @@ function UserActivities(props: ActivitiesProps) {
                 ) : (
                   <Stack gap={'0rem'} align="center">
                     <Text>
-                      {paceCalcul(
-                        Number(convertDurationToMin(activity.duration)),
-                        activity.distance
-                      )}{' '}
-                      min/km
+                      {paceCalcul(activity.duration, activity.distance)} min/km
                     </Text>
                     <Text size="0.6rem" tt={'uppercase'}>
                       Allure moyenne

@@ -27,6 +27,7 @@ import {
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { logout } from '../../store/reducers/login';
+import { fetchUserActivities } from '../../store/reducers/getUserActivities';
 import NavBarCreateActivity from '../Activity/NavBarCreateActivity/NavBarCreateActivity';
 
 import './NavBar.scss';
@@ -35,10 +36,16 @@ function NavBar() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const id = useAppSelector((state) => state.login.data.userId);
   const isLogged = useAppSelector((state) => state.login.logged);
   const usernameSlug = useAppSelector(
     (state) => state.login.data.username_slug
   );
+
+  // Fetch all user activities
+  useEffect(() => {
+    dispatch(fetchUserActivities(id));
+  }, [dispatch, id]);
 
   // Retrieve user activities from state
   const activitiesData = useAppSelector(
