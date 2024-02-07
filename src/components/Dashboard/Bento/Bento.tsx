@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import {
-  Button,
   Container,
   Grid,
   RingProgress,
@@ -143,7 +142,7 @@ function Bento() {
             <Grid.Col
               span={6}
               className="bento__item"
-              mx={isMobile ? '0rem' : 'md'}
+              mx={isMobile ? 'sm' : 'md'}
               my={isMobile ? 'md' : 'md'}
             >
               <Title
@@ -174,7 +173,7 @@ function Bento() {
             <Grid.Col
               span={3}
               className="bento__item"
-              mx={isMobile ? '0.35rem' : 'md'}
+              mx={isMobile ? 'sm' : 'md'}
               my={isMobile ? 'md' : 'md'}
             >
               {/* Number of hecho activities */}
@@ -257,7 +256,7 @@ function Bento() {
             <Grid.Col
               span={3}
               className="bento__item"
-              mx={isMobile ? '0.35rem' : 'md'}
+              mx={isMobile ? 'sm' : 'md'}
               my={isMobile ? 'md' : 'md'}
             >
               <Title
@@ -305,7 +304,7 @@ function Bento() {
             <Grid.Col
               span={6}
               className="bento__item"
-              mx={isMobile ? '0rem' : 'md'}
+              mx={isMobile ? 'sm' : 'md'}
               my={isMobile ? 'md' : 'md'}
             >
               <Title
