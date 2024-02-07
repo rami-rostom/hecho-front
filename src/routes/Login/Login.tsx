@@ -25,7 +25,7 @@ function Login() {
   const dispatch = useAppDispatch();
 
   // Boolean for responsive design
-  const isMobile = useMediaQuery(`(max-width: ${em(600)})`);
+  const isMobile = useMediaQuery(`(max-width: ${em(700)})`);
 
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
@@ -56,7 +56,7 @@ function Login() {
   return (
     <>
       <Stack justify="center" h={'90vh'}>
-        <Container w={isMobile ? '80%' : '30%'} className="login-container">
+        <Container w={isMobile ? '80%' : '40%'} className="login-container">
           <Title order={1} size={'1.5rem'}>
             Se connecter
           </Title>

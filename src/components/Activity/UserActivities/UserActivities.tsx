@@ -236,7 +236,7 @@ function UserActivities(props: ActivitiesProps) {
 
               {/* Date, distance, duration and pace section */}
               <Group>
-                <Stack gap={'0rem'} w={'6rem'}>
+                <Stack gap={'0rem'} w={'6rem'} align="center">
                   <Text>{convertDateFormat(activity.date_scheduled)}</Text>
                   <Text size="0.6rem" tt={'uppercase'}>
                     Date prévue
@@ -245,14 +245,14 @@ function UserActivities(props: ActivitiesProps) {
 
                 {/* Conditionnal render for distance */}
                 {activity.distance === null ? (
-                  <Stack gap={'0rem'} w={'3rem'}>
+                  <Stack gap={'0rem'} w={'4rem'} align="center">
                     <Text>--</Text>
                     <Text size="0.6rem" tt={'uppercase'}>
                       Distance
                     </Text>
                   </Stack>
                 ) : (
-                  <Stack gap={'0rem'} w={'3rem'}>
+                  <Stack gap={'0rem'} w={'4rem'} align="center">
                     <Text>{activity.distance} km</Text>
                     <Text size="0.6rem" tt={'uppercase'}>
                       Distance
@@ -262,14 +262,14 @@ function UserActivities(props: ActivitiesProps) {
 
                 {/* Conditionnal render for duration */}
                 {activity.duration === '00:00:00' ? (
-                  <Stack gap={'0rem'} w={'4rem'}>
+                  <Stack gap={'0rem'} w={'4rem'} align="center">
                     <Text>--</Text>
                     <Text size="0.6rem" tt={'uppercase'}>
                       Durée
                     </Text>
                   </Stack>
                 ) : (
-                  <Stack gap={'0rem'} w={'4rem'}>
+                  <Stack gap={'0rem'} w={'4rem'} align="center">
                     <Text>{activity.duration}</Text>
                     <Text size="0.6rem" tt={'uppercase'}>
                       Durée
@@ -280,14 +280,14 @@ function UserActivities(props: ActivitiesProps) {
                 {/* Conditionnal render for pace */}
                 {activity.distance === null ||
                 activity.duration === '00:00:00' ? (
-                  <Stack gap={'0rem'}>
+                  <Stack gap={'0rem'} align="center">
                     <Text>--</Text>
                     <Text size="0.6rem" tt={'uppercase'}>
                       Allure moyenne
                     </Text>
                   </Stack>
                 ) : (
-                  <Stack gap={'0rem'}>
+                  <Stack gap={'0rem'} align="center">
                     <Text>
                       {paceCalcul(
                         Number(convertDurationToMin(activity.duration)),
@@ -367,7 +367,7 @@ function UserActivities(props: ActivitiesProps) {
               </Group>
 
               <Group>
-                <Stack gap={'0rem'}>
+                <Stack gap={'0rem'} align="center">
                   <UnstyledButton
                     component="a"
                     href={`/activity/${activity.id}`}
@@ -383,7 +383,7 @@ function UserActivities(props: ActivitiesProps) {
 
               {/* Date, distance, duration and pace section */}
               <Group justify="center">
-                <Stack gap={'0rem'}>
+                <Stack gap={'0rem'} align="center">
                   <Text>{convertDateFormat(activity.date_scheduled)}</Text>
                   <Text size="0.6rem" tt={'uppercase'}>
                     Date prévue
@@ -392,14 +392,14 @@ function UserActivities(props: ActivitiesProps) {
 
                 {/* Conditionnal render for distance */}
                 {activity.distance === null ? (
-                  <Stack gap={'0rem'} w={'3rem'}>
+                  <Stack gap={'0rem'} w={'4rem'} align="center">
                     <Text>--</Text>
                     <Text size="0.6rem" tt={'uppercase'}>
                       Distance
                     </Text>
                   </Stack>
                 ) : (
-                  <Stack gap={'0rem'} w={'3rem'}>
+                  <Stack gap={'0rem'} w={'4rem'} align="center">
                     <Text>{activity.distance} km</Text>
                     <Text size="0.6rem" tt={'uppercase'}>
                       Distance
@@ -409,14 +409,14 @@ function UserActivities(props: ActivitiesProps) {
 
                 {/* Conditionnal render for duration */}
                 {activity.duration === '00:00:00' ? (
-                  <Stack gap={'0rem'} w={'4rem'}>
+                  <Stack gap={'0rem'} w={'4rem'} align="center">
                     <Text>--</Text>
                     <Text size="0.6rem" tt={'uppercase'}>
                       Durée
                     </Text>
                   </Stack>
                 ) : (
-                  <Stack gap={'0rem'} w={'4rem'}>
+                  <Stack gap={'0rem'} w={'4rem'} align="center">
                     <Text>{activity.duration}</Text>
                     <Text size="0.6rem" tt={'uppercase'}>
                       Durée
@@ -429,14 +429,14 @@ function UserActivities(props: ActivitiesProps) {
               <Group justify="center">
                 {activity.distance === null ||
                 activity.duration === '00:00:00' ? (
-                  <Stack gap={'0rem'}>
+                  <Stack gap={'0rem'} align="center">
                     <Text>--</Text>
                     <Text size="0.6rem" tt={'uppercase'}>
                       Allure moyenne
                     </Text>
                   </Stack>
                 ) : (
-                  <Stack gap={'0rem'}>
+                  <Stack gap={'0rem'} align="center">
                     <Text>
                       {paceCalcul(
                         Number(convertDurationToMin(activity.duration)),
