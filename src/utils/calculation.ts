@@ -41,15 +41,30 @@ export const speedCalcul = (duration: number, distance: number) => {
 
 /**
  * Function for calculating the pace of activity
- * @param duration value in minutes
+ * @param duration value in HH:mm:ss format
  * @param distance value in kilometers
  * @returns Return pace in min/km
  */
-export const paceCalcul = (duration: number, distance: number) => {
-  const paceResult = duration / distance;
+export const paceCalcul = (duration: string, distance: number) => {
+  // Split the duration into hours, minutes, and seconds
+  const [hours, minutes, seconds] = duration.split(':').map(Number);
 
-  // Return result with two decimals
-  return paceResult.toFixed(2);
+  // Convert hours, minutes, and seconds to total minutes
+  const durationInMinutes = hours * 60 + minutes + seconds / 60;
+
+  // Calculate the pace in minutes per kilometer
+  const paceResult = durationInMinutes / distance;
+
+  // Convert pace to minutes and seconds per kilometer
+  const paceMinutes = Math.floor(paceResult);
+  const paceSeconds = Math.round((paceResult - paceMinutes) * 60);
+
+  // Format the result as a string "mm:ss" for pace per kilometer
+  const paceFormatted = `${paceMinutes}:${
+    paceSeconds < 10 ? '0' : ''
+  }${paceSeconds}`;
+
+  return paceFormatted;
 };
 
 // ---------------------------------------------------------------------------//

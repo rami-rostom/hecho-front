@@ -54,10 +54,7 @@ function EditActivity() {
     Number(convertDurationToMin(activityData.duration)),
     activityData.distance
   );
-  const pace = paceCalcul(
-    Number(convertDurationToMin(activityData.duration)),
-    activityData.distance
-  );
+  const pace = paceCalcul(activityData.duration, activityData.distance);
 
   // Function who render true or false if one of the step has an empty duration or distance value
   const emptyPaceAndSpeed = activityData.steps.find(
@@ -258,7 +255,7 @@ function EditActivity() {
                             <Text fw={700}>
                               {/* Calculation of pace step */}
                               {paceCalcul(
-                                Number(convertDurationToMin(step.duration)),
+                                step.duration,
                                 Number(step.distance)
                               )}{' '}
                               min/km
