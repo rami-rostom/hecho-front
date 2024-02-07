@@ -10,7 +10,9 @@ import {
   Stack,
   Text,
   Tooltip,
+  em,
 } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 
 import {
   IconBrandFeedly,
@@ -69,6 +71,9 @@ function NavBar() {
     navigate('/');
   };
 
+  // Boolean for responsive design
+  const isBurger = useMediaQuery(`(max-width: ${em(767)})`);
+
   // Open and close create activity modal on navlink click
   const [isCreateActivityModalOpen, setCreateActivityModalOpen] =
     useState(false);
@@ -85,6 +90,12 @@ function NavBar() {
         <AppShell.Navbar p="md" bg="palette.5" className="navbar">
           <Flex direction="column" justify="space-between" h="100%">
             <Stack gap="0.3rem" className="navbar__menu">
+              {isBurger && (
+                <Text size="md" fw={500} tt={'capitalize'} pl={'sm'} pb={'sm'}>
+                  Hello {usernameSlug}
+                </Text>
+              )}
+
               <NavLink
                 label="Tableau de bord"
                 fw={600}
