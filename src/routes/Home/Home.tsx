@@ -67,12 +67,12 @@ function Home() {
             <Stack align="center" pt={'3rem'}>
               <Button
                 component="a"
-                href="/login"
+                href="/register"
                 color="button.0"
                 variant="outline"
                 className="home-btn"
               >
-                Se connecter
+                Créer un compte
               </Button>
             </Stack>
           </Stack>
