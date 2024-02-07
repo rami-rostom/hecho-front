@@ -9,7 +9,7 @@
       border-radius: 3rem;
       padding: 8px;
 
-      box-shadow: 3px 0px 10px 0px rgba(126, 124, 124, 0.5);
+      box-shadow: 3px 0px 10px 0px var(--mantine-color-palette-8);
     }
   }
 
@@ -17,10 +17,10 @@
     &-step {
       background-color: var(--mantine-color-palette-7);
 
-      border: 1px solid rgb(93, 89, 89);
-      border-radius: 1rem;
-      box-shadow: 3px 3px 10px 0px rgba(126, 124, 124, 0.5);
       padding: 1rem;
+      border-radius: 1rem;
+      border: 1px solid var(--mantine-color-palette-5);
+      box-shadow: 5px 5px 5px 0px var(--mantine-color-palette-8);
     }
 
     &-button {

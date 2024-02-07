@@ -304,7 +304,7 @@ function Activity() {
 
           {/* Aside section responsive render if not a mobile */}
           {!isMobile && (
-            <Stack className="activity__aside">
+            <Stack className="activity__aside" w={'15%'}>
               <Stack gap="0rem">
                 <Text fw={500} tt="uppercase">
                   {activityData.sport.name}

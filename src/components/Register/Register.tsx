@@ -15,8 +15,6 @@ import { notifications } from '@mantine/notifications';
 import { useAppDispatch } from '../../hooks/redux';
 import { register } from '../../store/reducers/register';
 
-import './Register.scss';
-
 function Register() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
