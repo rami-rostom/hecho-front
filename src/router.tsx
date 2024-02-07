@@ -6,6 +6,7 @@ import Login from './routes/Login/Login';
 import Activity from './routes/Activity/Activity';
 import EditActivity from './routes/EditActivity/EditActivity';
 import Activities from './routes/Activities/Activities';
+import Register from './routes/Register/Register';
 
 // eslint-disable-next-line import/prefer-default-export
 export const router = createBrowserRouter([
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />,
+      },
+      {
+        path: '/register',
+        element: <Register />,
       },
       {
         path: '/activity/:id',
