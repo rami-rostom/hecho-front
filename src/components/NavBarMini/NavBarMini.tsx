@@ -24,7 +24,7 @@ import {
   IconTargetArrow,
   IconCalendarPlus,
   IconLogout,
-  IconArrowBarLeft,
+  IconArrowBarRight,
 } from '@tabler/icons-react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -32,13 +32,13 @@ import { logout } from '../../store/reducers/login';
 import { fetchUserActivities } from '../../store/reducers/getUserActivities';
 import NavBarCreateActivity from '../Activity/NavBarCreateActivity/NavBarCreateActivity';
 
-import './NavBar.scss';
+import './NavBarMini.scss';
 
 type toggleProps = {
   toggleNavBar: () => void;
 };
 
-function NavBar({ toggleNavBar }: toggleProps) {
+function NavBarMini({ toggleNavBar }: toggleProps) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -100,7 +100,7 @@ function NavBar({ toggleNavBar }: toggleProps) {
       {!isLogged ? (
         <AppShell navbar={{ width: 0, breakpoint: 'none' }}></AppShell>
       ) : (
-        <AppShell.Navbar p="md" bg="palette.5" className="navbar">
+        <AppShell.Navbar bg="palette.5" className="navbarmini">
           {!isBurger && (
             <ActionIcon
               variant="subtle"
@@ -108,44 +108,24 @@ function NavBar({ toggleNavBar }: toggleProps) {
               size={'sm'}
               onClick={toggleNavBar}
             >
-              <IconArrowBarLeft />
+              <IconArrowBarRight />
             </ActionIcon>
           )}
           <Flex direction="column" justify="space-between" h="100%">
-            <Stack gap="0.3rem" className="navbar__menu">
-              {isBurger && (
-                <Text size="md" fw={500} tt={'capitalize'} pl={'sm'} pb={'sm'}>
-                  Hello {usernameSlug}
-                </Text>
-              )}
-
-              <NavLink
-                label="Tableau de bord"
-                fw={600}
-                defaultOpened
-                childrenOffset={0}
-                className="navbar__link"
-              >
+            <Stack gap="0.3rem" className="navbarmini__menu" align="center">
+              <NavLink childrenOffset={0} defaultOpened disabled>
                 <NavLink
                   href="/"
-                  label="Mon flux"
                   leftSection={<IconBrandFeedly size="1.3rem" stroke={1.5} />}
-                  className="navbar__link"
+                  className="navbarmini__link"
                 />
               </NavLink>
 
-              <NavLink
-                label="Entraînement"
-                fw={600}
-                defaultOpened
-                childrenOffset={0}
-                className="navbar__link"
-              >
+              <NavLink childrenOffset={0} defaultOpened disabled>
                 <NavLink
                   onClick={handleCreateActivityModal}
-                  label="Nouvelle activité"
                   leftSection={<IconCalendarPlus size="1.3rem" stroke={1.5} />}
-                  className="navbar__link"
+                  className="navbarmini__link"
                 />
                 {/* Component to open create activity modal */}
                 <NavBarCreateActivity
@@ -155,45 +135,34 @@ function NavBar({ toggleNavBar }: toggleProps) {
 
                 <NavLink
                   href={`/activities/user/${usernameSlug}`}
-                  label="Mes activités"
                   leftSection={<IconRun size="1.3rem" stroke={1.5} />}
-                  className="navbar__link"
+                  className="navbarmini__link"
                 />
                 <NavLink
                   href="#"
-                  label="Mon calendrier"
                   leftSection={<IconCalendar size="1.3rem" stroke={1.5} />}
-                  className="navbar__link"
+                  className="navbarmini__link"
                 />
               </NavLink>
 
-              <NavLink
-                label="Profil"
-                fw={600}
-                defaultOpened
-                childrenOffset={0}
-                className="navbar__link"
-              >
+              <NavLink childrenOffset={0} defaultOpened disabled>
                 <NavLink
                   href="#"
-                  label="Mon profil"
                   leftSection={<IconUserFilled size="1.3rem" stroke={1.5} />}
-                  className="navbar__link"
+                  className="navbarmini__link"
                 />
                 <NavLink
                   href="#"
-                  label="Paramètres"
                   leftSection={<IconSettings size="1.3rem" stroke={1.5} />}
-                  className="navbar__link"
+                  className="navbarmini__link"
+                />
+                <NavLink
+                  c={'button.2'}
+                  onClick={handleLogout}
+                  leftSection={<IconLogout size="1.3rem" stroke={1.5} />}
+                  className="navbarmini__link"
                 />
               </NavLink>
-              <NavLink
-                c={'button.2'}
-                onClick={handleLogout}
-                label="Se déconnecter"
-                leftSection={<IconLogout size="1.3rem" stroke={1.5} />}
-                className="navbar__link"
-              />
             </Stack>
 
             {/* Tooltip when hover on the counter container */}
@@ -211,20 +180,13 @@ function NavBar({ toggleNavBar }: toggleProps) {
                 px="xs"
                 py="md"
                 bg="palette.7"
-                className="navbar__counter"
+                className="navbarmini__counter"
                 visibleFrom="sm"
               >
-                <Flex align="center" gap="sm" w="100%">
-                  <IconTargetArrow size="3rem" stroke={1.5} />
-                  <Group gap="0.1rem" justify="left">
-                    <Text size="md" fw={800}>
-                      Activités
-                    </Text>
-                    <Text size="xs">
-                      Cette semaine : {nbActivitiesThisWeek}
-                    </Text>
-                  </Group>
-                </Flex>
+                <Stack align="center" gap={'xs'}>
+                  <IconTargetArrow size="1.5rem" stroke={1.5} />
+                  <Text size="md">{nbActivitiesThisWeek}</Text>
+                </Stack>
               </Container>
             </Tooltip>
           </Flex>
@@ -234,4 +196,4 @@ function NavBar({ toggleNavBar }: toggleProps) {
   );
 }
 
-export default NavBar;
+export default NavBarMini;

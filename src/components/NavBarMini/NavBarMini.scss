@@ -1,0 +1,11 @@
+.navbarmini {
+  &__counter {
+    border: 1px solid var(--mantine-color-palette-7);
+    border-radius: var(--mantine-radius-lg);
+  }
+
+  &__link:hover {
+    background-color: var(--mantine-color-palette-7);
+    border-radius: var(--mantine-radius-lg);
+  }
+}
