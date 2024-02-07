@@ -64,6 +64,8 @@ function Activity() {
   // Boolean for responsive design
   const isMobile = useMediaQuery(`(max-width: ${em(600)})`);
 
+  console.log(activityData);
+
   return (
     <Container py="xl" className="activity">
       <Container px="-1rem" className="activity__banner">
@@ -311,7 +313,7 @@ function Activity() {
                 </Text>
               </Stack>
 
-              {activityData.duration == '' ||
+              {activityData.duration === null ||
               activityData.duration === '00:00:00' ? (
                 <Stack gap="0rem">
                   <Text fw={500}>--</Text>
@@ -345,7 +347,9 @@ function Activity() {
               )}
 
               {/* Conditionnal render of pace and speed */}
-              {!emptyPaceAndSpeed ? (
+              {!emptyPaceAndSpeed &&
+              activityData.duration !== null &&
+              activityData.distance !== null ? (
                 <>
                   <Stack gap="0rem">
                     {speed === 'NaN' ? (
