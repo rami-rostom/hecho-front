@@ -76,7 +76,7 @@ function Register() {
       <Modal
         opened={opened}
         onClose={close}
-        size="xs"
+        size="md"
         centered
         title="Créer un compte"
         overlayProps={{
@@ -102,6 +102,7 @@ function Register() {
             <PasswordInput
               label="Mot de passe"
               placeholder="Créer un mot de passe"
+              description="8 caractères minimum, une majuscule et un caractère spécial. "
               required
               onChange={handleChangePasswordValue}
             />
