@@ -16,6 +16,8 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { fetchUserActivities } from '../../../store/reducers/getUserActivities';
 import { fetchGoal } from '../../../store/reducers/getGoal';
 import { sumDurations } from '../../../utils/calculation';
+import { LocalStorage } from '../../../utils/LocalStorage';
+
 import UserActivitiesCarousel from '../UserActivitiesCarousel/UserActivitiesCarousel';
 import UpdateActivityGoal from '../../Goal/UpdateActivityGoal';
 import UpdateDistanceGoal from '../../Goal/UpdateDistanceGoal';
@@ -27,29 +29,33 @@ import './Bento.scss';
 function Bento() {
   const dispatch = useAppDispatch();
 
+  const isLogged = useAppSelector((state) => state.login.logged);
+
+  // Retrieve user datas from local storage
+  const userAuth = LocalStorage.getItem('user');
+  const id = userAuth.data.userId;
+  const usernameSlug = userAuth.data.username_slug;
+
+  // Fetch and render all user activities and goal if connected
+  useEffect(() => {
+    if (isLogged) {
+      dispatch(fetchUserActivities(id));
+      dispatch(fetchGoal(id));
+    }
+  }, [dispatch, isLogged]);
+
   // Boolean for responsive design
   const isMobile = useMediaQuery(`(max-width: ${em(600)})`);
 
-  // Retrieve user ID and slug from state
-  const id = useAppSelector((state) => state.login.data.userId);
-
-  const usernameSlug = useAppSelector(
-    (state) => state.login.data.username_slug
-  );
-
-  // Fetch and render all user activities
-  useEffect(() => {
-    dispatch(fetchUserActivities(id));
-  }, [dispatch, id]);
-
-  // Fetch user goal
-  useEffect(() => {
-    dispatch(fetchGoal(id));
-  }, [dispatch, id]);
-
   // Retrieve user goals from state
   const goalData = useAppSelector((state) => state.getGoal.goal);
-  const goalActivity = goalData && goalData[0] ? goalData[0].activity : 0;
+
+  let goalActivity;
+  if (goalData && goalData[0]) {
+    goalActivity = goalData[0].activity;
+  } else {
+    goalActivity = 0;
+  }
 
   // Retrieve user activities from state
   const activitiesData = useAppSelector(

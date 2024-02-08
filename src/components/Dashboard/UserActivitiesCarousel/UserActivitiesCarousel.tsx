@@ -10,11 +10,7 @@ import {
 } from '@tabler/icons-react';
 
 import { Activity } from '../../../@types/activity';
-import {
-  convertDateFormat,
-  convertDurationToMin,
-  paceCalcul,
-} from '../../../utils/calculation';
+import { convertDateFormat, paceCalcul } from '../../../utils/calculation';
 
 import './UserActivitiesCarousel.scss';
 
