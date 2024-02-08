@@ -1,4 +1,4 @@
-# :runner: Hecho :runner:
+# :runner: Hecho :bicyclist:
 
 **Hecho is a sport app designed to help you organize and plan your sport activities.**
 
@@ -19,7 +19,7 @@ The name **Hecho** means "done" in Spanish, reflecting the app's focus on comple
 
 ## :computer: Installation
 
-To run Hecho locally, follow thse steps :
+To run Hecho locally, follow these steps :
 
 1. Clone the repository to your local machine :
 
@@ -51,7 +51,7 @@ yarn install
 pnpm run dev
 ```
 
-Open your browser and visit _http://localhost:5173/_ to view the application.
+Open your browser and visit _http://localhost:5173/_ to view the application :fire:.
 
 ## :coffee: Author
 
