@@ -64,8 +64,6 @@ function Activity() {
   // Boolean for responsive design
   const isMobile = useMediaQuery(`(max-width: ${em(600)})`);
 
-  console.log(activityData);
-
   return (
     <Container py="xl" className="activity">
       <Container px="-1rem" className="activity__banner">

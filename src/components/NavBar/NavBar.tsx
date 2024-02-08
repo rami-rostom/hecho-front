@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
+  ActionIcon,
   AppShell,
   Container,
   Flex,
@@ -23,6 +24,7 @@ import {
   IconTargetArrow,
   IconCalendarPlus,
   IconLogout,
+  IconChevronLeft,
 } from '@tabler/icons-react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -32,7 +34,11 @@ import NavBarCreateActivity from '../Activity/NavBarCreateActivity/NavBarCreateA
 
 import './NavBar.scss';
 
-function NavBar() {
+type toggleProps = {
+  toggleNavBar: () => void;
+};
+
+function NavBar({ toggleNavBar }: toggleProps) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -95,6 +101,17 @@ function NavBar() {
         <AppShell navbar={{ width: 0, breakpoint: 'none' }}></AppShell>
       ) : (
         <AppShell.Navbar p="md" bg="palette.5" className="navbar">
+          {!isBurger && (
+            <ActionIcon
+              variant="outline"
+              color="palette.4"
+              size={'xs'}
+              onClick={toggleNavBar}
+              className="navbar__toggle"
+            >
+              <IconChevronLeft />
+            </ActionIcon>
+          )}
           <Flex direction="column" justify="space-between" h="100%">
             <Stack gap="0.3rem" className="navbar__menu">
               {isBurger && (
@@ -113,7 +130,7 @@ function NavBar() {
                 <NavLink
                   href="/"
                   label="Mon flux"
-                  leftSection={<IconBrandFeedly size="1rem" stroke={1.5} />}
+                  leftSection={<IconBrandFeedly size="1.3rem" stroke={1.5} />}
                   className="navbar__link"
                 />
               </NavLink>
@@ -128,7 +145,7 @@ function NavBar() {
                 <NavLink
                   onClick={handleCreateActivityModal}
                   label="Nouvelle activité"
-                  leftSection={<IconCalendarPlus size="1rem" stroke={1.5} />}
+                  leftSection={<IconCalendarPlus size="1.3rem" stroke={1.5} />}
                   className="navbar__link"
                 />
                 {/* Component to open create activity modal */}
@@ -140,13 +157,13 @@ function NavBar() {
                 <NavLink
                   href={`/activities/user/${usernameSlug}`}
                   label="Mes activités"
-                  leftSection={<IconRun size="1rem" stroke={1.5} />}
+                  leftSection={<IconRun size="1.3rem" stroke={1.5} />}
                   className="navbar__link"
                 />
                 <NavLink
                   href="#"
                   label="Mon calendrier"
-                  leftSection={<IconCalendar size="1rem" stroke={1.5} />}
+                  leftSection={<IconCalendar size="1.3rem" stroke={1.5} />}
                   className="navbar__link"
                 />
               </NavLink>
@@ -161,23 +178,23 @@ function NavBar() {
                 <NavLink
                   href="#"
                   label="Mon profil"
-                  leftSection={<IconUserFilled size="1rem" stroke={1.5} />}
+                  leftSection={<IconUserFilled size="1.3rem" stroke={1.5} />}
                   className="navbar__link"
                 />
                 <NavLink
                   href="#"
                   label="Paramètres"
-                  leftSection={<IconSettings size="1rem" stroke={1.5} />}
-                  className="navbar__link"
-                />
-                <NavLink
-                  c={'button.2'}
-                  onClick={handleLogout}
-                  label="Se déconnecter"
-                  leftSection={<IconLogout size="1rem" stroke={1.5} />}
+                  leftSection={<IconSettings size="1.3rem" stroke={1.5} />}
                   className="navbar__link"
                 />
               </NavLink>
+              <NavLink
+                c={'button.2'}
+                onClick={handleLogout}
+                label="Se déconnecter"
+                leftSection={<IconLogout size="1.3rem" stroke={1.5} />}
+                className="navbar__link"
+              />
             </Stack>
 
             {/* Tooltip when hover on the counter container */}

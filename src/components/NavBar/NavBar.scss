@@ -11,3 +11,13 @@
     border-radius: var(--mantine-radius-lg);
   }
 }
+
+.navbar__menu {
+  position: relative;
+  bottom: 10px;
+}
+
+.navbar__toggle {
+  position: relative;
+  left: 195px;
+}
