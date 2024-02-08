@@ -102,8 +102,8 @@ function NavBarMini({ toggleNavBar }: toggleProps) {
         <AppShell.Navbar bg="palette.5" className="navbarmini">
           {!isBurger && (
             <ActionIcon
-              variant="outline"
-              color="palette.4"
+              variant="filled"
+              color="palette.9"
               size={'xs'}
               onClick={toggleNavBar}
               className="navbarmini__toggle"
