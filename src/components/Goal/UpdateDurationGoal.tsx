@@ -21,9 +21,13 @@ function UpdateDurationGoal(props: GoalProps) {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  const isLogged = useAppSelector((state) => state.login.logged);
+
   // Fetch user goal
   useEffect(() => {
-    dispatch(fetchGoal(userId));
+    if (isLogged) {
+      dispatch(fetchGoal(userId));
+    }
   }, [dispatch, userId]);
 
   const goalData = useAppSelector((state) => state.getGoal.goal);

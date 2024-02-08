@@ -17,6 +17,7 @@ import { useMediaQuery } from '@mantine/hooks';
 import { IconLogout, IconSettings, IconUserFilled } from '@tabler/icons-react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { LocalStorage } from '../../utils/LocalStorage';
 import { logout } from '../../store/reducers/login';
 
 import './Header.scss';
@@ -26,7 +27,9 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
   const navigate = useNavigate();
 
   const isLogged = useAppSelector((state) => state.login.logged);
-  const username = useAppSelector((state) => state.login.data.username);
+
+  // Retrieve user datas from local storage
+  const userAuth = LocalStorage.getItem('user');
 
   const handleLogout = () => {
     dispatch(logout());
@@ -129,9 +132,12 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
             </Anchor>
 
             <Group>
-              <Text size="md" fw={500} visibleFrom="sm">
-                Hello {username}
-              </Text>
+              {/* If user is logged, render his username */}
+              {userAuth && (
+                <Text size="md" fw={500} visibleFrom="sm">
+                  Hello {userAuth.data.username}
+                </Text>
+              )}
 
               {/* Menu dropdown on click on avatar */}
               <Menu shadow="md" width={200}>
@@ -179,7 +185,7 @@ function Header({ opened, toggle }: { opened: boolean; toggle: () => void }) {
                     Paramètres
                   </Menu.Item>
                   <Menu.Item
-                    color="red"
+                    color="button.2"
                     onClick={handleLogout}
                     leftSection={
                       <IconLogout style={{ width: rem(14), height: rem(14) }} />
