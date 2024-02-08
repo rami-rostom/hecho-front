@@ -24,7 +24,7 @@ import {
   IconTargetArrow,
   IconCalendarPlus,
   IconLogout,
-  IconArrowBarLeft,
+  IconChevronLeft,
 } from '@tabler/icons-react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -103,12 +103,13 @@ function NavBar({ toggleNavBar }: toggleProps) {
         <AppShell.Navbar p="md" bg="palette.5" className="navbar">
           {!isBurger && (
             <ActionIcon
-              variant="subtle"
-              color="white"
-              size={'sm'}
+              variant="outline"
+              color="palette.4"
+              size={'xs'}
               onClick={toggleNavBar}
+              className="navbar__toggle"
             >
-              <IconArrowBarLeft />
+              <IconChevronLeft />
             </ActionIcon>
           )}
           <Flex direction="column" justify="space-between" h="100%">

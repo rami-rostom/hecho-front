@@ -6,11 +6,10 @@ import {
   AppShell,
   Container,
   Flex,
-  Group,
-  NavLink,
   Stack,
   Text,
   Tooltip,
+  UnstyledButton,
   em,
 } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
@@ -24,7 +23,7 @@ import {
   IconTargetArrow,
   IconCalendarPlus,
   IconLogout,
-  IconArrowBarRight,
+  IconChevronRight,
 } from '@tabler/icons-react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -103,76 +102,162 @@ function NavBarMini({ toggleNavBar }: toggleProps) {
         <AppShell.Navbar bg="palette.5" className="navbarmini">
           {!isBurger && (
             <ActionIcon
-              variant="subtle"
-              color="white"
-              size={'sm'}
+              variant="outline"
+              color="palette.4"
+              size={'xs'}
               onClick={toggleNavBar}
+              className="navbarmini__toggle"
             >
-              <IconArrowBarRight />
+              <IconChevronRight />
             </ActionIcon>
           )}
           <Flex direction="column" justify="space-between" h="100%">
-            <Stack gap="0.3rem" className="navbarmini__menu" align="center">
-              <NavLink childrenOffset={0} defaultOpened disabled>
-                <NavLink
-                  href="/"
-                  leftSection={<IconBrandFeedly size="1.3rem" stroke={1.5} />}
-                  className="navbarmini__link"
-                />
-              </NavLink>
+            <Stack gap="2.5rem" className="navbarmini__menu" align="center">
+              <Stack gap={'lg'}>
+                <Tooltip
+                  label="Mon flux"
+                  position="right"
+                  offset={8}
+                  openDelay={300}
+                  closeDelay={150}
+                  transitionProps={{ transition: 'slide-left', duration: 200 }}
+                  withArrow
+                >
+                  <UnstyledButton
+                    component={'a'}
+                    href="/"
+                    className="navbarmini__link"
+                  >
+                    <IconBrandFeedly size="1.5rem" stroke={1.5} />
+                  </UnstyledButton>
+                </Tooltip>
+              </Stack>
 
-              <NavLink childrenOffset={0} defaultOpened disabled>
-                <NavLink
-                  onClick={handleCreateActivityModal}
-                  leftSection={<IconCalendarPlus size="1.3rem" stroke={1.5} />}
-                  className="navbarmini__link"
-                />
+              <Stack gap={'lg'} align="center">
+                <Tooltip
+                  label="Nouvelle activité"
+                  position="right"
+                  offset={8}
+                  openDelay={300}
+                  closeDelay={150}
+                  transitionProps={{ transition: 'slide-left', duration: 200 }}
+                  withArrow
+                >
+                  <UnstyledButton
+                    onClick={handleCreateActivityModal}
+                    className="navbarmini__link"
+                  >
+                    <IconCalendarPlus size="1.5rem" stroke={1.5} />
+                  </UnstyledButton>
+                </Tooltip>
                 {/* Component to open create activity modal */}
                 <NavBarCreateActivity
                   isOpen={isCreateActivityModalOpen}
                   onClose={() => setCreateActivityModalOpen(false)}
                 />
 
-                <NavLink
-                  href={`/activities/user/${usernameSlug}`}
-                  leftSection={<IconRun size="1.3rem" stroke={1.5} />}
-                  className="navbarmini__link"
-                />
-                <NavLink
-                  href="#"
-                  leftSection={<IconCalendar size="1.3rem" stroke={1.5} />}
-                  className="navbarmini__link"
-                />
-              </NavLink>
+                <Tooltip
+                  label="Mes activités"
+                  position="right"
+                  offset={8}
+                  openDelay={300}
+                  closeDelay={150}
+                  transitionProps={{ transition: 'slide-left', duration: 200 }}
+                  withArrow
+                >
+                  <UnstyledButton
+                    component={'a'}
+                    href={`/activities/user/${usernameSlug}`}
+                    className="navbarmini__link"
+                  >
+                    <IconRun size="1.5rem" stroke={1.5} />
+                  </UnstyledButton>
+                </Tooltip>
 
-              <NavLink childrenOffset={0} defaultOpened disabled>
-                <NavLink
-                  href="#"
-                  leftSection={<IconUserFilled size="1.3rem" stroke={1.5} />}
-                  className="navbarmini__link"
-                />
-                <NavLink
-                  href="#"
-                  leftSection={<IconSettings size="1.3rem" stroke={1.5} />}
-                  className="navbarmini__link"
-                />
-                <NavLink
-                  c={'button.2'}
-                  onClick={handleLogout}
-                  leftSection={<IconLogout size="1.3rem" stroke={1.5} />}
-                  className="navbarmini__link"
-                />
-              </NavLink>
+                <Tooltip
+                  label="Mon calendrier"
+                  position="right"
+                  offset={8}
+                  openDelay={300}
+                  closeDelay={150}
+                  transitionProps={{ transition: 'slide-left', duration: 200 }}
+                  withArrow
+                >
+                  <UnstyledButton
+                    component={'a'}
+                    href="#"
+                    className="navbarmini__link"
+                  >
+                    <IconCalendar size="1.5rem" stroke={1.5} />
+                  </UnstyledButton>
+                </Tooltip>
+              </Stack>
+
+              <Stack gap={'lg'} align="center">
+                <Tooltip
+                  label="Mon profil"
+                  position="right"
+                  offset={8}
+                  openDelay={300}
+                  closeDelay={150}
+                  transitionProps={{ transition: 'slide-left', duration: 200 }}
+                  withArrow
+                >
+                  <UnstyledButton
+                    component={'a'}
+                    href="#"
+                    className="navbarmini__link"
+                  >
+                    <IconUserFilled size="1.5rem" stroke={1.5} />
+                  </UnstyledButton>
+                </Tooltip>
+
+                <Tooltip
+                  label="Paramètres"
+                  position="right"
+                  offset={8}
+                  openDelay={300}
+                  closeDelay={150}
+                  transitionProps={{ transition: 'slide-left', duration: 200 }}
+                  withArrow
+                >
+                  <UnstyledButton
+                    component={'a'}
+                    href="#"
+                    className="navbarmini__link"
+                  >
+                    <IconSettings size="1.5rem" stroke={1.5} />
+                  </UnstyledButton>
+                </Tooltip>
+
+                <Tooltip
+                  label="Se déconnecter"
+                  position="right"
+                  offset={8}
+                  openDelay={300}
+                  closeDelay={150}
+                  transitionProps={{ transition: 'slide-left', duration: 200 }}
+                  withArrow
+                >
+                  <UnstyledButton
+                    c={'button.2'}
+                    onClick={handleLogout}
+                    className="navbarmini__link"
+                  >
+                    <IconLogout size="1.5rem" stroke={1.5} />
+                  </UnstyledButton>
+                </Tooltip>
+              </Stack>
             </Stack>
 
             {/* Tooltip when hover on the counter container */}
             <Tooltip
               label="Objectif hebdomadaire"
-              position="top"
+              position="right"
               offset={8}
               openDelay={300}
               closeDelay={150}
-              transitionProps={{ transition: 'slide-up', duration: 200 }}
+              transitionProps={{ transition: 'slide-left', duration: 200 }}
               withArrow
             >
               <Container
@@ -183,7 +268,7 @@ function NavBarMini({ toggleNavBar }: toggleProps) {
                 className="navbarmini__counter"
                 visibleFrom="sm"
               >
-                <Stack align="center" gap={'xs'}>
+                <Stack align="center" gap={'0.2rem'}>
                   <IconTargetArrow size="1.5rem" stroke={1.5} />
                   <Text size="md">{nbActivitiesThisWeek}</Text>
                 </Stack>
