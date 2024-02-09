@@ -10,12 +10,16 @@ Whether you're into running, cycling, or any other sport, Hecho makes it easy to
 
 The name **Hecho** means "done" in Spanish, reflecting the app's focus on completing your planned activities.
 
-## :memo: Stack
+<br />
+
+You can try the app [here](https://hecho-app.onrender.com/) ! :rocket:
+
+## :robot: Stack
 
 - [TypeScript](https://www.typescriptlang.org/) : for type safety and enhanced development experience.
 - [React](https://fr.legacy.reactjs.org/) : built with React for a modern and interactive user interface.
 - [Redux](https://redux.js.org//) : state management with Redux for managing application-wide data.
-- [Mantine](https://mantine.dev/) : for beautiful and customizable user interface components.
+- [Mantine UI](https://mantine.dev/) : for beautiful and customizable user interface components.
 
 ## :computer: Installation
 
