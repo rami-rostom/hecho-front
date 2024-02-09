@@ -12,7 +12,7 @@ The name **Hecho** means "done" in Spanish, reflecting the app's focus on comple
 
 <br />
 
-You can try the app [here](https://hecho-app.onrender.com/) and have a look to the API [here](https://github.com/rami-rostom/hecho-front) ! :rocket:
+You can try the app [here](https://hecho-app.onrender.com/) and have a look to the API [here](https://github.com/rami-rostom/hecho-api) ! :rocket:
 
 ## :robot: Stack
 
