@@ -1,4 +1,4 @@
-# :runner: Hecho :bicyclist:
+# Hecho
 
 **Hecho is a sport app designed to help you organize and plan your sport activities.**
 
@@ -30,7 +30,7 @@ git clone git@github.com:rami-rostom/hecho-front.git
 2. Navigate to the project directory :
 
 ```bash
-git cd /hecho-front
+git cd hecho-front/
 ```
 
 3. Install dependencies using your package manager (e.g., pnpm or yarn) :
@@ -51,7 +51,7 @@ yarn install
 pnpm run dev
 ```
 
-Open your browser and visit _http://localhost:5173/_ to view the application :fire:.
+Open your browser and visit _http://localhost:5173/_ to view the application.
 
 ## :coffee: Author
 
