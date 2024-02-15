@@ -30,7 +30,7 @@ git clone git@github.com:rami-rostom/hecho-front.git
 2. Navigate to the project directory :
 
 ```bash
-git cd hecho-front/
+cd hecho-front/
 ```
 
 3. Install dependencies using your package manager (e.g., pnpm or yarn) :
